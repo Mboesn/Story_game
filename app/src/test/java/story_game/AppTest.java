@@ -3,11 +3,12 @@
  */
 package story_game;
 
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.SaveHandler;
 
 class AppTest {
     public static void main(String[] args) {
         SaveFile save = new SaveFile();
-        save.saveGame("heyyyyo");
+        SaveHandler.saveGame(save,"heyyyyo");
+        System.out.println(SaveHandler.loadGame("heyyyyo"));
     }
 }
