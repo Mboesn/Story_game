@@ -1,9 +1,10 @@
 package story_game;
 
-
+/** List of data that can define the players character */
 public class Characteristics {
+    /** list of races and their attributes */
     public enum Race {
-        HUMAN("Human"); 
+        HUMAN("Human");
 
         private String name;
 
