@@ -1,6 +1,6 @@
-package story_game;
+package story_game.save_mechanics;
 
-import story_game.Characteristics.Race;
+import story_game.save_mechanics.Characteristics.Race;
 
 public class PlayerCharacter {
     private Race race = Race.HUMAN;

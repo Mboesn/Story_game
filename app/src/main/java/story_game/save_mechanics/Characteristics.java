@@ -1,4 +1,4 @@
-package story_game;
+package story_game.save_mechanics;
 
 /** List of data that can define the players character */
 public class Characteristics {
