@@ -10,8 +10,7 @@ import java.nio.file.Paths;
 import com.google.gson.Gson;
 
 public class SaveHandler {
-
-    private static final transient String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + "Super_cool_app";
+    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + "Super_cool_app";
 
     /**
      * Saves the game to a new file given a path
