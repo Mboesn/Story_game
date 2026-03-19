@@ -3,12 +3,11 @@
  */
 package story_game;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import story_game.save_mechanics.SaveFile;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        // assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    public static void main(String[] args) {
+        SaveFile save = new SaveFile();
+        save.saveGame("heyyyyo");
     }
 }

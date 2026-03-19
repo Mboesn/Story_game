@@ -4,7 +4,7 @@ import story_game.save_mechanics.Characteristics.Race;
 
 public class PlayerCharacter {
     private Race race = Race.HUMAN;
-    private int age = 69;
+    private int age = 42;
 
     public PlayerCharacter() {
     }
