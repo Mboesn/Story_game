@@ -9,8 +9,11 @@ import java.nio.file.Paths;
 
 import com.google.gson.Gson;
 
+import story_game.Constants;
+
 public class SaveHandler {
-    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + "Super_cool_app";
+    // This path leads to the game folder in the local appdata
+    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.gameName;
 
     /**
      * Saves the game to a new file given a path
@@ -32,7 +35,7 @@ public class SaveHandler {
             if (!Files.isDirectory(dir))
                 Files.createDirectory(dir);
         } catch (Exception e) {
-            System.out.println("failed to save to: " + filePath + " \n error: " + e);
+            System.out.println("failed to create path: " + filePath + " \n error: " + e);
             return e.toString();
         }
 
@@ -42,6 +45,7 @@ public class SaveHandler {
 
             System.out.println("saved to: " + filePath);
 
+            // returns a string version of json file, this does not affect the saved file
             return gson.toJson(saveFile);
         } catch (IOException e) {
             System.out.println("failed to save to: " + filePath + " \n error: " + e);
@@ -67,17 +71,17 @@ public class SaveHandler {
      * @param fileName the name of the json file
      * @param dirPath  the path to folder in which to save the game
      * 
-     * @return the loaded save fill, return null if failed to load.
+     * @return the loaded save file, return null if failed to load.
      */
     public static SaveFile loadGame(String fileName, String dirPath) {
         Gson gson = new Gson();
+
         String filePath = dirPath + "/" + fileName + ".json";
 
         try (FileReader reader = new FileReader(filePath)) {
             // loads the save file
             SaveFile save = gson.fromJson(reader, SaveFile.class);
             System.out.println("loaded: " + filePath);
-
             return save;
         } catch (IOException e) {
             System.out.println("failed to load: " + filePath + " \n error: " + e);
