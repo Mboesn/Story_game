@@ -1,8 +1,7 @@
-package story_game;
+package story_game.save_mechanics;
 
 import com.google.gson.Gson;
 
-import story_game.save_mechanics.PlayerCharacter;
 import story_game.save_mechanics.scene_flags.SceneOneFlags;
 
 public class SaveFile {

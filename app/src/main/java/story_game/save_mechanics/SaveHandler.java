@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.google.gson.Gson;
-import story_game.SaveFile;
 
 public class SaveHandler {
 
