@@ -9,8 +9,8 @@ public class PlayerCharacter {
     public PlayerCharacter() {
     }
 
-    public String getRaceName() {
-        return race.getName();
+    public Race getRace() {
+        return this.race;
     }
 
     public int getAge() {
@@ -18,6 +18,6 @@ public class PlayerCharacter {
     }
 
     public String getString() {
-        return "Race: " + getRaceName() + "Age: " + getAge();
+        return "Race: " + getRace().getName() + "Age: " + getAge();
     }
 }
