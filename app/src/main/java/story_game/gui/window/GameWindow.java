@@ -13,6 +13,7 @@ public class GameWindow {
         VBox root = new VBox();
         Scene scene = new Scene(root, 1000, 600);
 
+        System.out.println(saveFile);
 
         stage.setScene(scene);
         stage.setTitle(Constants.GAME_NAME);

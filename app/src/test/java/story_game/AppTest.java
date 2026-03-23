@@ -10,7 +10,8 @@ import story_game.save_mechanics.SaveHandler;
 class AppTest {
     public static void main(String[] args) {
         SaveFile save = new SaveFile();
-        SaveHandler.saveGame(save,"save1");
+        SaveHandler.saveGame(save,"save2");
+        SaveHandler.saveGame(save,"save3");
         System.out.println(SaveHandler.loadGame("save1"));
         MainMenuWindow.launch(MainMenuWindow.class, args);
     }

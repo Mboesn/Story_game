@@ -1,14 +1,18 @@
 package story_game.gui.window;
 
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import story_game.gui.util.ButtonCustom;
+import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.SaveHandler;
 
 /**
  * This window lists all available saves, allowing to load a new one or save the
@@ -58,6 +62,15 @@ public class LoadSaveMenuWindow {
     private class SaveButton extends ButtonCustom {
         public SaveButton(String text) {
             super(text);
+
+            setOnMouseClicked(new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent event) {
+                    // loads the games, removes white space from the text
+                    SaveFile save = SaveHandler.loadGame(text.replaceAll("\\s+", ""));
+                    GameWindow game = new GameWindow();
+                    game.show(save);
+                }
+            });
         }
         // TODO: make button logic
     }
