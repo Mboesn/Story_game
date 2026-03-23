@@ -3,7 +3,7 @@
  */
 package story_game;
 
-import story_game.gui.window.MainMenu;
+import story_game.gui.window.MainMenuWindow;
 import story_game.save_mechanics.SaveFile;
 import story_game.save_mechanics.SaveHandler;
 
@@ -12,6 +12,6 @@ class AppTest {
         SaveFile save = new SaveFile();
         SaveHandler.saveGame(save,"save1");
         System.out.println(SaveHandler.loadGame("save1"));
-        MainMenu.launch(MainMenu.class, args);
+        MainMenuWindow.launch(MainMenuWindow.class, args);
     }
 }

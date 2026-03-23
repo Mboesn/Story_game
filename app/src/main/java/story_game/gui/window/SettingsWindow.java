@@ -5,7 +5,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class SettingsMenu {
+public class SettingsWindow {
 
     public void show() {
         Stage stage = new Stage();

@@ -18,7 +18,7 @@ import story_game.gui.util.ButtonCustom;
  * The scene for the main menu of the game.
  * this should be launched when the game is started.
  */
-public class MainMenu extends Application {
+public class MainMenuWindow extends Application {
 
     @Override
     public void start(Stage mainMenuStage) throws Exception {
@@ -49,7 +49,7 @@ public class MainMenu extends Application {
 
         loadGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                LoadSaveMenu save = new LoadSaveMenu();
+                LoadSaveMenuWindow save = new LoadSaveMenuWindow();
                 save.show(mainMenuStage);
                 mainMenuStage.close();
             }
@@ -60,7 +60,7 @@ public class MainMenu extends Application {
 
         settings.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                SettingsMenu settings = new SettingsMenu();
+                SettingsWindow settings = new SettingsWindow();
                 settings.show();
             }
         });

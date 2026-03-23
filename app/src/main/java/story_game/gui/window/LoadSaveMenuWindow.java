@@ -14,7 +14,7 @@ import story_game.gui.util.ButtonCustom;
  * This window lists all available saves, allowing to load a new one or save the
  * current one
  */
-public class LoadSaveMenu {
+public class LoadSaveMenuWindow {
     public void show(Stage mainMenuStage) {
 
         final double buttonSpacing = 15;
