@@ -1,4 +1,4 @@
-package story_game.gui;
+package story_game.gui.window;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;

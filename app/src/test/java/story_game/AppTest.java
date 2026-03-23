@@ -3,7 +3,7 @@
  */
 package story_game;
 
-import story_game.gui.MainMenu;
+import story_game.gui.window.MainMenu;
 import story_game.save_mechanics.SaveFile;
 import story_game.save_mechanics.SaveHandler;
 

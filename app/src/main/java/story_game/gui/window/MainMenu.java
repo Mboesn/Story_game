@@ -1,19 +1,18 @@
-package story_game.gui;
+package story_game.gui.window;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import story_game.Constants;
+import story_game.gui.util.ButtonCustom;
 
 /**
  * The scene for the main menu of the game.
@@ -22,11 +21,14 @@ import story_game.Constants;
 public class MainMenu extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage mainMenuStage) throws Exception {
+
+        final double buttonSpacing = 15;
+
         VBox root = new VBox();
         Scene mainMenu = new Scene(root, 1000, 600);
         // Setting the title to Stage.
-        primaryStage.setTitle(Constants.gameName);
+        mainMenuStage.setTitle(Constants.GAME_NAME);
 
         // Creating a Text object
         Text titleText = new Text();
@@ -35,49 +37,48 @@ public class MainMenu extends Application {
         titleText.setFont(new Font(45));
 
         // Setting the text to be added.
-        titleText.setText(Constants.gameName);
-
-        final double buttonWidth = 200;
+        titleText.setText(Constants.GAME_NAME);
 
         // TODO: add button functions
 
         // Sends to game window using a fresh save file
-        Button newGame = new Button("New game");
-        newGame.setMaxWidth(buttonWidth);
+        ButtonCustom newGame = new ButtonCustom("New game");
 
         // Opens the save file window allowing you to choose what save file to load
-        Button loadGame = new Button("Load game");
-        loadGame.setMaxWidth(buttonWidth);
+        ButtonCustom loadGame = new ButtonCustom("Load game");
+
+        loadGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                LoadSaveMenu save = new LoadSaveMenu();
+                save.show(mainMenuStage);
+                mainMenuStage.close();
+            }
+        });
 
         // Opens the settings window.
-        Button settings = new Button("Settings");
-        settings.setMaxWidth(buttonWidth);
+        ButtonCustom settings = new ButtonCustom("Settings");
 
-        settings.setOnMouseClicked((new EventHandler<MouseEvent>() {
+        settings.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 SettingsMenu settings = new SettingsMenu();
                 settings.show();
             }
-        }));
+        });
 
         // Closes the game
-        Button exit = new Button("Exit");
-        exit.setMaxWidth(buttonWidth);
+        ButtonCustom exit = new ButtonCustom("Exit");
 
         // TODO: make a are you sure? window
-        exit.setOnMouseClicked((new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                primaryStage.close();
-            }
-        }));
+        exit.setOnMouseClicked(e -> mainMenuStage.close());
 
         ObservableList<Node> list = root.getChildren();
 
         list.addAll(titleText, newGame, loadGame, settings, exit);
+        root.setSpacing(buttonSpacing);
         root.setAlignment(Pos.CENTER);
         root.setFillWidth(true);
 
-        primaryStage.setScene(mainMenu);
-        primaryStage.show();
+        mainMenuStage.setScene(mainMenu);
+        mainMenuStage.show();
     }
 }
