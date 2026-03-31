@@ -20,17 +20,19 @@ import story_game.save_mechanics.SaveHandler;
  */
 public class LoadSaveMenuWindow {
     public void show(Stage mainMenuStage) {
+        final double sceneWidth = 300;
+        final double sceneHeight = 500;
 
         final double buttonSpacing = 15;
         final double backButtonInset = 30;
 
         Stage stage = new Stage();
         VBox root = new VBox();
-        Scene scene = new Scene(root, 300, 500);
+        Scene scene = new Scene(root, sceneWidth, sceneHeight);
 
-        SaveButton save1 = new SaveButton("Save 1");
-        SaveButton save2 = new SaveButton("Save 2");
-        SaveButton save3 = new SaveButton("Save 3");
+        LoadSaveButton save1 = new LoadSaveButton("Save 1", stage);
+        LoadSaveButton save2 = new LoadSaveButton("Save 2", stage);
+        LoadSaveButton save3 = new LoadSaveButton("Save 3", stage);
 
         ButtonCustom back = new ButtonCustom("Back");
 
@@ -58,20 +60,33 @@ public class LoadSaveMenuWindow {
         stage.show();
     }
 
-    // a button with all the logic to load a save file.
-    private class SaveButton extends ButtonCustom {
-        public SaveButton(String text) {
+    private class LoadSaveButton extends ButtonCustom {
+
+        /**
+         * Creates a button that loads a save file when pressed
+         * 
+         * @param text              Name of the space file. add whitespaces according to
+         *                          button name,
+         *                          code will ignore when loading
+         * @param loadSaveMenuStage the windows stage, used to close the window after
+         *                          loading save
+         */
+        public LoadSaveButton(String text, Stage loadSaveMenuStage) {
             super(text);
 
             setOnMouseClicked(new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
-                    // loads the games, removes white space from the text
+                    // loads the save file, removes white space from the text
                     SaveFile save = SaveHandler.loadGame(text.replaceAll("\\s+", ""));
-                    GameWindow game = new GameWindow();
-                    game.show(save);
+                    if (save != null) {
+                        GameWindow game = new GameWindow();
+                        game.show(save);
+                        loadSaveMenuStage.close();
+                    } else {
+                        System.out.println("failed to load save: " + text);
+                    }
                 }
             });
         }
-        // TODO: make button logic
     }
 }

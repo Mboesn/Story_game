@@ -8,12 +8,16 @@ import javafx.stage.Stage;
 public class SettingsWindow {
 
     public void show() {
+        final double sceneWidth = 400;
+        final double sceneHeight = 250;
+
         Stage stage = new Stage();
-
-        
         VBox root = new VBox();
-
-        Scene scene = new Scene(root, 400, 250);
+        Scene scene = new Scene(root, sceneWidth, sceneHeight);
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            ExitConfirmationAlert.confirmExit(stage);
+        });
 
         stage.setScene(scene);
         stage.setTitle("Settings");

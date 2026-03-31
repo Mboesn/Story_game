@@ -5,8 +5,14 @@ import story_game.Constants;
 
 // Adds repetitive functions to the Button class
 public class ButtonCustom extends Button {
+
+    /**
+     * Creates a button with the specified text as its label.
+     * 
+     * @param text A text string for its label.
+     */
     public ButtonCustom(String text) {
         super(text);
-        setMaxWidth(Constants.DEFAULT_BUTTON_WIDTH);
+        setMaxWidth(Constants.DEFAULT_BUTTON_MAX_WIDTH);
     }
 }

@@ -1,11 +1,16 @@
 package story_game.gui.window;
 
+import java.util.Optional;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -20,27 +25,25 @@ import story_game.save_mechanics.SaveFile;
  * this should be launched when the game is started.
  */
 public class MainMenuWindow extends Application {
-
     @Override
     public void start(Stage mainMenuStage) throws Exception {
+        final double sceneWidth = 1000;
+        final double sceneHeight = 600;
 
         final double buttonSpacing = 15;
 
         VBox root = new VBox();
-        Scene mainMenu = new Scene(root, 1000, 600);
-        // Setting the title to Stage.
+        Scene mainMenuScene = new Scene(root, sceneWidth, sceneHeight);
         mainMenuStage.setTitle(Constants.GAME_NAME);
+        mainMenuStage.setOnCloseRequest(e -> {
+            e.consume();
+            ExitConfirmationAlert.confirmExit(mainMenuStage);
+        });
 
-        // Creating a Text object
+        // Game's title card
         Text titleText = new Text();
-
-        // Setting font to the text
         titleText.setFont(new Font(45));
-
-        // Setting the text to be added.
         titleText.setText(Constants.GAME_NAME);
-
-        // TODO: add button functions
 
         // Sends to game window using a fresh save file
         ButtonCustom newGame = new ButtonCustom("New game");
@@ -75,9 +78,7 @@ public class MainMenuWindow extends Application {
 
         // Closes the game
         ButtonCustom exit = new ButtonCustom("Exit");
-
-        // TODO: make a are you sure? window
-        exit.setOnMouseClicked(e -> mainMenuStage.close());
+        exit.setOnMouseClicked(e -> ExitConfirmationAlert.confirmExit(mainMenuStage));
 
         ObservableList<Node> list = root.getChildren();
 
@@ -86,7 +87,7 @@ public class MainMenuWindow extends Application {
         root.setAlignment(Pos.CENTER);
         root.setFillWidth(true);
 
-        mainMenuStage.setScene(mainMenu);
+        mainMenuStage.setScene(mainMenuScene);
         mainMenuStage.show();
     }
 }

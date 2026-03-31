@@ -9,16 +9,22 @@ import story_game.save_mechanics.SaveFile;
 
 public class GameWindow {
     public void show(SaveFile saveFile) {
+        final double sceneWidth = 1000;
+        final double sceneHeight = 600;
+
         Stage stage = new Stage();
         VBox root = new VBox();
-        Scene scene = new Scene(root, 1000, 600);
-
-        System.out.println(saveFile);
-
+        Scene scene = new Scene(root, sceneWidth, sceneHeight);
         stage.setScene(scene);
         stage.setTitle(Constants.GAME_NAME);
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            ExitConfirmationAlert.confirmExit(stage);
+        });
+
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.NONE);
-        stage.show();        
+
+        stage.show();
     }
 }
