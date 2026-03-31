@@ -30,6 +30,8 @@ public class LoadSaveMenuWindow {
         VBox root = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
 
+        //TODO: check what save exist, and info
+        
         LoadSaveButton save1 = new LoadSaveButton("Save 1", stage);
         LoadSaveButton save2 = new LoadSaveButton("Save 2", stage);
         LoadSaveButton save3 = new LoadSaveButton("Save 3", stage);

@@ -19,6 +19,8 @@ public class SettingsWindow {
             ExitConfirmationAlert.confirmExit(stage);
         });
 
+        //TODO: add settings
+        
         stage.setScene(scene);
         stage.setTitle("Settings");
         // blocks all other windows till settings has been finished

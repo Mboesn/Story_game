@@ -22,6 +22,8 @@ public class GameWindow {
             ExitConfirmationAlert.confirmExit(stage);
         });
 
+        //TODO: add everything
+        
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.NONE);
 
