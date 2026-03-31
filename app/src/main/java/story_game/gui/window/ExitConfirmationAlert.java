@@ -14,15 +14,20 @@ public class ExitConfirmationAlert {
      * stage
      * 
      * @param stage stage to close if OK is selected
+     * 
+     * @return True if window closed
      */
-    public static void confirmExit(Stage stage) {
+    public static boolean confirmExit(Stage stage) {
         Alert exitConfirmationAlert = new Alert(AlertType.CONFIRMATION);
         exitConfirmationAlert.setTitle("Are you sure?");
         exitConfirmationAlert.setHeaderText("You are about to exit?");
         exitConfirmationAlert.setContentText("All unsaved progress will be deleted");
 
         Optional<ButtonType> isExit = exitConfirmationAlert.showAndWait();
-        if (isExit.isPresent() && isExit.get() == ButtonType.OK)
+
+        boolean exit = isExit.isPresent() && isExit.get() == ButtonType.OK;
+        if (exit)
             stage.close();
+        return exit;
     }
 }

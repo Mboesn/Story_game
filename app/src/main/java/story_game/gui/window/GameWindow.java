@@ -1,20 +1,23 @@
 package story_game.gui.window;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.SaveFile;
 
 public class GameWindow {
-    public void show(SaveFile saveFile) {
+    public void show(SaveFile saveFile, Stage mainMenuStage) {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
@@ -41,9 +44,27 @@ public class GameWindow {
         ButtonCustom saveGameButton = new ButtonCustom("Save game");
         saveGameButton.setOnMouseClicked(e -> {
             SaveMenuWindow saveMenuWindow = new SaveMenuWindow();
-            saveMenuWindow.show(stage, SaveMenuType.SAVE_GAME, saveFile);
+            saveMenuWindow.show(mainMenuStage, SaveMenuType.SAVE_GAME, saveFile);
         });
         topRowList.add(saveGameButton);
+
+        ButtonCustom refturnToMenuButton = new ButtonCustom("Return to menu");
+        refturnToMenuButton
+                .setOnMouseClicked(e -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+        topRowList.add(refturnToMenuButton);
+
+        // Assign equal horizontal grow priority
+        HBox.setHgrow(settingsButton, Priority.ALWAYS);
+        HBox.setHgrow(saveGameButton, Priority.ALWAYS);
+        HBox.setHgrow(refturnToMenuButton, Priority.ALWAYS);
+        topRow.setAlignment(Pos.TOP_CENTER);
+
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            if (ExitConfirmationAlert.confirmExit(stage)) {
+                mainMenuStage.show();
+            }
+        });
 
         rootList.add(topRow);
 
@@ -64,8 +85,6 @@ public class GameWindow {
                         "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.");
         gameTextArea.setWrapText(true);
         rootList.add(gameTextArea);
-
-        // TODO: add everything
 
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.NONE);
