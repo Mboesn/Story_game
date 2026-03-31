@@ -26,7 +26,8 @@ public class SaveMenuWindow {
      * Opens a save menu
      * 
      * @param mainMenuStage The stage of the main menu
-     * @param type          The type of menu tosave, if loading a save file leave as
+     * @param type          The type of menu to open
+     * @param saveFile      The save file to save if loading a save file leave as
      *                      null
      */
     public void show(Stage mainMenuStage, SaveMenuType type, SaveFile saveFile) {
@@ -36,22 +37,23 @@ public class SaveMenuWindow {
         final double buttonSpacing = 15;
         final double backButtonInset = 30;
 
+        final int maxSaveCount = 10;
+
         Stage stage = new Stage();
         VBox root = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
 
         // TODO: add info to save
 
-        SaveButton[] saveButtons = new SaveButton[10];
+        SaveButton[] saveButtons = new SaveButton[maxSaveCount];
         ObservableList<Node> list = root.getChildren();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < maxSaveCount; i++) {
             saveButtons[i] = new SaveButton("Save " + (i + 1), stage, saveFile, type, mainMenuStage);
             list.add(saveButtons[i]);
         }
 
         ButtonCustom back = new ButtonCustom("Back");
-
         back.setOnMouseClicked(e -> {
             if (type != SaveMenuType.SAVE_GAME)
                 mainMenuStage.show();
@@ -68,11 +70,17 @@ public class SaveMenuWindow {
 
         stage.setScene(scene);
         stage.setTitle("Load save");
-        // blocks all other windows till settings has been finished
+        // blocks all other windows till save menu has been finished
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
+    /**
+     * Opens a save menu (do not use this method for saving an existing file)
+     * 
+     * @param mainMenuStage The stage of the main menu
+     * @param type          The type of menu to open
+     */
     public void show(Stage mainMenuStage, SaveMenuType type) {
         if (type != SaveMenuType.SAVE_GAME)
             show(mainMenuStage, type, type == SaveMenuType.LOAD_GAME ? null : new SaveFile());
@@ -99,6 +107,7 @@ public class SaveMenuWindow {
         public SaveButton(String text, Stage loadSaveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
             super(text);
+            // removes whitespaces from the text
             String saveFileName = text.replaceAll("\\s+", "");
             SaveFile save = SaveHandler.loadGame(saveFileName);
 
@@ -139,7 +148,16 @@ public class SaveMenuWindow {
             }
         }
 
-        private void saveGame(String saveFileName, Stage loadSaveMenuStage, SaveFile saveFile,
+        /**
+         * Saves a given save file
+         * 
+         * @param saveFileName  The name of the file to save
+         * @param saveMenuStage The save menu stage
+         * @param saveFile      The save file to save
+         * @param type          What type of save to do (new or existing)
+         * @param mainMenuStage The main menu stage
+         */
+        private void saveGame(String saveFileName, Stage saveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
             SaveHandler.saveGame(saveFile, saveFileName);
             if (type != SaveMenuType.SAVE_GAME) {
@@ -147,7 +165,7 @@ public class SaveMenuWindow {
                 gameWindow.show(saveFile, mainMenuStage);
                 mainMenuStage.close();
             }
-            loadSaveMenuStage.close();
+            saveMenuStage.close();
         }
     }
 

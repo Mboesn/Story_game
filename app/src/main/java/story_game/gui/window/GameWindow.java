@@ -53,18 +53,17 @@ public class GameWindow {
                 .setOnMouseClicked(e -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
         topRowList.add(refturnToMenuButton);
 
-        // Assign equal horizontal grow priority
-        HBox.setHgrow(settingsButton, Priority.ALWAYS);
-        HBox.setHgrow(saveGameButton, Priority.ALWAYS);
-        HBox.setHgrow(refturnToMenuButton, Priority.ALWAYS);
-        topRow.setAlignment(Pos.TOP_CENTER);
-
         stage.setOnCloseRequest(e -> {
             e.consume();
             if (ExitConfirmationAlert.confirmExit(stage)) {
                 mainMenuStage.show();
             }
         });
+
+        HBox.setHgrow(settingsButton, Priority.ALWAYS);
+        HBox.setHgrow(saveGameButton, Priority.ALWAYS);
+        HBox.setHgrow(refturnToMenuButton, Priority.ALWAYS);
+        topRow.setAlignment(Pos.TOP_CENTER);
 
         rootList.add(topRow);
 
@@ -86,7 +85,6 @@ public class GameWindow {
         gameTextArea.setWrapText(true);
         rootList.add(gameTextArea);
 
-        // blocks all other windows till settings has been finished
         stage.initModality(Modality.NONE);
 
         stage.show();
