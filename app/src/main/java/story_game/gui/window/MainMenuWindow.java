@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
-import story_game.save_mechanics.SaveFile;
+import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 
 /**
  * The scene for the main menu of the game.
@@ -44,8 +44,8 @@ public class MainMenuWindow extends Application {
         ButtonCustom newGame = new ButtonCustom("New game");
         newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                GameWindow game = new GameWindow();
-                game.show(new SaveFile());
+                SaveMenuWindow save = new SaveMenuWindow();
+                save.show(mainMenuStage, SaveMenuType.NEW_GAME);
                 mainMenuStage.close();
             }
         });
@@ -55,8 +55,8 @@ public class MainMenuWindow extends Application {
 
         loadGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                LoadSaveMenuWindow save = new LoadSaveMenuWindow();
-                save.show(mainMenuStage);
+                SaveMenuWindow save = new SaveMenuWindow();
+                save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
                 mainMenuStage.close();
             }
         });
