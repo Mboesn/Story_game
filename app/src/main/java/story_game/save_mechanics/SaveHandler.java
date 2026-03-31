@@ -13,7 +13,7 @@ import story_game.Constants;
 
 public class SaveHandler {
     // This path leads to the game folder in the local appdata
-    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.gameName;
+    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
 
     /**
      * Saves the game to a new file given a path
