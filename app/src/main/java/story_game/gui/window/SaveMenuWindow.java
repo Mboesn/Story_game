@@ -3,7 +3,6 @@ package story_game.gui.window;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -11,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,10 +25,11 @@ public class SaveMenuWindow {
     /**
      * Opens a save menu
      * 
-     * @param mainMenuStage Main menu stage
-     * @param type          The type of menu to open
+     * @param previousStage Stage in which the save menu was open from
+     * @param type          The type of menu tosave, if loading a save file leave as
+     *                      null
      */
-    public void show(Stage mainMenuStage, SaveMenuType type) {
+    public void show(Stage previousStage, SaveMenuType type, SaveFile saveFile) {
         final double sceneWidth = 300;
         final double sceneHeight = 500;
 
@@ -47,14 +46,14 @@ public class SaveMenuWindow {
         ObservableList<Node> list = root.getChildren();
 
         for (int i = 0; i < 10; i++) {
-            saveButtons[i] = new SaveButton("Save " + (i + 1), stage, type);
+            saveButtons[i] = new SaveButton("Save " + (i + 1), stage, saveFile, type);
             list.add(saveButtons[i]);
         }
 
         ButtonCustom back = new ButtonCustom("Back");
 
         back.setOnMouseClicked(e -> {
-            mainMenuStage.show();
+            previousStage.show();
             stage.close();
         });
 
@@ -73,6 +72,13 @@ public class SaveMenuWindow {
         stage.show();
     }
 
+    public void show(Stage previousStage, SaveMenuType type) {
+        if (type != SaveMenuType.SAVE_GAME)
+            show(previousStage, type, type == SaveMenuType.LOAD_GAME ? null : new SaveFile());
+        else
+            System.out.println("Trying to save game but no save file provided");
+    }
+
     private class SaveButton extends ButtonCustom {
 
         /**
@@ -83,14 +89,17 @@ public class SaveMenuWindow {
          *                          code will ignore when loading
          * @param loadSaveMenuStage the windows stage, used to close the window after
          *                          loading save
-         * @param menuType          The type of menu
+         * @param saveFile          Save file to save, if loading a save file leave as
+         *                          null
+         * @param type              Type of action to take
          */
-        public SaveButton(String text, Stage loadSaveMenuStage, SaveMenuType menuType) {
+        public SaveButton(String text, Stage loadSaveMenuStage, SaveFile saveFile,
+                SaveMenuType type) {
             super(text);
             String saveFileName = text.replaceAll("\\s+", "");
             SaveFile save = SaveHandler.loadGame(saveFileName);
 
-            if (menuType == SaveMenuType.LOAD_GAME) {
+            if (saveFile == null) {
                 // If no save is found for a given slot disable the button
                 this.setDisable(save == null);
                 if (save != null) {
@@ -98,14 +107,13 @@ public class SaveMenuWindow {
                         GameWindow gameWindow = new GameWindow();
                         gameWindow.show(save);
                         loadSaveMenuStage.close();
-
                     });
                 }
             } else {
                 if (save == null) {
                     this.setText(this.getText() + " - new save");
                     setOnMouseClicked(e -> {
-                        saveGame(saveFileName, loadSaveMenuStage);
+                        saveGame(saveFileName, loadSaveMenuStage, saveFile, type);
                     });
                 } else {
                     this.setText(this.getText() + " - override save");
@@ -119,18 +127,20 @@ public class SaveMenuWindow {
                     setOnMouseClicked(e -> {
                         Optional<ButtonType> isSave = saveConfirmationAlert.showAndWait();
                         if (isSave.isPresent() && isSave.get() == ButtonType.OK) {
-                            saveGame(saveFileName, loadSaveMenuStage);
+                            saveGame(saveFileName, loadSaveMenuStage, saveFile, type);
                         }
                     });
                 }
             }
         }
 
-        private void saveGame(String saveFileName, Stage loadSaveMenuStage) {
-            SaveFile saveFile = new SaveFile();
+        private void saveGame(String saveFileName, Stage loadSaveMenuStage, SaveFile saveFile,
+                SaveMenuType type) {
             SaveHandler.saveGame(saveFile, saveFileName);
-            GameWindow gameWindow = new GameWindow();
-            gameWindow.show(saveFile);
+            if (type != SaveMenuType.SAVE_GAME) {
+                GameWindow gameWindow = new GameWindow();
+                gameWindow.show(saveFile);
+            }
             loadSaveMenuStage.close();
         }
     }
@@ -138,6 +148,7 @@ public class SaveMenuWindow {
     // The type of save menu to open
     public enum SaveMenuType {
         NEW_GAME,
-        LOAD_GAME;
+        LOAD_GAME,
+        SAVE_GAME;
     }
 }

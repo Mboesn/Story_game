@@ -4,11 +4,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
+import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.SaveFile;
 
 public class GameWindow {
@@ -17,6 +19,7 @@ public class GameWindow {
         final double sceneHeight = 600;
 
         Stage stage = new Stage();
+        HBox topRow = new HBox();
         VBox root = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
         stage.setScene(scene);
@@ -25,14 +28,24 @@ public class GameWindow {
             e.consume();
             ExitConfirmationAlert.confirmExit(stage);
         });
-        ObservableList<Node> list = root.getChildren();
+        ObservableList<Node> rootList = root.getChildren();
+        ObservableList<Node> topRowList = topRow.getChildren();
 
         ButtonCustom settingsButton = new ButtonCustom("Settings");
         settingsButton.setOnMouseClicked(e -> {
             SettingsWindow settingsWindow = new SettingsWindow();
             settingsWindow.show();
         });
-        list.add(settingsButton);
+        topRowList.add(settingsButton);
+
+        ButtonCustom saveGameButton = new ButtonCustom("Save game");
+        saveGameButton.setOnMouseClicked(e -> {
+            SaveMenuWindow saveMenuWindow = new SaveMenuWindow();
+            saveMenuWindow.show(stage, SaveMenuType.SAVE_GAME, saveFile);
+        });
+        topRowList.add(saveGameButton);
+
+        rootList.add(topRow);
 
         TextArea gameTextArea = new TextArea();
         gameTextArea.setText(
@@ -50,7 +63,7 @@ public class GameWindow {
                         "\r\n" + //
                         "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.");
         gameTextArea.setWrapText(true);
-        list.add(gameTextArea);
+        rootList.add(gameTextArea);
 
         // TODO: add everything
 
