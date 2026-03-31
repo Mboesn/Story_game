@@ -94,37 +94,32 @@ public class SaveMenuWindow {
                 // If no save is found for a given slot disable the button
                 this.setDisable(save == null);
                 if (save != null) {
-                    setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent event) {
-                            GameWindow gameWindow = new GameWindow();
-                            gameWindow.show(save);
-                            loadSaveMenuStage.close();
-                        }
+                    setOnMouseClicked(e -> {
+                        GameWindow gameWindow = new GameWindow();
+                        gameWindow.show(save);
+                        loadSaveMenuStage.close();
+
                     });
                 }
             } else {
                 if (save == null) {
                     this.setText(this.getText() + " - new save");
-                    setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent event) {
-                            saveGame(saveFileName, loadSaveMenuStage);
-                        }
+                    setOnMouseClicked(e -> {
+                        saveGame(saveFileName, loadSaveMenuStage);
                     });
                 } else {
                     this.setText(this.getText() + " - override save");
                     // Throws an alert telling the user that save will be overridden
-                    Alert exitConfirmationAlert = new Alert(AlertType.CONFIRMATION);
-                    exitConfirmationAlert.setTitle("Are you sure?");
-                    exitConfirmationAlert.setHeaderText("You are about to delete " + text);
-                    exitConfirmationAlert
+                    Alert saveConfirmationAlert = new Alert(AlertType.CONFIRMATION);
+                    saveConfirmationAlert.setTitle("Are you sure?");
+                    saveConfirmationAlert.setHeaderText("You are about to delete " + text);
+                    saveConfirmationAlert
                             .setContentText("Deleting this save cannot be undone, do you wish to proceed?");
 
-                    setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        public void handle(MouseEvent event) {
-                            Optional<ButtonType> isExit = exitConfirmationAlert.showAndWait();
-                            if (isExit.isPresent() && isExit.get() == ButtonType.OK) {
-                                saveGame(saveFileName, loadSaveMenuStage);
-                            }
+                    setOnMouseClicked(e -> {
+                        Optional<ButtonType> isSave = saveConfirmationAlert.showAndWait();
+                        if (isSave.isPresent() && isSave.get() == ButtonType.OK) {
+                            saveGame(saveFileName, loadSaveMenuStage);
                         }
                     });
                 }
