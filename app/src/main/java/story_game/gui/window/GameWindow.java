@@ -21,9 +21,12 @@ public class GameWindow {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
+        final double chooiceButtonSpacing = 15;
+
         Stage stage = new Stage();
         HBox topRow = new HBox();
         VBox root = new VBox();
+        VBox choices = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
         stage.setScene(scene);
         stage.setTitle(Constants.GAME_NAME);
@@ -31,8 +34,10 @@ public class GameWindow {
             e.consume();
             ExitConfirmationAlert.confirmExit(stage);
         });
+
         ObservableList<Node> rootList = root.getChildren();
         ObservableList<Node> topRowList = topRow.getChildren();
+        ObservableList<Node> choicesList = choices.getChildren();
 
         ButtonCustom settingsButton = new ButtonCustom("Settings");
         settingsButton.setOnMouseClicked(e -> {
@@ -83,10 +88,25 @@ public class GameWindow {
                         "\r\n" + //
                         "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.");
         gameTextArea.setWrapText(true);
+        gameTextArea.setEditable(false);
         rootList.add(gameTextArea);
+
+        rootList.add(choices);
+        choices.setSpacing(chooiceButtonSpacing);
+        choices.setAlignment(Pos.CENTER_LEFT);
+        choices.setFillWidth(true);
+        choices.autosize();
+        addButtons(saveFile.getCurrentPage().getButtons(), choicesList);
 
         stage.initModality(Modality.NONE);
 
         stage.show();
+    }
+
+    private void addButtons(ButtonCustom[] buttons, ObservableList<Node> choicesList) {
+        choicesList.clear();
+        for (ButtonCustom btn : buttons) {
+            choicesList.add(btn);
+        }
     }
 }

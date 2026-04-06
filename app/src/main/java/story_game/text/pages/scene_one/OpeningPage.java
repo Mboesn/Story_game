@@ -19,10 +19,13 @@ public class OpeningPage extends Page {
         texts[2] = new Text("text 3");
         return texts;
     }
+
     @Override
-    public ButtonCustom getButtons() {
-        ButtonCustom op1 = new ButtonCustom("wake up");
+    public ButtonCustom[] getButtons() {
+        ButtonCustom op1 = new ButtonCustom("Wake up");
         
-        return null;
+        ButtonCustom op2 = new ButtonCustom("Sloop");
+        
+        return new ButtonCustom[] {op1, op2};
     }
 }
