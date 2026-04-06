@@ -30,6 +30,7 @@ dependencies {
     implementation("org.danilopianini:gson-extras:3.3.0")
     // Reflections in order to automatically add all pages to Gson extras
     implementation("org.reflections:reflections:0.10.2")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
