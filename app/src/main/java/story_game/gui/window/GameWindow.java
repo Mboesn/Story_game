@@ -39,23 +39,22 @@ public class GameWindow {
         ObservableList<Node> topRowList = topRow.getChildren();
         ObservableList<Node> choicesList = choices.getChildren();
 
-        ButtonCustom settingsButton = new ButtonCustom("Settings");
-        settingsButton.setOnMouseClicked(e -> {
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.show();
-        });
+        ButtonCustom settingsButton = ButtonCustom.createButtonCustom("Settings",
+                e -> {
+                    SettingsWindow settingsWindow = new SettingsWindow();
+                    settingsWindow.show();
+                });
         topRowList.add(settingsButton);
 
-        ButtonCustom saveGameButton = new ButtonCustom("Save game");
-        saveGameButton.setOnMouseClicked(e -> {
-            SaveMenuWindow saveMenuWindow = new SaveMenuWindow();
-            saveMenuWindow.show(mainMenuStage, SaveMenuType.SAVE_GAME, saveFile);
-        });
+        ButtonCustom saveGameButton = ButtonCustom.createButtonCustom("Save game",
+                e -> {
+                    SaveMenuWindow saveMenuWindow = new SaveMenuWindow();
+                    saveMenuWindow.show(mainMenuStage, SaveMenuType.SAVE_GAME, saveFile);
+                });
         topRowList.add(saveGameButton);
 
-        ButtonCustom refturnToMenuButton = new ButtonCustom("Return to menu");
-        refturnToMenuButton
-                .setOnMouseClicked(e -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
+        ButtonCustom refturnToMenuButton = ButtonCustom.createButtonCustom("Return to menu",
+                e -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
         topRowList.add(refturnToMenuButton);
 
         stage.setOnCloseRequest(e -> {
