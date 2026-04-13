@@ -15,19 +15,33 @@ import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.SaveFile;
+import story_game.text.Page;
+import story_game.text.Text;
 
 public class GameWindow {
+
+    private static Page currentPage;
+    private static ObservableList<Node> choicesList;
+    private static TextArea gameTextArea;
+    private static SaveFile saveFile;
+
     public void show(SaveFile saveFile, Stage mainMenuStage) {
+
+        GameWindow.saveFile = saveFile;
+
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
         final double chooiceButtonSpacing = 15;
+
+        final int textAreaSize = 25;
 
         Stage stage = new Stage();
         HBox topRow = new HBox();
         VBox root = new VBox();
         VBox choices = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
+
         stage.setScene(scene);
         stage.setTitle(Constants.GAME_NAME);
         stage.setOnCloseRequest(e -> {
@@ -38,6 +52,8 @@ public class GameWindow {
         ObservableList<Node> rootList = root.getChildren();
         ObservableList<Node> topRowList = topRow.getChildren();
         ObservableList<Node> choicesList = choices.getChildren();
+
+        GameWindow.choicesList = choicesList;
 
         ButtonCustom settingsButton = ButtonCustom.createButtonCustom("Settings",
                 e -> {
@@ -72,40 +88,46 @@ public class GameWindow {
         rootList.add(topRow);
 
         TextArea gameTextArea = new TextArea();
-        gameTextArea.setText(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lacus libero, laoreet ut feugiat non, luctus quis erat. Morbi eleifend accumsan eleifend. Donec nibh nunc, fermentum eu risus ut, fermentum porta leo. Suspendisse in diam auctor, imperdiet metus eget, tincidunt justo. Cras tincidunt cursus leo, sit amet mollis nisi luctus at. Nunc venenatis sit amet ligula eu egestas. Fusce consequat fermentum accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies quam et porttitor venenatis.\r\n"
-                        + //
-                        "\r\n" + //
-                        "Mauris venenatis nisl sed turpis ornare elementum. Praesent interdum, enim non rhoncus maximus, erat libero lacinia justo, sit amet posuere ligula metus ac lectus. Curabitur posuere non diam vitae varius. Proin volutpat ipsum libero, et fermentum diam ornare sit amet. Pellentesque sed vehicula mauris. Etiam vitae blandit eros. Suspendisse tincidunt venenatis velit. Suspendisse tellus lorem, commodo dignissim rhoncus et, condimentum et neque. Cras cursus consectetur eros, a dignissim eros hendrerit ac.\r\n"
-                        + //
-                        "\r\n" + //
-                        "Morbi in nulla ullamcorper, faucibus sapien nec, ornare nulla. Fusce consectetur lacus leo, in dapibus felis auctor quis. Etiam semper felis non tempus semper. Praesent pretium gravida arcu ac condimentum. Aenean libero metus, feugiat eu dignissim maximus, malesuada quis tellus. Pellentesque eros nulla, euismod a pharetra ut, ultrices vel magna. Mauris a semper nunc. Duis volutpat felis ut justo ultricies mattis. Ut dui orci, tristique vitae lacus eu, hendrerit ullamcorper ex. Ut imperdiet vitae nisl non porttitor. Fusce rutrum sem vel malesuada commodo. Maecenas sit amet urna at odio blandit ultricies. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;\r\n"
-                        + //
-                        "\r\n" + //
-                        "Curabitur volutpat suscipit libero, iaculis dignissim felis commodo sed. Donec nec dignissim nulla. Ut blandit justo ex, non elementum urna sodales et. Mauris posuere faucibus velit, quis porttitor magna aliquam eu. Donec tempor ultricies aliquet. Nam dapibus libero vitae ipsum ultrices sagittis. Cras luctus lacus orci, ac tincidunt nulla sagittis non. Phasellus eget mollis tortor. Suspendisse convallis sapien eros, eu tristique tortor commodo vel. Curabitur vehicula velit vestibulum tellus molestie, eget tristique mi sollicitudin.\r\n"
-                        + //
-                        "\r\n" + //
-                        "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.");
         gameTextArea.setWrapText(true);
         gameTextArea.setEditable(false);
+        gameTextArea.setPrefRowCount(textAreaSize);
         rootList.add(gameTextArea);
+
+        GameWindow.gameTextArea = gameTextArea;
 
         rootList.add(choices);
         choices.setSpacing(chooiceButtonSpacing);
         choices.setAlignment(Pos.CENTER_LEFT);
         choices.setFillWidth(true);
         choices.autosize();
-        addButtons(saveFile.getCurrentPage().getButtons(), choicesList);
+
+        setCurrentPage(saveFile.getCurrentPage());
 
         stage.initModality(Modality.NONE);
 
         stage.show();
     }
 
-    private void addButtons(ButtonCustom[] buttons, ObservableList<Node> choicesList) {
+    private static void addButtons(ButtonCustom[] buttons) {
         choicesList.clear();
         for (ButtonCustom btn : buttons) {
             choicesList.add(btn);
         }
+    }
+
+    public Page getCurrentPage() {
+        return currentPage;
+    }
+
+    public static void setCurrentPage(Page currentPage) {
+        GameWindow.currentPage = currentPage;
+        Text[] texts = currentPage.getTexts();
+        GameWindow.gameTextArea.setText(texts[0].getText());
+        addButtons(currentPage.getButtons());
+        saveFile.setCurrentPage(currentPage);
+    }
+
+    public static void updateText(Text text) {
+        GameWindow.gameTextArea.setText(text.getText());
     }
 }

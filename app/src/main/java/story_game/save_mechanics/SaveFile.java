@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 
 import story_game.save_mechanics.scene_flags.SceneOneFlags;
 import story_game.text.Page;
-import story_game.text.pages.scene_one.OpeningPage;
+import story_game.text.pages.scene_one.ExplainingStuffPage;
 
 public class SaveFile {
     private PlayerCharacter playerCharacter;
@@ -18,7 +18,7 @@ public class SaveFile {
     public SaveFile() {
         this.playerCharacter = new PlayerCharacter();
         this.sceneOneFlags = new SceneOneFlags();
-        this.currentPage = new OpeningPage();
+        this.currentPage = new ExplainingStuffPage();
     }
 
     public PlayerCharacter getPlayerCharacter() {
