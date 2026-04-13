@@ -3,10 +3,10 @@ package story_game.text.pages.scene_one;
 import story_game.text.ResponsePage;
 import story_game.text.Text;
 
-public class ExplainingStuffPage extends ResponsePage {
+public class IntroPage extends ResponsePage {
 
-    public ExplainingStuffPage() {
-        super.targetPage = new OpeningPage();
+    public IntroPage() {
+        super.targetPage = new WakingUpPage();
     }
     
     @Override

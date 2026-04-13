@@ -8,8 +8,8 @@ public class ContinueButton extends ButtonCustom {
     private int nextText = 1;
 
     @SuppressWarnings("deprecation")
-    public ContinueButton(Text[] text, Page targetPage) {
-        super("Continue");
+    public ContinueButton(Text[] text, Page targetPage, String buttonText) {
+        super(buttonText);
         setOnMouseClicked(e -> {
             if (nextText == text.length)
                 GameWindow.setCurrentPage(targetPage);
@@ -18,5 +18,9 @@ public class ContinueButton extends ButtonCustom {
                 nextText++;
             }
         });
+    }
+
+    public ContinueButton(Text[] text, Page targetPage) {
+        this(text, targetPage, "Continue");
     }
 }

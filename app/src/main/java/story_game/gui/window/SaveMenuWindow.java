@@ -106,7 +106,7 @@ public class SaveMenuWindow {
          */
         @SuppressWarnings("deprecation")
         public SaveButton(String text, Stage loadSaveMenuStage, SaveFile saveFile,
-                SaveMenuType type, Stage mainMenuStage) {         
+                SaveMenuType type, Stage mainMenuStage) {
             super(text);
             // removes whitespaces from the text
             String saveFileName = text.replaceAll("\\s+", "");

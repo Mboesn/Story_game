@@ -91,9 +91,14 @@ public class SaveHandler {
 
         try (FileReader reader = new FileReader(filePath)) {
             // loads the save file
-            SaveFile save = gson.fromJson(reader, SaveFile.class);
-            System.out.println("loaded: " + filePath);
-            return save;
+            try {
+                SaveFile save = gson.fromJson(reader, SaveFile.class);
+                System.out.println("loaded: " + filePath);
+                return save;
+            } catch (Exception e) {
+                System.out.println("failed to deserialize: " + filePath + " \n error: " + e);
+                return null;
+            }
         } catch (IOException e) {
             System.out.println("failed to load: " + filePath + " \n error: " + e);
             return null;

@@ -110,9 +110,14 @@ public class GameWindow {
 
     private static void addButtons(ButtonCustom[] buttons) {
         choicesList.clear();
-        for (ButtonCustom btn : buttons) {
-            choicesList.add(btn);
-        }
+        if (buttons != null)
+            for (ButtonCustom btn : buttons) {
+                try {
+                    choicesList.add(btn);
+                } catch (Exception e) {
+                    System.out.println("Failed to add button, error: \n" + e);
+                }
+            }
     }
 
     public Page getCurrentPage() {
@@ -120,14 +125,22 @@ public class GameWindow {
     }
 
     public static void setCurrentPage(Page currentPage) {
-        GameWindow.currentPage = currentPage;
-        Text[] texts = currentPage.getTexts();
-        GameWindow.gameTextArea.setText(texts[0].getText());
-        addButtons(currentPage.getButtons());
-        saveFile.setCurrentPage(currentPage);
+        try {
+            Text[] texts = currentPage.getTexts();
+            updateText(texts[0]);
+            addButtons(currentPage.getButtons());
+            GameWindow.currentPage = currentPage;
+            saveFile.setCurrentPage(currentPage);
+        } catch (Exception e) {
+            System.out.println("Failed to set current page, error: \n" + e);
+        }
     }
 
     public static void updateText(Text text) {
-        GameWindow.gameTextArea.setText(text.getText());
+        try {
+            GameWindow.gameTextArea.setText(text.getText());
+        } catch (Exception e) {
+            System.out.println("Failed to update text, error: \n" + e);
+        }
     }
 }
