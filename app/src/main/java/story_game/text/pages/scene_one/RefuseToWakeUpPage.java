@@ -13,7 +13,7 @@ public class RefuseToWakeUpPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons() {
-        //TODO: add exit button and achivement 
+        //TODO: add exit button and achievement 
         return null;
     }
     

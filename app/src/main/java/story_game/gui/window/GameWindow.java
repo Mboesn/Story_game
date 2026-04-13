@@ -32,7 +32,7 @@ public class GameWindow {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
-        final double chooiceButtonSpacing = 15;
+        final double choiceButtonSpacing = 15;
 
         final int textAreaSize = 25;
 
@@ -69,9 +69,9 @@ public class GameWindow {
                 });
         topRowList.add(saveGameButton);
 
-        ButtonCustom refturnToMenuButton = ButtonCustom.createButtonCustom("Return to menu",
+        ButtonCustom returnToMenuButton = ButtonCustom.createButtonCustom("Return to menu",
                 e -> stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST)));
-        topRowList.add(refturnToMenuButton);
+        topRowList.add(returnToMenuButton);
 
         stage.setOnCloseRequest(e -> {
             e.consume();
@@ -82,7 +82,7 @@ public class GameWindow {
 
         HBox.setHgrow(settingsButton, Priority.ALWAYS);
         HBox.setHgrow(saveGameButton, Priority.ALWAYS);
-        HBox.setHgrow(refturnToMenuButton, Priority.ALWAYS);
+        HBox.setHgrow(returnToMenuButton, Priority.ALWAYS);
         topRow.setAlignment(Pos.TOP_CENTER);
 
         rootList.add(topRow);
@@ -96,7 +96,7 @@ public class GameWindow {
         GameWindow.gameTextArea = gameTextArea;
 
         rootList.add(choices);
-        choices.setSpacing(chooiceButtonSpacing);
+        choices.setSpacing(choiceButtonSpacing);
         choices.setAlignment(Pos.CENTER_LEFT);
         choices.setFillWidth(true);
         choices.autosize();
