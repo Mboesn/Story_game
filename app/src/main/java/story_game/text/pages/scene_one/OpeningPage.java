@@ -8,8 +8,7 @@ public class OpeningPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        Text[] texts = new Text[1];
-        texts[0] = new Text(
+        return new Text[] { new Text(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam lacus libero, laoreet ut feugiat non, luctus quis erat. Morbi eleifend accumsan eleifend. Donec nibh nunc, fermentum eu risus ut, fermentum porta leo. Suspendisse in diam auctor, imperdiet metus eget, tincidunt justo. Cras tincidunt cursus leo, sit amet mollis nisi luctus at. Nunc venenatis sit amet ligula eu egestas. Fusce consequat fermentum accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultricies quam et porttitor venenatis.\r\n"
                         + //
                         "\r\n" + //
@@ -22,8 +21,8 @@ public class OpeningPage extends Page {
                         "Curabitur volutpat suscipit libero, iaculis dignissim felis commodo sed. Donec nec dignissim nulla. Ut blandit justo ex, non elementum urna sodales et. Mauris posuere faucibus velit, quis porttitor magna aliquam eu. Donec tempor ultricies aliquet. Nam dapibus libero vitae ipsum ultrices sagittis. Cras luctus lacus orci, ac tincidunt nulla sagittis non. Phasellus eget mollis tortor. Suspendisse convallis sapien eros, eu tristique tortor commodo vel. Curabitur vehicula velit vestibulum tellus molestie, eget tristique mi sollicitudin.\r\n"
                         + //
                         "\r\n" + //
-                        "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.");
-        return texts;
+                        "Mauris scelerisque iaculis porta. Nam dapibus sodales libero, et sodales lacus auctor luctus. Mauris tincidunt, ligula quis elementum bibendum, ex libero porttitor velit, ut malesuada ipsum justo in purus. Donec mattis ac lorem et pellentesque. Donec et ipsum risus. Vivamus varius massa mi, non finibus urna tincidunt non. Donec lectus lacus, aliquam posuere semper a, finibus sed felis. Maecenas non nunc consectetur, lobortis tortor et, tincidunt velit.")
+        };
     }
 
     @Override

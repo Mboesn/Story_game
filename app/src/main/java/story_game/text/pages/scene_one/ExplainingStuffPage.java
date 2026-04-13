@@ -9,7 +9,6 @@ public class ExplainingStuffPage extends ResponsePage {
         super.targetPage = new OpeningPage();
     }
     
-
     @Override
     public Text[] getTexts() {
         Text[] texts = new Text[3];
