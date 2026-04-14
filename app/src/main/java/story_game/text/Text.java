@@ -3,7 +3,7 @@ package story_game.text;
 public class Text {
     private String text;
     private Font font;
-    
+
     public Text(String text, Font font) {
         this.text = text;
         this.font = font;
@@ -11,6 +11,11 @@ public class Text {
 
     public Text(String text) {
         this(text, new Font());
+    }
+
+    @Deprecated
+    public Text() {
+        this("Missing text", new Font());
     }
 
     public String getText() {
