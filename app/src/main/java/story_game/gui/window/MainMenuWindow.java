@@ -2,11 +2,9 @@ package story_game.gui.window;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -41,39 +39,31 @@ public class MainMenuWindow extends Application {
         titleText.setText(Constants.GAME_NAME);
 
         // Sends to game window using a fresh save file
-        ButtonCustom newGame = new ButtonCustom("New game");
-        newGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                SaveMenuWindow save = new SaveMenuWindow();
-                save.show(mainMenuStage, SaveMenuType.NEW_GAME);
-                mainMenuStage.close();
-            }
-        });
+        ButtonCustom newGame = ButtonCustom.createButtonCustom("New game",
+                e -> {
+                    SaveMenuWindow save = new SaveMenuWindow();
+                    save.show(mainMenuStage, SaveMenuType.NEW_GAME);
+                    mainMenuStage.close();
+                });
 
         // Opens the save file window allowing you to choose what save file to load
-        ButtonCustom loadGame = new ButtonCustom("Load game");
-
-        loadGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                SaveMenuWindow save = new SaveMenuWindow();
-                save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
-                mainMenuStage.close();
-            }
-        });
+        ButtonCustom loadGame = ButtonCustom.createButtonCustom("Load game",
+                e -> {
+                    SaveMenuWindow save = new SaveMenuWindow();
+                    save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
+                    mainMenuStage.close();
+                });
 
         // Opens the settings window.
-        ButtonCustom settings = new ButtonCustom("Settings");
-
-        settings.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent event) {
-                SettingsWindow settings = new SettingsWindow();
-                settings.show();
-            }
-        });
+        ButtonCustom settings = ButtonCustom.createButtonCustom("Settings",
+                e -> {
+                    SettingsWindow settingsWin = new SettingsWindow();
+                    settingsWin.show();
+                });
 
         // Closes the game
-        ButtonCustom exit = new ButtonCustom("Exit");
-        exit.setOnMouseClicked(e -> ExitConfirmationAlert.confirmExit(mainMenuStage));
+        ButtonCustom exit = ButtonCustom.createButtonCustom("Exit",
+                e -> ExitConfirmationAlert.confirmExit(mainMenuStage));
 
         ObservableList<Node> list = root.getChildren();
 

@@ -53,12 +53,12 @@ public class SaveMenuWindow {
             list.add(saveButtons[i]);
         }
 
-        ButtonCustom back = new ButtonCustom("Back");
-        back.setOnMouseClicked(e -> {
-            if (type != SaveMenuType.SAVE_GAME)
-                mainMenuStage.show();
-            stage.close();
-        });
+        ButtonCustom back = ButtonCustom.createButtonCustom("Back",
+                e -> {
+                    if (type != SaveMenuType.SAVE_GAME)
+                        mainMenuStage.show();
+                    stage.close();
+                });
 
         // Makes the back button be more down
         VBox.setMargin(back, new Insets(backButtonInset, 0, 0, 0));
@@ -104,6 +104,7 @@ public class SaveMenuWindow {
          * @param mainMenuStage     Stage of the main menu used to pass to game window
          *                          to open when game returns to menu
          */
+        @SuppressWarnings("deprecation")
         public SaveButton(String text, Stage loadSaveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
             super(text);
@@ -169,7 +170,7 @@ public class SaveMenuWindow {
         }
     }
 
-    // The type of save menu to open
+    /** The type of save menu to open */
     public enum SaveMenuType {
         NEW_GAME,
         LOAD_GAME,

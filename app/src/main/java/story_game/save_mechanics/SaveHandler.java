@@ -6,14 +6,28 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
+
+import org.reflections.Reflections;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapterFactory;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import story_game.Constants;
+import story_game.text.Page;
 
 public class SaveHandler {
     // This path leads to the game folder in the local appdata
     private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
+    // This path leads to the pages package
+    private static final String pagesPackage = "story_game.text.pages";
+
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapterFactory(createFactory())
+            .setPrettyPrinting()
+            .create();
 
     /**
      * Saves the game to a new file given a path
@@ -25,7 +39,6 @@ public class SaveHandler {
      * @returns a string of save file in Json format or error exception
      */
     public static String saveGame(SaveFile saveFile, String fileName, String dirPath) {
-        Gson gson = new Gson();
 
         Path dir = Paths.get(dirPath);
         String filePath = dirPath + "/" + fileName + ".json";
@@ -74,15 +87,19 @@ public class SaveHandler {
      * @return the loaded save file, return null if failed to load.
      */
     public static SaveFile loadGame(String fileName, String dirPath) {
-        Gson gson = new Gson();
 
         String filePath = dirPath + "/" + fileName + ".json";
 
         try (FileReader reader = new FileReader(filePath)) {
             // loads the save file
-            SaveFile save = gson.fromJson(reader, SaveFile.class);
-            System.out.println("loaded: " + filePath);
-            return save;
+            try {
+                SaveFile save = gson.fromJson(reader, SaveFile.class);
+                System.out.println("loaded: " + filePath);
+                return save;
+            } catch (Exception e) {
+                System.out.println("failed to deserialize: " + filePath + " \n error: " + e);
+                return null;
+            }
         } catch (IOException e) {
             System.out.println("failed to load: " + filePath + " \n error: " + e);
             return null;
@@ -99,5 +116,22 @@ public class SaveHandler {
      */
     public static SaveFile loadGame(String fileName) {
         return loadGame(fileName, defaultSavePath);
+    }
+
+    /**
+     * Creates a TypeAdapterFactory which tells the Gson object what are the
+     * subclasses of Page. This is used in order to save the current page.
+     * 
+     * @return TypeAdapterFactory to save in the Gson object
+     */
+    private static TypeAdapterFactory createFactory() {
+        Reflections reflections = new Reflections(pagesPackage);
+        Set<Class<? extends Page>> subclasses = reflections.getSubTypesOf(Page.class);
+
+        RuntimeTypeAdapterFactory<Page> factory = RuntimeTypeAdapterFactory.of(Page.class, "type");
+        for (Class<? extends Page> clazz : subclasses) {
+            factory.registerSubtype(clazz, clazz.getSimpleName());
+        }
+        return factory;
     }
 }

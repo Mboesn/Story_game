@@ -19,13 +19,20 @@ repositories {
 dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
-
+    
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     // This dependency is used by the application.
     implementation(libs.guava)
-    implementation("com.google.code.gson:gson:2.11.0")
 
+    // Gson for save system
+    implementation("com.google.code.gson:gson:2.13.2")
+    // Gson extras for page subclass saving
+    implementation("org.danilopianini:gson-extras:3.3.0")
+    // Reflections in order to automatically add all pages to Gson extras
+    implementation("org.reflections:reflections:0.10.2")
+    // logback classic in order to fix reflections logs
+    implementation("ch.qos.logback:logback-classic:1.4.14")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
