@@ -6,12 +6,16 @@ import story_game.text.Text;
 
 public class ContinueButton extends ButtonCustom {
     private int nextText = 1;
+    private OnClickFunction onClickFunction;
 
     @SuppressWarnings("deprecation")
     public ContinueButton(Text[] text, Page targetPage, String buttonText) {
         super(buttonText);
         setOnMouseClicked(e -> {
             if (text == null || nextText == text.length) {
+                                    if (onClickFunction != null) {
+                        onClickFunction.onClick();
+                    }
                 if (targetPage != null) {
                     GameWindow.setCurrentPage(targetPage);
                 }
@@ -43,5 +47,10 @@ public class ContinueButton extends ButtonCustom {
     @Deprecated
     public ContinueButton(String buttonText) {
         this(null, null, buttonText);
+    }
+
+    public ContinueButton setOnClickFunction(OnClickFunction onClickFunction) {
+        this.onClickFunction = onClickFunction;
+        return this;
     }
 }

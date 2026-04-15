@@ -1,6 +1,7 @@
 package story_game.text.pages.scene_one;
 
 import story_game.gui.util.ButtonCustom;
+import story_game.save_mechanics.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
 
@@ -12,7 +13,7 @@ public class RefuseToWakeUpPage extends Page {
     }
 
     @Override
-    public ButtonCustom[] getButtons() {
+    public ButtonCustom[] getButtons(SaveFile saveFile) {
         //TODO: add exit button and achievement 
         return null;
     }

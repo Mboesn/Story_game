@@ -2,6 +2,7 @@ package story_game.text.pages.scene_one;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
+import story_game.save_mechanics.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
 
@@ -19,7 +20,7 @@ public class WakingUpPage extends Page {
     }
 
     @Override
-    public ButtonCustom[] getButtons() {
+    public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom op1 = new ContinueButton(new BedRoomPage(), "Wake up");
 
         ButtonCustom op2 = new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....");

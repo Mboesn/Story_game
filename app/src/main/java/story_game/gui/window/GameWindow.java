@@ -128,7 +128,7 @@ public class GameWindow {
         try {
             Text[] texts = currentPage.getTexts();
             updateText(texts[0]);
-            addButtons(currentPage.getButtons());
+            addButtons(currentPage.getButtons(saveFile));
             GameWindow.currentPage = currentPage;
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
