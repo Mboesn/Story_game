@@ -21,10 +21,10 @@ public class WakingUpPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        ButtonCustom op1 = new ContinueButton(new BedRoomPage(), "Wake up");
+        ButtonCustom wakeUpBtn = new ContinueButton(new BedRoomPage(), "Wake up");
 
-        ButtonCustom op2 = new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....");
+        ButtonCustom sleepBtn = new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....");
 
-        return new ButtonCustom[] { op1, op2 };
+        return new ButtonCustom[] { wakeUpBtn, sleepBtn };
     }
 }

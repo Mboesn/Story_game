@@ -108,6 +108,11 @@ public class GameWindow {
         stage.show();
     }
 
+    /**
+     * Changes the choices buttons.
+     * 
+     * @param buttons new buttons to add to the game screen
+     */
     private static void addButtons(ButtonCustom[] buttons) {
         choicesList.clear();
         if (buttons != null)
@@ -124,11 +129,20 @@ public class GameWindow {
         return currentPage;
     }
 
+    /**
+     * Changes the games pages and updates: the text, the buttons, and the temporary
+     * save file.
+     * 
+     * @param currentPage Page to set the game to.
+     */
     public static void setCurrentPage(Page currentPage) {
         try {
+            // update game text to first text of the page
             Text[] texts = currentPage.getTexts();
             updateText(texts[0]);
+            // update buttons
             addButtons(currentPage.getButtons(saveFile));
+            // update variables accordingly
             GameWindow.currentPage = currentPage;
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
@@ -136,6 +150,11 @@ public class GameWindow {
         }
     }
 
+    /**
+     * Updates the game screen to a given text.
+     * 
+     * @param text text to update to.
+     */
     public static void updateText(Text text) {
         try {
             GameWindow.gameTextArea.setText(text.getText());

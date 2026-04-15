@@ -23,6 +23,7 @@ public class SaveHandler {
     private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
     // This path leads to the pages package
     private static final String pagesPackage = "story_game.text.pages";
+
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapterFactory(createFactory())
             .setPrettyPrinting()
@@ -119,8 +120,7 @@ public class SaveHandler {
 
     /**
      * Creates a TypeAdapterFactory which tells the Gson object what are the
-     * subclasses of Page
-     * this is used in order to save the current page
+     * subclasses of Page. This is used in order to save the current page.
      * 
      * @return TypeAdapterFactory to save in the Gson object
      */

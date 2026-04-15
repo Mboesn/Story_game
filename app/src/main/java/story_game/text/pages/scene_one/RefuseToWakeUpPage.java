@@ -9,13 +9,13 @@ public class RefuseToWakeUpPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        return new Text[] {new Text("And so Gobby McGobface, went to sleep and never woke again \n \t \t \t \t \t \t \t \t \t FIN")};
+        return new Text[] { new Text(
+                "And so Gobby McGobface, went to sleep and never woke again \n \t \t \t \t \t \t \t \t \t FIN") };
     }
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        //TODO: add exit button and achievement 
+        // TODO: add exit button and achievement
         return null;
     }
-    
 }

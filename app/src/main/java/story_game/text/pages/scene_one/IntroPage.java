@@ -8,7 +8,7 @@ public class IntroPage extends ResponsePage {
     public IntroPage() {
         super.targetPage = new WakingUpPage();
     }
-    
+
     @Override
     public Text[] getTexts() {
         Text[] texts = new Text[3];

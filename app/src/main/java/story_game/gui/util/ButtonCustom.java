@@ -12,9 +12,10 @@ public class ButtonCustom extends Button {
      * Creates a button with the specified text as its label.
      * 
      * @param text A text string for its label.
-     * @deprecated Use createButtonCustom in order to make sure that the button has
+     * @deprecated Use createButtonCustom() in order to make sure that the button has
      *             a function
      */
+    @Deprecated
     public ButtonCustom(String text) {
         super(text);
         setMaxWidth(Constants.DEFAULT_BUTTON_MAX_WIDTH);
@@ -28,7 +29,7 @@ public class ButtonCustom extends Button {
      * @param buttonHandler Defines a function to be called when a mouse button has
      *                      been clicked (pressed and released) on this Node.
      * 
-     * @return A created button
+     * @return A new button.
      */
     public static ButtonCustom createButtonCustom(String text, EventHandler<? super MouseEvent> buttonHandler) {
         ButtonCustom btn = new ButtonCustom(text);

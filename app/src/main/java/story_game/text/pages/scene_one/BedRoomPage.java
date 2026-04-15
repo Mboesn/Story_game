@@ -14,8 +14,6 @@ public class BedRoomPage extends Page {
         texts[0] = new Text("a");
         texts[1] = new Text();
         texts[2] = new Text("c");
-
-        // TODO Auto-generated method stub
         return texts;
     }
 
@@ -27,5 +25,4 @@ public class BedRoomPage extends Page {
         });
         return buttons;
     }
-
 }

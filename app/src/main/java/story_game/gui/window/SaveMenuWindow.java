@@ -170,7 +170,7 @@ public class SaveMenuWindow {
         }
     }
 
-    // The type of save menu to open
+    /** The type of save menu to open */
     public enum SaveMenuType {
         NEW_GAME,
         LOAD_GAME,
