@@ -1,4 +1,4 @@
-package story_game.text.pages.scene_one;
+package story_game.text.pages.HouseScene;
 
 import story_game.text.ResponsePage;
 import story_game.text.Text;

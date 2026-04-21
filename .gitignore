@@ -32,3 +32,5 @@ gradle-app.setting
 .gradletasknamecache
 
 .vscode
+
+/app/src/main/java/resources/temp/
