@@ -6,12 +6,12 @@ import story_game.save_mechanics.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
 
-public class BedRoomPage extends Page {
+public class BedroomPage extends Page {
 
     @Override
     public Text[] getTexts() {
         Text[] texts = new Text[3];
-        texts[0] = new Text("a");
+        texts[0] = new Text("You open your eyes and see your room in for of you");
         texts[1] = new Text();
         texts[2] = new Text("c");
         return texts;
@@ -19,10 +19,11 @@ public class BedRoomPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        ButtonCustom[] buttons = new ButtonCustom[1];
-        buttons[0] = new ContinueButton(getTexts()).setOnClickFunction(() -> {
-            saveFile.getSceneOneFlags().a = 62;
-        });
+        ButtonCustom[] buttons = new ButtonCustom[3];
+        buttons[0] = new ContinueButton(new ClosetPage(), "Check out the closet");
+        buttons[1] = new ContinueButton(new BathroomPage(), "Go to bathroom");
+        buttons[2] = new ContinueButton(new LivingroomPage(), "Exit bedroom");
+        buttons[3] = new ContinueButton(new RefuseToWakeUpPage(), "Go back to sleep");
         return buttons;
     }
 }

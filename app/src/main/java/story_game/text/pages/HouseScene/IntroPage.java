@@ -12,9 +12,9 @@ public class IntroPage extends ResponsePage {
     @Override
     public Text[] getTexts() {
         Text[] texts = new Text[3];
-        texts[0] = new Text("Well you must be asking how we got here");
-        texts[1] = new Text("Well I don't know");
-        texts[2] = new Text("text 3");
+        texts[0] = new Text("1");
+        texts[1] = new Text("2");
+        texts[2] = new Text("3");
         return texts;
     }
 }
