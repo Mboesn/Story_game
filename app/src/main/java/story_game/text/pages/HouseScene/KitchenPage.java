@@ -24,7 +24,7 @@ public class KitchenPage extends Page {
                 new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
 
                 }),
-                new ContinueButton(new LivingRoomPage(), "Return to livingroom")
+                new ContinueButton(new LivingRoomPage(), "Return to livingRoom")
         };
         return buttons;
     }

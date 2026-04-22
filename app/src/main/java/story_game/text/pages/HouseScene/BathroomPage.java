@@ -11,9 +11,7 @@ public class BathroomPage extends Page {
     @Override
     public Text[] getTexts(SaveFile saveFile) {
         Text[] texts = new Text[] {
-                new Text("1"),
-                new Text("2"),
-                new Text("3")
+                new Text("You enter your bathroom and find a all the basic necessities a bathroom needs.")
         };
         return texts;
     }

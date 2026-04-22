@@ -12,7 +12,7 @@ public class Characteristics {
                 "You shouldn't leave the house like this, you are already considered weird, no point and pointing it out even more."),
         FULL_ARMOR("Full suit of armor",
                 "Heavy, loud, and unwieldy, good for taking a hit but bad for sneaking and running."),
-        CLOAK("Travalers cloak", "Light and fast, good for agility and sneaking but won't block much damage.");
+        CLOAK("traveler's cloak", "Light and fast, good for agility and sneaking but won't block much damage.");
 
         private String name;
         private String text;
@@ -53,9 +53,9 @@ public class Characteristics {
     public enum Weapons implements Choiceable {
         // TODO: add full list of Weapons and functionality
         NONE("Unarmed",
-                "Great for pacifism and seeming non threatning but if your looking to get in a brawl prepare to get beat."),
+                "Great for pacifism and seeming non threatening but if your looking to get in a brawl prepare to get beat."),
         DAGGER("Dagger",
-                "Small and shiny, much like you, fairly easy to concile and can cut through someone's stomech if need be but you need to be right in their face."),
+                "Small and shiny, much like you, fairly easy to conceal and can cut through someone's stomach if need be but you need to be right in their face."),
         BOW_AND_ARROW("Bow and arrow",
                 "Not your typical item for a Goblin but one you know how to use, great for range but makes you stick out like a sore thumb and isn't going to pierce as much as a dagger.");
 
