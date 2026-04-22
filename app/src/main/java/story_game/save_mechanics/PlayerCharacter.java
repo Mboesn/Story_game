@@ -5,7 +5,7 @@ import story_game.save_mechanics.Characteristics.Clothes;
 // This class holds all data pertaining to the character of a specific save file
 public class PlayerCharacter {
 
-    private Clothes clothes = Clothes.FULL_ARMOR;
+    private Clothes clothes = Clothes.PAJAMAS;
 
     public Clothes getClothes() {
         return clothes;

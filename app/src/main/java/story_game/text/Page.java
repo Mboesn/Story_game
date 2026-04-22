@@ -28,3 +28,4 @@ public abstract class Page {
      */
     public abstract ButtonCustom[] getButtons(SaveFile saveFile);
 }
+

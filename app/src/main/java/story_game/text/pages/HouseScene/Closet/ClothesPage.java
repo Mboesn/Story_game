@@ -5,6 +5,6 @@ import story_game.text.EnumChoicePage;
 
 public class ClothesPage extends EnumChoicePage<Clothes> {
     public ClothesPage() {
-        super(Clothes.class, "Pick an outfit:", "Your current outfit:");
+        super(Clothes.class, "Pick an outfit:", "Your current outfit:", new ClosetPage());
     }
 }
