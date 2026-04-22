@@ -10,21 +10,23 @@ public class WakingUpPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        Text[] text = new Text[5];
-        text[0] = new Text("a");
-        text[1] = new Text("b");
-        text[2] = new Text("c");
-        text[3] = new Text("d");
-        text[4] = new Text("e");
-        return text;
+        Text[] texts = new Text[] {
+                new Text("1"),
+                new Text("2"),
+                new Text("3"),
+                new Text("4"),
+                new Text("5")
+        };
+        return texts;
     }
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        ButtonCustom wakeUpBtn = new ContinueButton(new BedroomPage(), "Wake up");
+        ButtonCustom[] buttons = new ButtonCustom[] {
+                new ContinueButton(new BedroomPage(), "Wake up"),
 
-        ButtonCustom sleepBtn = new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....");
-
-        return new ButtonCustom[] { wakeUpBtn, sleepBtn };
+                new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....")
+        };
+        return buttons;
     }
 }

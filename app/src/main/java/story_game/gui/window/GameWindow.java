@@ -138,8 +138,8 @@ public class GameWindow {
     public static void setCurrentPage(Page currentPage) {
         try {
             // update game text to first text of the page
-            Text[] texts = currentPage.getTexts();
-            updateText(texts[0]);
+            Text text = currentPage.getTexts()[0];
+            updateText(text);
             // update buttons
             addButtons(currentPage.getButtons(saveFile));
             // update variables accordingly
@@ -147,6 +147,7 @@ public class GameWindow {
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
             System.out.println("Failed to set current page, error: \n" + e);
+            e.printStackTrace();
         }
     }
 

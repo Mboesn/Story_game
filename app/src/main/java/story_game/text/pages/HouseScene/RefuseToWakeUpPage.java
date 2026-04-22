@@ -9,8 +9,9 @@ public class RefuseToWakeUpPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        return new Text[] { new Text(
+        Text text[] = new Text[] { new Text(
                 "And so Gobby McGobface, went to sleep and never woke again \n \t \t \t \t \t \t \t \t \t FIN") };
+        return text;
     }
 
     @Override

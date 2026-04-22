@@ -10,20 +10,22 @@ public class BathroomPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        Text[] texts = new Text[3];
-        texts[0] = new Text("");
-        texts[1] = new Text("");
-        texts[2] = new Text("");
+        Text[] texts = new Text[] {
+                new Text("1"),
+                new Text("2"),
+                new Text("3")
+        };
         return texts;
     }
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        ButtonCustom[] buttons = new ButtonCustom[2];
-        buttons[0] = new ContinueButton(getTexts()).setOnClickFunction(() -> {
+        ButtonCustom[] buttons = new ButtonCustom[] {
+                new ContinueButton(getTexts()).setOnClickFunction(() -> {
 
-        });
-        buttons[1] = new ContinueButton(new BedroomPage(), "Return to bedroom");
+                }),
+                new ContinueButton(new BedroomPage(), "Return to bedroom")
+        };
         return buttons;
     }
 }

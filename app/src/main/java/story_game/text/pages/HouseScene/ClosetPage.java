@@ -10,17 +10,16 @@ public class ClosetPage extends Page {
 
     @Override
     public Text[] getTexts() {
-        Text[] texts = new Text[3];
-        texts[0] = new Text("It's a closet");
+        Text[] texts = new Text[] { new Text("It's a closet") };
         return texts;
     }
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-                ButtonCustom[] buttons = new ButtonCustom[1];
-        buttons[0] = new ContinueButton(getTexts());
-        buttons[1] = new ContinueButton(new BedroomPage(), "Return to bedroom");
+        ButtonCustom[] buttons = new ButtonCustom[] {
+                new ContinueButton(getTexts()),
+                new ContinueButton(new BedroomPage(), "Return to bedroom")
+        };
         return buttons;
     }
-
 }

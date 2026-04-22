@@ -11,10 +11,11 @@ public class IntroPage extends ResponsePage {
 
     @Override
     public Text[] getTexts() {
-        Text[] texts = new Text[3];
-        texts[0] = new Text("1");
-        texts[1] = new Text("2");
-        texts[2] = new Text("3");
+        Text[] texts = new Text[] {
+                new Text("1"),
+                new Text("2"),
+                new Text("3")
+        };
         return texts;
     }
 }
