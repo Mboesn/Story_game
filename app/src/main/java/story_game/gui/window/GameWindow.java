@@ -138,7 +138,7 @@ public class GameWindow {
     public static void setCurrentPage(Page currentPage) {
         try {
             // update game text to first text of the page
-            updateText(currentPage.getTexts()[0]);
+            updateText(currentPage.getTexts(saveFile)[0]);
             // update buttons
             addButtons(currentPage.getButtons(saveFile));
             // update variables accordingly

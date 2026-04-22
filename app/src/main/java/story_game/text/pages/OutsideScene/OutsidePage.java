@@ -9,7 +9,7 @@ import story_game.text.Text;
 public class OutsidePage extends Page {
 
     @Override
-    public Text[] getTexts() {
+    public Text[] getTexts(SaveFile saveFile) {
         Text[] texts = new Text[] {
                 new Text("1"),
                 new Text("2"),
@@ -23,10 +23,10 @@ public class OutsidePage extends Page {
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom[] buttons = new ButtonCustom[] {
-                new ContinueButton(getTexts()).setOnClickFunction(() -> {
+                new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
 
                 }),
-                new ContinueButton(getTexts())
+                new ContinueButton(getTexts(saveFile))
         };
         return buttons;
     }

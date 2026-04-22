@@ -9,7 +9,7 @@ import story_game.text.Text;
 public class WakingUpPage extends Page {
 
     @Override
-    public Text[] getTexts() {
+    public Text[] getTexts(SaveFile saveFile) {
         Text[] texts = new Text[] {
                 new Text("1"),
                 new Text("2"),
@@ -25,7 +25,7 @@ public class WakingUpPage extends Page {
         ButtonCustom[] buttons = new ButtonCustom[] {
                 new ContinueButton(new BedroomPage(), "Wake up"),
 
-                new ContinueButton(getTexts(), new RefuseToWakeUpPage(), "Just five more minutes....")
+                new ContinueButton(getTexts(saveFile), new RefuseToWakeUpPage(), "Just five more minutes....")
         };
         return buttons;
     }
