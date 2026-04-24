@@ -5,7 +5,7 @@ import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
-import story_game.text.pages.HouseScene.BedroomPage;
+import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
 
 public class ClosetPage extends Page {
 

@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -34,7 +35,7 @@ public class GameWindow {
 
         final double choiceButtonSpacing = 15;
 
-        final int textAreaSize = 25;
+        final int textAreaSize = 10;
 
         Stage stage = new Stage();
         HBox topRow = new HBox();
@@ -91,6 +92,7 @@ public class GameWindow {
         gameTextArea.setWrapText(true);
         gameTextArea.setEditable(false);
         gameTextArea.setPrefRowCount(textAreaSize);
+        gameTextArea.setFont(Font.font("System", 25));
         rootList.add(gameTextArea);
 
         GameWindow.gameTextArea = gameTextArea;

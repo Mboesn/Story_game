@@ -11,13 +11,22 @@ import story_game.save_mechanics.SaveFile;
 public abstract class ResponsePage extends Page {
     /** The page to load after completing shifting through the texts. */
     private Page targetPage;
+    private String buttonText;
+
+    protected ResponsePage(Page targetPage, String buttonText) {
+        this.targetPage = targetPage;
+        this.buttonText = buttonText;
+    }
 
     protected ResponsePage(Page targetPage) {
-        this.targetPage = targetPage;
+        this(targetPage, null);
     }
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        return new ButtonCustom[] { new ContinueButton(getTexts(saveFile), targetPage) };
+        if (buttonText == null)
+            return new ButtonCustom[] { new ContinueButton(getTexts(saveFile), targetPage) };
+        else
+            return new ButtonCustom[] { new ContinueButton(getTexts(saveFile), targetPage, buttonText) };
     }
 }
