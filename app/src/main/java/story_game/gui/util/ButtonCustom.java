@@ -18,7 +18,7 @@ public class ButtonCustom extends Button {
     @Deprecated
     public ButtonCustom(String text) {
         super(text);
-        setMaxWidth(Constants.DEFAULT_BUTTON_MAX_WIDTH);
+        setMinWidth(Constants.DEFAULT_BUTTON_MIN_WIDTH);
     }
 
     /**

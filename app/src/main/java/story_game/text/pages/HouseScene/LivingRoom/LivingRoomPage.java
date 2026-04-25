@@ -7,6 +7,7 @@ import story_game.text.Page;
 import story_game.text.Text;
 import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
 import story_game.text.pages.HouseScene.Kitchen.KitchenPage;
+import story_game.text.pages.OutsideScene.OutsidePage;
 
 public class LivingRoomPage extends Page {
 
@@ -27,7 +28,7 @@ public class LivingRoomPage extends Page {
                 }),
                 new ContinueButton(new KitchenPage(), "Enter kitchen"),
                 new ContinueButton(new BedroomPage(), "Return to bedroom"),
-                new ContinueButton(new LivingRoomPage(),
+                new ContinueButton(new OutsidePage(),
                         "Exit your house and go on your adventure!!! no turning back")
         };
         return buttons;
