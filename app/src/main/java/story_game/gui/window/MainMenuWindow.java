@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
+import story_game.sound_system.Music;
+import story_game.sound_system.MusicHandler;
 
 /**
  * The scene for the main menu of the game.
@@ -20,6 +22,8 @@ import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 public class MainMenuWindow extends Application {
     @Override
     public void start(Stage mainMenuStage) throws Exception {
+        MusicHandler.playMusic(Music.DEFAULT);
+        
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
