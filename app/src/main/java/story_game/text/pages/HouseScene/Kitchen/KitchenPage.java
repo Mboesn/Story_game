@@ -26,33 +26,26 @@ public class KitchenPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        ButtonCustom checkPantryBtn = null;
-        ButtonCustom checkFridgeBtn = null;
-        ButtonCustom checkFreezerBtn = null;
+        boolean checkedKitchen = saveFile.getHouseSceneFlags().checkedKitchenForFood;
         // If you haven't checked all the places enables to check each place you haven't
         // yet checked
-        if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
-
-            checkPantryBtn = new ContinueButton(new PantryPage(), "Check pantry").setOnClickFunction(() -> {
-                saveFile.getHouseSceneFlags().checkedPantryForFood = true;
-                checkedAllKitchen(saveFile);
-            }).defineDisable(saveFile.getHouseSceneFlags().checkedPantryForFood);
-
-            checkFridgeBtn = new ContinueButton(new FridgePage(), "Check fridge").setOnClickFunction(() -> {
-                saveFile.getHouseSceneFlags().checkedFridgeForFood = true;
-                checkedAllKitchen(saveFile);
-            }).defineDisable(saveFile.getHouseSceneFlags().checkedFridgeForFood);
-
-            checkFreezerBtn = new ContinueButton(new FreezerPage(), "Check freezer").setOnClickFunction(() -> {
-                saveFile.getHouseSceneFlags().checkedFreezerForFood = true;
-                checkedAllKitchen(saveFile);
-            }).defineDisable(saveFile.getHouseSceneFlags().checkedFreezerForFood);
-        }
 
         ButtonCustom[] buttons = new ButtonCustom[] {
-                checkPantryBtn,
-                checkFridgeBtn,
-                checkFreezerBtn,
+                new ContinueButton(new PantryPage(), "Check pantry").setOnClickFunction(() -> {
+                    saveFile.getHouseSceneFlags().checkedPantryForFood = true;
+                    checkedAllKitchen(saveFile);
+                }).defineDisable(saveFile.getHouseSceneFlags().checkedPantryForFood).setInvisible(checkedKitchen),
+
+                new ContinueButton(new FridgePage(), "Check fridge").setOnClickFunction(() -> {
+                    saveFile.getHouseSceneFlags().checkedFridgeForFood = true;
+                    checkedAllKitchen(saveFile);
+                }).defineDisable(saveFile.getHouseSceneFlags().checkedFridgeForFood).setInvisible(checkedKitchen),
+
+                new ContinueButton(new FreezerPage(), "Check freezer").setOnClickFunction(() -> {
+                    saveFile.getHouseSceneFlags().checkedFreezerForFood = true;
+                    checkedAllKitchen(saveFile);
+                }).defineDisable(saveFile.getHouseSceneFlags().checkedFreezerForFood).setInvisible(checkedKitchen),
+                
                 new ContinueButton(new LivingRoomPage(), "Return to livingRoom")
         };
         return buttons;

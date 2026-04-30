@@ -29,17 +29,16 @@ public class LivingRoomPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        // if you haven't checked the kitchen do not let the player leave
-        ButtonCustom exitButton = new ContinueButton(new OutsidePage(),
-                "Exit your house and go on your adventure!!! no turning back")
-                .defineDisable(!saveFile.getHouseSceneFlags().checkedKitchenForFood);
 
         ButtonCustom[] buttons = new ButtonCustom[] {
-                new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
-                }),
+                new ContinueButton(new BottlesPage(), "Check out bottles")
+                        .setInvisible(saveFile.getHouseSceneFlags().cleanedUpBottles),
                 new ContinueButton(new KitchenPage(), "Enter kitchen"),
                 new ContinueButton(new BedroomPage(), "Return to bedroom"),
-                exitButton
+                // if you haven't checked the kitchen do not let the player leave
+                new ContinueButton(new OutsidePage(),
+                        "Exit your house and go on your adventure!!! no turning back")
+                        .defineDisable(!saveFile.getHouseSceneFlags().checkedKitchenForFood)
         };
         return buttons;
     }

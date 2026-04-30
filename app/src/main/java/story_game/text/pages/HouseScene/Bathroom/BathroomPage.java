@@ -20,15 +20,10 @@ public class BathroomPage extends Page {
 
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
-        // If haven't brushed teeth let play brush and set brushed teeth to true
-        ButtonCustom brush = null;
-        if (!saveFile.getHouseSceneFlags().brushedTeeth)
-            brush = new ContinueButton(new BrushingTeethPage(), "Brush teeth").setOnClickFunction(() -> {
-                saveFile.getHouseSceneFlags().brushedTeeth = true;
-            });
-
         ButtonCustom[] buttons = new ButtonCustom[] {
-                brush,
+                new ContinueButton(new BrushingTeethPage(), "Brush teeth").setOnClickFunction(() -> {
+                    saveFile.getHouseSceneFlags().brushedTeeth = true;
+                }).setInvisible(saveFile.getHouseSceneFlags().brushedTeeth),
                 new ContinueButton(new BedroomPage(), "Return to bedroom")
         };
         return buttons;

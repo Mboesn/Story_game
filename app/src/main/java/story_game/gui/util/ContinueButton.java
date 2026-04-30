@@ -125,13 +125,27 @@ public class ContinueButton extends ButtonCustom {
     }
 
     /**
-     * Sets if the button is disabled
+     * Sets if the button is disabled. will still display yet will not be clickable.
      * 
      * @param isDisabled if the button is disabled
      * @return This object
      */
     public ContinueButton defineDisable(boolean isDisabled) {
         setDisable(isDisabled);
+        return this;
+    }
+
+    /**
+     * Sets if the button is invisible. When the button is called in GameWindow it
+     * will not show the button if this value is true. Only applicable to choice
+     * buttons.
+     * 
+     * @param isInvisible if the button is invisible
+     * @return This object
+     */
+    @Override
+    public ContinueButton setInvisible(boolean isInvisible) {
+        this.isInvisible = isInvisible;
         return this;
     }
 }
