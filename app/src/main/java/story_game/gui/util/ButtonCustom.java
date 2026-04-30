@@ -4,7 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import story_game.Constants;
-import story_game.gui.window.GameWindow;
 
 // Adds repetitive functions to the Button class
 public class ButtonCustom extends Button {
