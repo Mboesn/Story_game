@@ -12,8 +12,9 @@ public abstract class Page {
      * Defines what texts to show when loading the page. The first element of the
      * array is shown when page is loaded, the rest can be loaded from a
      * ContinueButton.
+     * 
      * @param saveFile current temporary save file used by the GameWindow class.
-     * used to retrieve and edit data in the save file.
+     *                 used to retrieve and edit data in the save file.
      * 
      * @return Array of texts to display.
      */
@@ -28,4 +29,3 @@ public abstract class Page {
      */
     public abstract ButtonCustom[] getButtons(SaveFile saveFile);
 }
-

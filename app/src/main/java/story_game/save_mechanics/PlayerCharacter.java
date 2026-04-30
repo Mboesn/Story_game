@@ -27,6 +27,6 @@ public class PlayerCharacter {
 
     @Override
     public String toString() {
-        return clothing.getName();
+        return clothing.getName() + " " + weapon.getName();
     }
 }

@@ -30,6 +30,7 @@ public class BedroomPage extends Page {
                 new ContinueButton(new BathroomPage(), "Go to bathroom"),
                 new ContinueButton(new BookPage(), "Check out book"),
                 new ContinueButton(new LivingRoomPage(), "Exit bedroom"),
+                // TODO: maybe remove instant death button?
                 new ContinueButton(new RefuseToWakeUpPage(), "Go back to sleep")
         };
         return buttons;

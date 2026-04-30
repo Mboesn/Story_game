@@ -23,7 +23,7 @@ public class BottlesPage extends Page {
                         .setOnClickFunction(() -> {
                             saveFile.getHouseSceneFlags().cleanedUpBottles = true;
                         }),
-                new ContinueButton(new LivingRoomPage(), "It adds to the decor of the house, should keep it there.")
+                new ContinueButton(new LivingRoomPage(), "It adds to the decor of the house, you should keep it there.")
         };
         return buttons;
     }

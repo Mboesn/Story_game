@@ -92,6 +92,7 @@ public class GameWindow {
         gameTextArea.setWrapText(true);
         gameTextArea.setEditable(false);
         gameTextArea.setPrefRowCount(textAreaSize);
+        // TODO: make font code separate
         gameTextArea.setFont(Font.font("System", 25));
         rootList.add(gameTextArea);
 
@@ -108,24 +109,6 @@ public class GameWindow {
         stage.initModality(Modality.NONE);
 
         stage.show();
-    }
-
-    /**
-     * Changes the choices buttons.
-     * 
-     * @param buttons new buttons to add to the game screen
-     */
-    private static void addButtons(ButtonCustom[] buttons) {
-        choicesList.clear();
-        if (buttons != null)
-            for (ButtonCustom btn : buttons) {
-                try {
-                    if(!btn.isInvisible())
-                        choicesList.add(btn);
-                } catch (Exception e) {
-                    System.out.println("Failed to add button, error: \n" + e);
-                }
-            }
     }
 
     public Page getCurrentPage() {
@@ -164,5 +147,23 @@ public class GameWindow {
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }
+    }
+
+    /**
+     * Changes the choices buttons.
+     * 
+     * @param buttons new buttons to add to the game screen
+     */
+    private static void addButtons(ButtonCustom[] buttons) {
+        choicesList.clear();
+        if (buttons != null)
+            for (ButtonCustom btn : buttons) {
+                try {
+                    if (!btn.isInvisible())
+                        choicesList.add(btn);
+                } catch (Exception e) {
+                    System.out.println("Failed to add button, error: \n" + e);
+                }
+            }
     }
 }

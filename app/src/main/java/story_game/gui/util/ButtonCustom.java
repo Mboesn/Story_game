@@ -40,7 +40,18 @@ public class ButtonCustom extends Button {
     }
 
     /**
+     * Sets if the button is disabled. The button will still be displayed yet not be
+     * clickable.
      * 
+     * @param isDisabled if the button is disabled
+     * @return This object
+     */
+    public ButtonCustom defineDisable(boolean isDisabled) {
+        setDisable(isDisabled);
+        return this;
+    }
+
+    /**
      * @return if the button is invisible. When the button is called in GameWindow
      *         it will not show the button if this value is true. Only applicable to
      *         choice buttons.
