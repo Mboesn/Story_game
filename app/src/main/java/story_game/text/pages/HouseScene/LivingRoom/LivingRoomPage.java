@@ -13,8 +13,9 @@ public class LivingRoomPage extends Page {
 
     @Override
     public Text[] getTexts(SaveFile saveFile) {
-        String text = "Your living room. You find two doors, one leads to the kitchen and one to the very scary outside.";
-        if (!saveFile.getSceneOneFlags().checkedKitchenForFood) {
+        String text = "Your living room. Sprawled across the floor are countless glass bottles. You find"
+                + " two doors, one leads to the kitchen and one to the very scary outside.";
+        if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
             text += "\n\nYou should probably check out the kitchen to see what you have to eat before leaving.";
         } else {
             text += "\n\nOnce you are all ready you should leave and go to town to find some food.";
@@ -31,7 +32,7 @@ public class LivingRoomPage extends Page {
         // if you haven't checked the kitchen do not let the player leave
         ButtonCustom exitButton = new ContinueButton(new OutsidePage(),
                 "Exit your house and go on your adventure!!! no turning back")
-                .defineDisable(!saveFile.getSceneOneFlags().checkedKitchenForFood);
+                .defineDisable(!saveFile.getHouseSceneFlags().checkedKitchenForFood);
 
         ButtonCustom[] buttons = new ButtonCustom[] {
                 new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {

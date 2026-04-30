@@ -13,9 +13,7 @@ public class BathroomPage extends Page {
     public Text[] getTexts(SaveFile saveFile) {
         Text[] texts = new Text[] {
                 new Text(
-                        "You enter your bathroom and find your toilet, sink, and shower. You might wonder why such modern plumbing "
-                                + "exists in a medieval setting but just because it's a story of goblins and dragons doesn't mean "
-                                + "everyone must stink. By the sink you spot your Toothbrush.")
+                        "You enter your bathroom and see your toilet, sink, and shower. By the sink you spot your toothbrush.")
         };
         return texts;
     }
@@ -24,9 +22,9 @@ public class BathroomPage extends Page {
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         // If haven't brushed teeth let play brush and set brushed teeth to true
         ButtonCustom brush = null;
-        if (!saveFile.getSceneOneFlags().brushedTeeth)
+        if (!saveFile.getHouseSceneFlags().brushedTeeth)
             brush = new ContinueButton(new BrushingTeethPage(), "Brush teeth").setOnClickFunction(() -> {
-                saveFile.getSceneOneFlags().brushedTeeth = true;
+                saveFile.getHouseSceneFlags().brushedTeeth = true;
             });
 
         ButtonCustom[] buttons = new ButtonCustom[] {

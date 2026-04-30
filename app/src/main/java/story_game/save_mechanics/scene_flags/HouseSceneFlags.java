@@ -1,6 +1,6 @@
 package story_game.save_mechanics.scene_flags;
 
-public class SceneOneFlags {
+public class HouseSceneFlags {
     public boolean brushedTeeth = false;
     public boolean checkedKitchenForFood = false;
     public transient boolean checkedPantryForFood = false;
