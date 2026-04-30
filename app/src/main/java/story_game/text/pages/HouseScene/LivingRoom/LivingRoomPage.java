@@ -13,8 +13,13 @@ public class LivingRoomPage extends Page {
 
     @Override
     public Text[] getTexts(SaveFile saveFile) {
-        String text = "Your living room. Sprawled across the floor are countless glass bottles. You find"
-                + " two doors, one leads to the kitchen and one to the very scary outside.";
+        String text = "Your living room.";
+
+        if (!saveFile.getHouseSceneFlags().cleanedUpBottles)
+            text += " Sprawled across the floor are countless glass bottles.";
+
+        text += " You find two doors, one leads to the kitchen and one to the very scary outside.";
+
         if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
             text += "\n\nYou should probably check out the kitchen to see what you have to eat before leaving.";
         } else {

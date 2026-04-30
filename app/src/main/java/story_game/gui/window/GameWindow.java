@@ -120,7 +120,8 @@ public class GameWindow {
         if (buttons != null)
             for (ButtonCustom btn : buttons) {
                 try {
-                    choicesList.add(btn);
+                    if(!btn.isInvisible())
+                        choicesList.add(btn);
                 } catch (Exception e) {
                     System.out.println("Failed to add button, error: \n" + e);
                 }

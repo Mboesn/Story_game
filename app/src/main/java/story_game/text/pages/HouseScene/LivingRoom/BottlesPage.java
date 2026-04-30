@@ -11,7 +11,7 @@ public class BottlesPage extends Page {
     @Override
     public Text[] getTexts(SaveFile saveFile) {
         Text[] texts = new Text[] {
-                new Text(""),
+                new Text("You look closer and they are all empty. You should probably clean this up.")
         };
         return texts;
     }
@@ -19,10 +19,11 @@ public class BottlesPage extends Page {
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom[] buttons = new ButtonCustom[] {
-                new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
-
-                }),
-                new ContinueButton(getTexts(saveFile))
+                new ContinueButton(getTexts(saveFile), new BottleCleanUpPage(), "Clean up the bottles")
+                        .setOnClickFunction(() -> {
+                            saveFile.getHouseSceneFlags().cleanedUpBottles = true;
+                        }),
+                new ContinueButton(new LivingRoomPage(), "It adds to the decor of the house, should keep it there.")
         };
         return buttons;
     }

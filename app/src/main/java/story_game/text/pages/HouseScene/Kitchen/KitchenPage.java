@@ -45,8 +45,8 @@ public class KitchenPage extends Page {
                     saveFile.getHouseSceneFlags().checkedFreezerForFood = true;
                     checkedAllKitchen(saveFile);
                 }).defineDisable(saveFile.getHouseSceneFlags().checkedFreezerForFood).setInvisible(checkedKitchen),
-                
-                new ContinueButton(new LivingRoomPage(), "Return to livingRoom")
+
+                new ContinueButton(new LivingRoomPage(), "Return to the living room")
         };
         return buttons;
     }

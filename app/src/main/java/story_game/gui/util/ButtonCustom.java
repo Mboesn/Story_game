@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import story_game.Constants;
+import story_game.gui.window.GameWindow;
 
 // Adds repetitive functions to the Button class
 public class ButtonCustom extends Button {
@@ -37,6 +38,16 @@ public class ButtonCustom extends Button {
         ButtonCustom btn = new ButtonCustom(text);
         btn.setOnMouseClicked(buttonHandler);
         return btn;
+    }
+
+    /**
+     * 
+     * @return if the button is invisible. When the button is called in GameWindow
+     *         it will not show the button if this value is true. Only applicable to
+     *         choice buttons.
+     */
+    public boolean isInvisible() {
+        return this.isInvisible;
     }
 
     /**
