@@ -14,7 +14,7 @@ public class ClosetPage extends Page {
         Text[] texts = new Text[] {
                 new Text(
                         """
-                                You enter your closet, it isn't very big to an average human but as you aren't an average human, but rather a small goblin you find it quite spacious for your needs.
+                                You enter your closet, it isn't very big to an average human but as you aren't an average human, but rather a small goblin that finds it quite spacious for your needs.
                                 You look about you and find most of your belongings: clothes and weapons.""")
         };
         return texts;

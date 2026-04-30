@@ -123,4 +123,15 @@ public class ContinueButton extends ButtonCustom {
         this.onClickFunction = onClickFunction;
         return this;
     }
+
+    /**
+     * Sets if the button is disabled
+     * 
+     * @param isDisabled if the button is disabled
+     * @return This object
+     */
+    public ContinueButton defineDisable(boolean isDisabled) {
+        setDisable(isDisabled);
+        return this;
+    }
 }
