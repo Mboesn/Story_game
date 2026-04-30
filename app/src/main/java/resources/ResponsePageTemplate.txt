@@ -1,0 +1,21 @@
+package story_game.text.pages.
+
+import story_game.save_mechanics.SaveFile;
+import story_game.text.ResponsePage;
+import story_game.text.Text;
+
+public class  extends ResponsePage {
+
+    public () {
+        super(new );
+    }
+
+    @Override
+    public Text[] getTexts(SaveFile saveFile) {
+        Text[] texts = new Text[] {
+                new Text(""),
+                new Text("")
+        };
+        return texts;
+    }
+}

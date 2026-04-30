@@ -2,13 +2,13 @@ package story_game.save_mechanics;
 
 import com.google.gson.Gson;
 
-import story_game.save_mechanics.scene_flags.SceneOneFlags;
+import story_game.save_mechanics.scene_flags.HouseSceneFlags;
 import story_game.text.Page;
-import story_game.text.pages.scene_one.IntroPage;
+import story_game.text.pages.HouseScene.IntroPage;
 
 public class SaveFile {
     private PlayerCharacter playerCharacter;
-    private SceneOneFlags sceneOneFlags;
+    private HouseSceneFlags HouseSceneFlags;
     private Page currentPage;
 
     /**
@@ -17,7 +17,7 @@ public class SaveFile {
      */
     public SaveFile() {
         this.playerCharacter = new PlayerCharacter();
-        this.sceneOneFlags = new SceneOneFlags();
+        this.HouseSceneFlags = new HouseSceneFlags();
         this.currentPage = new IntroPage();
     }
 
@@ -25,8 +25,8 @@ public class SaveFile {
         return this.playerCharacter;
     }
 
-    public SceneOneFlags getSceneOneFlags() {
-        return this.sceneOneFlags;
+    public HouseSceneFlags getHouseSceneFlags() {
+        return this.HouseSceneFlags;
     }
 
     public Page getCurrentPage() {

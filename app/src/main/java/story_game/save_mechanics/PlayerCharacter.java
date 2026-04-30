@@ -1,33 +1,32 @@
 package story_game.save_mechanics;
 
-import story_game.save_mechanics.Characteristics.Race;
+import story_game.save_mechanics.Characteristics.Clothes;
+import story_game.save_mechanics.Characteristics.Weapons;
 
 // This class holds all data pertaining to the character of a specific save file
 public class PlayerCharacter {
-    private Race race = Race.HUMAN;
-    private int age;
 
-    public PlayerCharacter() {
+    private Clothes clothing = Clothes.PAJAMAS;
+    private Weapons weapon = Weapons.NONE;
+
+    public Clothes getClothing() {
+        return clothing;
     }
 
-    public Race getRace() {
-        return this.race;
+    public void setClothing(Clothes clothing) {
+        this.clothing = clothing;
     }
 
-    public void setRace(Race race) {
-        this.race = race;
+    public Weapons getWeapon() {
+        return weapon;
     }
 
-    public int getAge() {
-        return this.age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setWeapon(Weapons weapon) {
+        this.weapon = weapon;
     }
 
     @Override
     public String toString() {
-        return "Race: " + getRace().getName() + "Age: " + getAge();
+        return clothing.getName() + " " + weapon.getName();
     }
 }

@@ -1,0 +1,20 @@
+package story_game.text.pages.HouseScene.LivingRoom;
+
+import story_game.save_mechanics.SaveFile;
+import story_game.text.ResponsePage;
+import story_game.text.Text;
+
+public class BottleCleanUpPage extends ResponsePage {
+
+    public BottleCleanUpPage() {
+        super(new LivingRoomPage());
+    }
+
+    @Override
+    public Text[] getTexts(SaveFile saveFile) {
+        Text[] texts = new Text[] {
+                new Text("Good job! your a 0.001% closer to getting your life together!")
+        };
+        return texts;
+    }
+}

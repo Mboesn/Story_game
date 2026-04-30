@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -34,7 +35,7 @@ public class GameWindow {
 
         final double choiceButtonSpacing = 15;
 
-        final int textAreaSize = 25;
+        final int textAreaSize = 10;
 
         Stage stage = new Stage();
         HBox topRow = new HBox();
@@ -91,6 +92,8 @@ public class GameWindow {
         gameTextArea.setWrapText(true);
         gameTextArea.setEditable(false);
         gameTextArea.setPrefRowCount(textAreaSize);
+        // TODO: make font code separate
+        gameTextArea.setFont(Font.font("System", 25));
         rootList.add(gameTextArea);
 
         GameWindow.gameTextArea = gameTextArea;
@@ -108,23 +111,6 @@ public class GameWindow {
         stage.show();
     }
 
-    /**
-     * Changes the choices buttons.
-     * 
-     * @param buttons new buttons to add to the game screen
-     */
-    private static void addButtons(ButtonCustom[] buttons) {
-        choicesList.clear();
-        if (buttons != null)
-            for (ButtonCustom btn : buttons) {
-                try {
-                    choicesList.add(btn);
-                } catch (Exception e) {
-                    System.out.println("Failed to add button, error: \n" + e);
-                }
-            }
-    }
-
     public Page getCurrentPage() {
         return currentPage;
     }
@@ -138,8 +124,7 @@ public class GameWindow {
     public static void setCurrentPage(Page currentPage) {
         try {
             // update game text to first text of the page
-            Text[] texts = currentPage.getTexts();
-            updateText(texts[0]);
+            updateText(currentPage.getTexts(saveFile)[0]);
             // update buttons
             addButtons(currentPage.getButtons(saveFile));
             // update variables accordingly
@@ -147,6 +132,7 @@ public class GameWindow {
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
             System.out.println("Failed to set current page, error: \n" + e);
+            e.printStackTrace();
         }
     }
 
@@ -161,5 +147,23 @@ public class GameWindow {
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }
+    }
+
+    /**
+     * Changes the choices buttons.
+     * 
+     * @param buttons new buttons to add to the game screen
+     */
+    private static void addButtons(ButtonCustom[] buttons) {
+        choicesList.clear();
+        if (buttons != null)
+            for (ButtonCustom btn : buttons) {
+                try {
+                    if (!btn.isInvisible())
+                        choicesList.add(btn);
+                } catch (Exception e) {
+                    System.out.println("Failed to add button, error: \n" + e);
+                }
+            }
     }
 }

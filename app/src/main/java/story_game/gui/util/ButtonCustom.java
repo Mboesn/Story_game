@@ -7,18 +7,20 @@ import story_game.Constants;
 
 // Adds repetitive functions to the Button class
 public class ButtonCustom extends Button {
+    protected boolean isInvisible = false;
 
     /**
      * Creates a button with the specified text as its label.
      * 
      * @param text A text string for its label.
-     * @deprecated Use createButtonCustom() in order to make sure that the button has
+     * @deprecated Use createButtonCustom() in order to make sure that the button
+     *             has
      *             a function
      */
     @Deprecated
     public ButtonCustom(String text) {
         super(text);
-        setMaxWidth(Constants.DEFAULT_BUTTON_MAX_WIDTH);
+        setMinWidth(Constants.DEFAULT_BUTTON_MIN_WIDTH);
     }
 
     /**
@@ -35,5 +37,39 @@ public class ButtonCustom extends Button {
         ButtonCustom btn = new ButtonCustom(text);
         btn.setOnMouseClicked(buttonHandler);
         return btn;
+    }
+
+    /**
+     * Sets if the button is disabled. The button will still be displayed yet not be
+     * clickable.
+     * 
+     * @param isDisabled if the button is disabled
+     * @return This object
+     */
+    public ButtonCustom defineDisable(boolean isDisabled) {
+        setDisable(isDisabled);
+        return this;
+    }
+
+    /**
+     * @return if the button is invisible. When the button is called in GameWindow
+     *         it will not show the button if this value is true. Only applicable to
+     *         choice buttons.
+     */
+    public boolean isInvisible() {
+        return this.isInvisible;
+    }
+
+    /**
+     * Sets if the button is invisible. When the button is called in GameWindow it
+     * will not show the button if this value is true. Only applicable to choice
+     * buttons.
+     * 
+     * @param isInvisible if the button is invisible
+     * @return This object
+     */
+    public ButtonCustom setInvisible(boolean isInvisible) {
+        this.isInvisible = isInvisible;
+        return this;
     }
 }

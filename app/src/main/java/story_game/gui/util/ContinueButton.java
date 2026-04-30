@@ -15,7 +15,7 @@ public class ContinueButton extends ButtonCustom {
      * the text to first element.
      * 
      * @param text       Text to shift through.
-     * @param targetPage Page to switch to after completing all text elements
+     * @param targetPage Page to switch to after completing all text elements.
      * @param buttonText A text string for its label.
      */
     @SuppressWarnings("deprecation")
@@ -64,7 +64,7 @@ public class ContinueButton extends ButtonCustom {
      * 
      * @param text       Text to shift through. Leave as a single element to
      *                   immediately switch pages.
-     * @param targetPage Page to switch to after completing all text elements
+     * @param targetPage Page to switch to after completing all text elements.
      */
     public ContinueButton(Text[] text, Page targetPage) {
         this(text, targetPage, "Continue");
@@ -92,7 +92,7 @@ public class ContinueButton extends ButtonCustom {
      * Creates a button with the specified text as its label, and changes the page
      * when pressed
      * 
-     * @param targetPage Page to switch to after completing all text elements
+     * @param targetPage Page to switch to after completing all text elements.
      * @param buttonText A text string for its label.
      */
     public ContinueButton(Page targetPage, String buttonText) {
@@ -121,6 +121,33 @@ public class ContinueButton extends ButtonCustom {
      */
     public ContinueButton setOnClickFunction(OnClickFunction onClickFunction) {
         this.onClickFunction = onClickFunction;
+        return this;
+    }
+
+    /**
+     * Sets if the button is disabled. The button will still be displayed yet not be
+     * clickable.
+     * 
+     * @param isDisabled if the button is disabled
+     * @return This object
+     */
+    @Override
+    public ContinueButton defineDisable(boolean isDisabled) {
+        setDisable(isDisabled);
+        return this;
+    }
+
+    /**
+     * Sets if the button is invisible. When the button is called in GameWindow it
+     * will not show the button if this value is true. Only applicable to choice
+     * buttons.
+     * 
+     * @param isInvisible if the button is invisible
+     * @return This object
+     */
+    @Override
+    public ContinueButton setInvisible(boolean isInvisible) {
+        this.isInvisible = isInvisible;
         return this;
     }
 }

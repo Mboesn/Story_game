@@ -1,0 +1,31 @@
+package story_game.text.pages.HouseScene.Bathroom;
+
+import story_game.gui.util.ButtonCustom;
+import story_game.gui.util.ContinueButton;
+import story_game.save_mechanics.SaveFile;
+import story_game.text.Page;
+import story_game.text.Text;
+import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
+
+public class BathroomPage extends Page {
+
+    @Override
+    public Text[] getTexts(SaveFile saveFile) {
+        Text[] texts = new Text[] {
+                new Text(
+                        "You enter your bathroom and see your toilet, sink, and shower. By the sink you spot your toothbrush.")
+        };
+        return texts;
+    }
+
+    @Override
+    public ButtonCustom[] getButtons(SaveFile saveFile) {
+        ButtonCustom[] buttons = new ButtonCustom[] {
+                new ContinueButton(new BrushingTeethPage(), "Brush teeth").setOnClickFunction(() -> {
+                    saveFile.getHouseSceneFlags().brushedTeeth = true;
+                }).setInvisible(saveFile.getHouseSceneFlags().brushedTeeth),
+                new ContinueButton(new BedroomPage(), "Return to bedroom")
+        };
+        return buttons;
+    }
+}
