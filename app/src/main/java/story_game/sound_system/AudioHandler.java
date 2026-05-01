@@ -6,9 +6,18 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/**
+ * This class contains all the function relating to controlling the audio of the
+ * game.
+ */
 public class AudioHandler {
     private static MediaPlayer mediaPlayer;
 
+    /**
+     * Plays a given music file on loop.
+     * 
+     * @param music the music to play
+     */
     public static void playMusic(Music music) {
         try {
             Media media = new Media(new File(music.getPath()).toURI().toString());
@@ -20,6 +29,9 @@ public class AudioHandler {
         }
     }
 
+    /**
+     * Stops playing music.
+     */
     public static void stopMusic() {
         try {
             mediaPlayer.stop();
@@ -28,6 +40,11 @@ public class AudioHandler {
         }
     }
 
+    /**
+     * Plays a given sound effect, does not distrupt the music.
+     * 
+     * @param sfx The sounds effect to play.
+     */
     public static void playSFX(SFX sfx) {
         try {
             AudioClip clip = new AudioClip(new File(sfx.getPath()).toURI().toString());

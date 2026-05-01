@@ -6,6 +6,11 @@ public enum Music {
 
     private String path;
 
+    /**
+     * List of all the music available to be played. All music is royalty free.
+     * 
+     * @param name the name of the music file.
+     */
     Music(String name) {
         this.path = "app\\src\\main\\java\\resources\\music\\" + name + ".mp3";
     }
