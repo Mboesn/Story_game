@@ -12,7 +12,7 @@ public enum SFX {
      * @param name The name of the sound effect file.
      */
     SFX(String name) {
-        this.path = "app\\src\\main\\java\\resources\\sfx\\" + name + ".mp3";
+        this.path = "app\\src\\main\\resources\\sfx\\" + name + ".mp3";
     }
 
     public String getPath() {

@@ -3,9 +3,13 @@
  */
 package story_game;
 
+import java.util.HashMap;
+
 import story_game.gui.window.MainMenuWindow;
 import story_game.save_mechanics.SaveFile;
 import story_game.save_mechanics.SaveHandler;
+import story_game.text.PageLoader;
+import story_game.text.PageYAML;
 
 class AppTest {
     public static void main(String[] args) {
@@ -13,6 +17,10 @@ class AppTest {
         SaveHandler.saveGame(save, "save2");
         SaveHandler.saveGame(save, "save3");
         System.out.println(SaveHandler.loadGame("save1"));
+        HashMap<String, PageYAML> pages = PageLoader.loadPages();
+        pages.forEach((id, page) -> {
+            System.out.println(id + ":\n" + page);
+        });
         MainMenuWindow.launch(MainMenuWindow.class, args);
     }
 }

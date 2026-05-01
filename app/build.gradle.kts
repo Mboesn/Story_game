@@ -33,6 +33,8 @@ dependencies {
     implementation("org.reflections:reflections:0.10.2")
     // logback classic in order to fix reflections logs
     implementation("ch.qos.logback:logback-classic:1.4.14")
+    // Snakeyaml for loading YAML
+    implementation("org.yaml:snakeyaml:2.2")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
