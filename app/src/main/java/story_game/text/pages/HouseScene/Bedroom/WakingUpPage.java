@@ -3,6 +3,8 @@ package story_game.text.pages.HouseScene.Bedroom;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.SaveFile;
+import story_game.sound_system.AudioHandler;
+import story_game.sound_system.SFX;
 import story_game.text.Page;
 import story_game.text.Text;
 
@@ -45,8 +47,9 @@ public class WakingUpPage extends Page {
         @Override
         public ButtonCustom[] getButtons(SaveFile saveFile) {
                 ButtonCustom[] buttons = new ButtonCustom[] {
-                                new ContinueButton(new WakeUpPage(), "Wake up"),
-
+                                new ContinueButton(new WakeUpPage(), "Wake up").setOnClickFunction(() -> {
+                                        AudioHandler.playSFX(SFX.ROOSTER);
+                                }),
                                 new ContinueButton(getTexts(saveFile), new RefuseToWakeUpPage(),
                                                 "Just five more minutes....")
                 };
