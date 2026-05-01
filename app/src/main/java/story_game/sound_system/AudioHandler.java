@@ -2,10 +2,11 @@ package story_game.sound_system;
 
 import java.io.File;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class MusicHandler {
+public class AudioHandler {
     private static MediaPlayer mediaPlayer;
 
     public static void playMusic(Music music) {
@@ -24,6 +25,15 @@ public class MusicHandler {
             mediaPlayer.stop();
         } catch (Exception e) {
             System.out.println("Failed to stop music.\nerror: " + e);
+        }
+    }
+
+    public static void playSFX(SFX sfx) {
+        try {
+            AudioClip clip = new AudioClip(new File(sfx.getPath()).toURI().toString());
+            clip.play();
+        } catch (Exception e) {
+            System.out.println("Failed to play music: " + sfx.getPath() + "\nerror: " + e);
         }
     }
 }
