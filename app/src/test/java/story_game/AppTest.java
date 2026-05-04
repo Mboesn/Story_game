@@ -6,7 +6,6 @@ package story_game;
 import story_game.gui.window.MainMenuWindow;
 import story_game.save_mechanics.SaveHandler;
 import story_game.save_mechanics.save_file.SaveFile;
-import story_game.save_mechanics.settings.SettingsFile;
 
 class AppTest {
     public static void main(String[] args) {

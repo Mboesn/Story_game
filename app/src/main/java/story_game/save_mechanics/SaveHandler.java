@@ -83,6 +83,18 @@ public class SaveHandler {
     }
 
     /**
+     * Saves a saveable file to a new file using the default path
+     * 
+     * @param saveableFile Saveable file to save
+     * @param fileName     The name of the json file
+     * 
+     * @returns a string of save file in Json format
+     */
+    public static String saveSettings(Saveable saveableFile) {
+        return saveFile(saveableFile, defaultSettingName, defaultSavePath);
+    }
+
+    /**
      * Loads a saveable file.
      * 
      * @param <T>      The type of file to return.

@@ -1,31 +1,72 @@
 package story_game.gui.window;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import story_game.gui.util.ButtonCustom;
+import story_game.save_mechanics.settings.SettingsContainer;
+import story_game.save_mechanics.settings.SettingsFile;
+import story_game.sound_system.AudioHandler;
 
 public class SettingsWindow {
 
     public void show() {
+        SettingsFile tempSettingsFile = new SettingsFile(SettingsContainer.getSettings());
         final double sceneWidth = 400;
         final double sceneHeight = 250;
 
         Stage stage = new Stage();
         VBox root = new VBox();
+        HBox bottomRow = new HBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
-        stage.setOnCloseRequest(e -> {
-            e.consume();
-            ExitConfirmationAlert.confirmExit(stage);
-        });
 
-        //TODO: add settings
-        
+        ObservableList<Node> rootList = root.getChildren();
+        ObservableList<Node> bottomList = bottomRow.getChildren();
+
         stage.setScene(scene);
         stage.setTitle("Settings");
+
+        Slider musicSlider = new Slider(0, 1, tempSettingsFile.getAudioSettings().musicVolume);
+        musicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            tempSettingsFile.getAudioSettings().musicVolume = newVal.doubleValue();
+            AudioHandler.setMusicVolume(newVal.doubleValue());
+        });
+        rootList.add(musicSlider);
+
+        Slider sfxSlider = new Slider(0, 1, tempSettingsFile.getAudioSettings().sfxVolume);
+        sfxSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            tempSettingsFile.getAudioSettings().sfxVolume = newVal.doubleValue();
+        });
+        rootList.add(sfxSlider);
+
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            if (ExitConfirmationAlert.confirmExit(stage))
+                SettingsContainer.updateSettings();
+        });
+
+        ButtonCustom save = ButtonCustom.createButtonCustom("Save",
+                e -> {
+                    SettingsContainer.updateSettings(tempSettingsFile);
+                    stage.close();
+                });
+        bottomList.add(save);
+
+        ButtonCustom back = ButtonCustom.createButtonCustom("Back",
+                e -> {
+                    if (ExitConfirmationAlert.confirmExit(stage))
+                        SettingsContainer.updateSettings();
+                });
+        bottomList.add(back);
+
+        rootList.add(bottomRow);
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
-
 }
