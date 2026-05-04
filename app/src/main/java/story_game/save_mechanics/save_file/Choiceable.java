@@ -1,4 +1,4 @@
-package story_game.save_mechanics;
+package story_game.save_mechanics.save_file;
 
 import story_game.text.Font;
 

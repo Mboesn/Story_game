@@ -1,7 +1,7 @@
-package story_game.save_mechanics;
+package story_game.save_mechanics.save_file;
 
-import story_game.save_mechanics.Characteristics.Clothes;
-import story_game.save_mechanics.Characteristics.Weapons;
+import story_game.save_mechanics.save_file.Characteristics.Clothes;
+import story_game.save_mechanics.save_file.Characteristics.Weapons;
 
 // This class holds all data pertaining to the character of a specific save file
 public class PlayerCharacter {

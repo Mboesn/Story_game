@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import story_game.gui.util.ButtonCustom;
-import story_game.save_mechanics.SaveFile;
 import story_game.save_mechanics.SaveHandler;
+import story_game.save_mechanics.save_file.SaveFile;
 
 /**
  * This window lists all available saves, allowing to load a new one or save the

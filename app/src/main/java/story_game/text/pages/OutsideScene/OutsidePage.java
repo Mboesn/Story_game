@@ -2,7 +2,7 @@ package story_game.text.pages.OutsideScene;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
 

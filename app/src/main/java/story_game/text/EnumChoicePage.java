@@ -2,8 +2,8 @@ package story_game.text;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
-import story_game.save_mechanics.Choiceable;
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.save_file.Choiceable;
+import story_game.save_mechanics.save_file.SaveFile;
 
 public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Page {
 

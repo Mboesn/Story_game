@@ -12,7 +12,6 @@ import javafx.scene.media.MediaPlayer;
  */
 public class AudioHandler {
     private static MediaPlayer mediaPlayer;
-
     /**
      * Plays a given music file on loop.
      * 

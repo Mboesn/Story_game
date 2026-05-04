@@ -16,6 +16,8 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import story_game.Constants;
+import story_game.save_mechanics.save_file.SaveFile;
+import story_game.save_mechanics.settings.SettingsFile;
 import story_game.text.Page;
 
 public class SaveHandler {
@@ -24,7 +26,7 @@ public class SaveHandler {
     // This path leads to the pages package
     private static final String pagesPackage = "story_game.text.pages";
     // This path leads to the pages package
-    private static final String settingDefaultName = "settings";
+    private static final String defaultSettingName = "settings";
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapterFactory(createFactory())
@@ -100,6 +102,7 @@ public class SaveHandler {
                 return file;
             } catch (Exception e) {
                 System.out.println("failed to deserialize: " + filePath + " \n error: " + e);
+                e.printStackTrace();
                 return null;
             }
         } catch (IOException e) {
@@ -138,20 +141,27 @@ public class SaveHandler {
      * @param fileName the name of the json file
      * @param dirPath  the path to folder in which to save the settings
      * 
-     * @return the loaded settings file, returns null if failed to load.
+     * @return The loaded settings file, a new settings file is saved and returned
+     *         if none was found
      */
     public static SettingsFile loadSettings(String fileName, String dirPath) {
-        return loadFile(fileName, dirPath, SettingsFile.class);
+        SettingsFile settings = loadFile(fileName, dirPath, SettingsFile.class);
+        if (settings == null) {
+            settings = new SettingsFile();
+            saveFile(settings, fileName, dirPath);
+        }
+        return settings;
     }
 
     /**
      * load a settings file using default save path and name, overrides all values
      * to be equal to the settings file.
      * 
-     * @return the loaded settings fill, returns null if failed to load.
+     * @return The loaded settings file, a new settings file is saved and returned
+     *         if none was found
      */
     public static SettingsFile loadSettings() {
-        return loadSettings(defaultSavePath, defaultSavePath);
+        return loadSettings(defaultSettingName, defaultSavePath);
     }
 
     /**
