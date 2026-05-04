@@ -21,7 +21,7 @@ public class WakeUpPage extends ResponsePage {
                                 + "bathroom, living room, and, most importantly now, a kitchen. You should probably go search for something to settle your hunger as soon as possible. "
                                 + "While thinking about what you shall make for breakfast you notice a rancid smell emanating from your person. You realize that you probably didn't brush "
                                 + "your teeth the previous night and the smell could very much be deem a biohazard. Getting up from bed you gain a new resolve to finally get yourself "
-                                + "together. all you need is to brush your teeth and probably get out of your pajamas.")
+                                + "together. All you need is to brush your teeth and probably get out of your pajamas.")
         };
         return texts;
     }

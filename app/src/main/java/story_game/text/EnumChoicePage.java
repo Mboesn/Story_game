@@ -86,7 +86,7 @@ public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Pag
     @Override
     public Text[] getTexts(SaveFile saveFile) {
         String textString = "";
-        // If there is text to desplay before the choices add it on top.
+        // If there is text to display before the choices add it on top.
         if (!chooseText.equals(""))
             textString = chooseText + " \n\n";
         for (int i = 0; i < choices.length; i++) {

@@ -12,7 +12,7 @@ public enum Music {
      * @param name the name of the music file.
      */
     Music(String name) {
-        this.path = "app\\src\\main\\java\\resources\\music\\" + name + ".mp3";
+        this.path = "app\\src\\main\\resources\\music\\" + name + ".mp3";
     }
 
     public String getPath() {
