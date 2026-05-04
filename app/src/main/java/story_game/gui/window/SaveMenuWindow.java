@@ -160,7 +160,7 @@ public class SaveMenuWindow {
          */
         private void saveGame(String saveFileName, Stage saveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
-            SaveHandler.saveGame(saveFile, saveFileName);
+            SaveHandler.saveFile(saveFile, saveFileName);
             if (type != SaveMenuType.SAVE_GAME) {
                 GameWindow gameWindow = new GameWindow();
                 gameWindow.show(saveFile, mainMenuStage);
