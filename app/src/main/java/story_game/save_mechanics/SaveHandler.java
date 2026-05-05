@@ -16,6 +16,7 @@ import com.google.gson.TypeAdapterFactory;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import story_game.Constants;
+import story_game.save_mechanics.achievements.AchievementsFile;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.save_mechanics.settings.SettingsFile;
 import story_game.text.Page;
@@ -27,6 +28,8 @@ public class SaveHandler {
     private static final String pagesPackage = "story_game.text.pages";
     // The default name of the settings file
     private static final String defaultSettingName = "Settings";
+    // The default name of the Achievements file
+    private static final String defaultAchievementsName = "Achievements";
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapterFactory(createFactory())
@@ -91,6 +94,17 @@ public class SaveHandler {
      */
     public static String saveSettings(SettingsFile settingsFile) {
         return saveFile(settingsFile, defaultSettingName);
+    }
+
+    /**
+     * Saves a achievements file to a new file using the default path
+     * 
+     * @param achievementsFile Achievements file to save
+     * 
+     * @returns a string of save file in Json format
+     */
+    public static String saveAchievements(AchievementsFile achievementsFile) {
+        return saveFile(achievementsFile, defaultAchievementsName);
     }
 
     /**
@@ -171,6 +185,35 @@ public class SaveHandler {
      */
     public static SettingsFile loadSettings() {
         return loadSettings(defaultSettingName, defaultSavePath);
+    }
+
+    /**
+     * load a achievements file from a given path and file name
+     * 
+     * @param fileName the name of the json file
+     * @param dirPath  the path to folder in which to save the achievements
+     * 
+     * @return The loaded achievements file, a new achievements file is saved and
+     *         returned
+     *         if none was found
+     */
+    public static AchievementsFile loadAchievements(String fileName, String dirPath) {
+        AchievementsFile achievements = loadFile(fileName, dirPath, AchievementsFile.class);
+        if (achievements == null) {
+            achievements = new AchievementsFile();
+            saveFile(achievements, fileName, dirPath);
+        }
+        return achievements;
+    }
+
+    /**
+     * load a achievements file using default save path and name.
+     * 
+     * @return The loaded achievements file, a new achievements file is saved and
+     *         returned if none was found.
+     */
+    public static AchievementsFile loadAchievements() {
+        return loadAchievements(defaultAchievementsName, defaultSavePath);
     }
 
     /**
