@@ -6,16 +6,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
-
-import org.reflections.Reflections;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import story_game.Constants;
+import story_game.save_mechanics.save_file.PageAdapter;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.save_mechanics.settings.SettingsFile;
 import story_game.text.Page;
@@ -23,13 +19,11 @@ import story_game.text.Page;
 public class SaveHandler {
     // This path leads to the game folder in the local appdata
     private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
-    // This path leads to the pages package
-    private static final String pagesPackage = "story_game.text.pages";
     // The default name of the settings file
     private static final String defaultSettingName = "Settings";
 
     private static final Gson gson = new GsonBuilder()
-            .registerTypeAdapterFactory(createFactory())
+            .registerTypeAdapter(Page.class, new PageAdapter())
             .setPrettyPrinting()
             .create();
 
@@ -171,23 +165,6 @@ public class SaveHandler {
      */
     public static SettingsFile loadSettings() {
         return loadSettings(defaultSettingName, defaultSavePath);
-    }
-
-    /**
-     * Creates a TypeAdapterFactory which tells the Gson object what are the
-     * subclasses of Page. This is used in order to save the current page.
-     * 
-     * @return TypeAdapterFactory to save in the Gson object
-     */
-    private static TypeAdapterFactory createFactory() {
-        Reflections reflections = new Reflections(pagesPackage);
-        Set<Class<? extends Page>> subclasses = reflections.getSubTypesOf(Page.class);
-
-        RuntimeTypeAdapterFactory<Page> factory = RuntimeTypeAdapterFactory.of(Page.class, "type");
-        for (Class<? extends Page> clazz : subclasses) {
-            factory.registerSubtype(clazz, clazz.getSimpleName());
-        }
-        return factory;
     }
 
     /**

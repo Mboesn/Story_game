@@ -6,14 +6,11 @@ import story_game.save_mechanics.save_file.Choiceable;
 import story_game.save_mechanics.save_file.SaveFile;
 
 public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Page {
-
-    private transient T[] choices;
-    private transient String chooseText;
-    private transient String currentChoiceText;
-    private transient Page targetPage;
-    private transient ButtonCustom[] customButton;
-
-    // TODO: change save system to only save id so transient will not be required
+    private T[] choices;
+    private String chooseText;
+    private String currentChoiceText;
+    private Page targetPage;
+    private ButtonCustom[] customButton;
 
     /**
      * This class displays to the player a given enum of choices and lets them

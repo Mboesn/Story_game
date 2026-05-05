@@ -5,10 +5,8 @@ import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
 
 public abstract class ResponsePage extends Page {
-
-    // TODO: remove transient once save system is fixed
-    transient private Page targetPage;
-    transient private String buttonText;
+    private Page targetPage;
+    private String buttonText;
 
     /**
      * This class represents a generic page in the game Which does not have any
