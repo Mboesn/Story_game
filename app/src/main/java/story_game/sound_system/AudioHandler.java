@@ -57,6 +57,11 @@ public class AudioHandler {
         }
     }
 
+    /**
+     * Updates volume of the currently playing music.
+     * 
+     * @param volume Volume of the music.
+     */
     public static void setMusicVolume(double volume) {
         // if music is playing update volume
         if (mediaPlayer != null)

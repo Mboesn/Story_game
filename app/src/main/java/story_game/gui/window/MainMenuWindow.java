@@ -23,9 +23,10 @@ import story_game.sound_system.AudioHandler;
 public class MainMenuWindow extends Application {
     @Override
     public void start(Stage mainMenuStage) throws Exception {
+        // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();
         AudioHandler.playMusic(Music.DEFAULT);
-        
+
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 

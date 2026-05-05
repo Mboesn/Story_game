@@ -17,11 +17,11 @@ public class ExitConfirmationAlert {
      * 
      * @return True if window closed
      */
-    public static boolean confirmExit(Stage stage) {
+    public static boolean confirmExit(Stage stage, String title, String header, String content) {
         Alert exitConfirmationAlert = new Alert(AlertType.CONFIRMATION);
-        exitConfirmationAlert.setTitle("Are you sure?");
-        exitConfirmationAlert.setHeaderText("You are about to exit?");
-        exitConfirmationAlert.setContentText("All unsaved progress will be deleted");
+        exitConfirmationAlert.setTitle(title);
+        exitConfirmationAlert.setHeaderText(header);
+        exitConfirmationAlert.setContentText(content);
 
         Optional<ButtonType> isExit = exitConfirmationAlert.showAndWait();
 
@@ -29,5 +29,17 @@ public class ExitConfirmationAlert {
         if (exit)
             stage.close();
         return exit;
+    }
+
+    /**
+     * Opens a confirmation alert asking the user if he wishes to close a given
+     * stage
+     * 
+     * @param stage stage to close if OK is selected
+     * 
+     * @return True if window closed
+     */
+    public static boolean confirmExit(Stage stage) {
+        return confirmExit(stage, "Are you sure?", "You are about to exit", "All unsaved progress will be deleted");
     }
 }

@@ -25,8 +25,8 @@ public class SaveHandler {
     private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
     // This path leads to the pages package
     private static final String pagesPackage = "story_game.text.pages";
-    // This path leads to the pages package
-    private static final String defaultSettingName = "settings";
+    // The default name of the settings file
+    private static final String defaultSettingName = "Settings";
 
     private static final Gson gson = new GsonBuilder()
             .registerTypeAdapterFactory(createFactory())
@@ -83,15 +83,14 @@ public class SaveHandler {
     }
 
     /**
-     * Saves a saveable file to a new file using the default path
+     * Saves a settings file to a new file using the default path
      * 
-     * @param saveableFile Saveable file to save
-     * @param fileName     The name of the json file
+     * @param settingsFile Settings file to save
      * 
      * @returns a string of save file in Json format
      */
-    public static String saveSettings(Saveable saveableFile) {
-        return saveFile(saveableFile, defaultSettingName, defaultSavePath);
+    public static String saveSettings(SettingsFile settingsFile) {
+        return saveFile(settingsFile, defaultSettingName);
     }
 
     /**
@@ -136,8 +135,7 @@ public class SaveHandler {
     }
 
     /**
-     * load a save file using default save path, overrides all values to be equal to
-     * the save file
+     * load a save file using default save path.
      * 
      * @param fileName the name of the json file
      * 
@@ -166,11 +164,10 @@ public class SaveHandler {
     }
 
     /**
-     * load a settings file using default save path and name, overrides all values
-     * to be equal to the settings file.
+     * load a settings file using default save path and name.
      * 
      * @return The loaded settings file, a new settings file is saved and returned
-     *         if none was found
+     *         if none was found.
      */
     public static SettingsFile loadSettings() {
         return loadSettings(defaultSettingName, defaultSavePath);

@@ -24,11 +24,9 @@ public class SettingsWindow {
 
         Stage stage = new Stage();
         VBox root = new VBox();
-        HBox bottomRow = new HBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
 
         ObservableList<Node> rootList = root.getChildren();
-        ObservableList<Node> bottomList = bottomRow.getChildren();
 
         stage.setScene(scene);
         stage.setTitle("Settings");
@@ -50,27 +48,34 @@ public class SettingsWindow {
         });
         rootList.add(new HBox(buttonSpacing, sfxLabel, sfxSlider));
 
+        ButtonCustom saveBtn = ButtonCustom.createButtonCustom("Save",
+                e -> {
+                    SettingsContainer.updateSettings(tempSettingsFile);
+                    stage.close();
+                });
+
+        // If closed without saving reset settings
         stage.setOnCloseRequest(e -> {
             e.consume();
             if (ExitConfirmationAlert.confirmExit(stage))
                 SettingsContainer.updateSettings();
         });
 
-        ButtonCustom save = ButtonCustom.createButtonCustom("Save",
-                e -> {
-                    SettingsContainer.updateSettings(tempSettingsFile);
-                    stage.close();
-                });
-        bottomList.add(save);
-
-        ButtonCustom back = ButtonCustom.createButtonCustom("Back",
+        ButtonCustom backBtn = ButtonCustom.createButtonCustom("Back",
                 e -> {
                     if (ExitConfirmationAlert.confirmExit(stage))
                         SettingsContainer.updateSettings();
                 });
-        bottomList.add(back);
+        rootList.add(new HBox(saveBtn, backBtn));
 
-        rootList.add(bottomRow);
+        ButtonCustom defaultBtn = ButtonCustom.createButtonCustom("Reset to default",
+                e -> {
+                    if (ExitConfirmationAlert.confirmExit(stage, "Reset settings",
+                            "You are about to reset your settings", "Are you sure? This can not be undone."))
+                        SettingsContainer.updateSettings(new SettingsFile());
+                });
+        rootList.add(defaultBtn);
+
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
