@@ -3,6 +3,7 @@ package story_game.gui.window;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,6 +20,7 @@ public class SettingsWindow {
         SettingsFile tempSettingsFile = new SettingsFile(SettingsContainer.getSettings());
         final double sceneWidth = 400;
         final double sceneHeight = 250;
+        final double buttonSpacing = 10;
 
         Stage stage = new Stage();
         VBox root = new VBox();
@@ -31,18 +33,22 @@ public class SettingsWindow {
         stage.setScene(scene);
         stage.setTitle("Settings");
 
+        Label musicLabel = new Label("Music: " + (int) (tempSettingsFile.getAudioSettings().musicVolume * 100) + "%");
         Slider musicSlider = new Slider(0, 1, tempSettingsFile.getAudioSettings().musicVolume);
         musicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             tempSettingsFile.getAudioSettings().musicVolume = newVal.doubleValue();
             AudioHandler.setMusicVolume(newVal.doubleValue());
+            musicLabel.setText("Music: " + (int) (newVal.doubleValue() * 100) + "%");
         });
-        rootList.add(musicSlider);
+        rootList.add(new HBox(buttonSpacing, musicLabel, musicSlider));
 
+        Label sfxLabel = new Label("SFX: " + (int) (tempSettingsFile.getAudioSettings().sfxVolume * 100) + "%");
         Slider sfxSlider = new Slider(0, 1, tempSettingsFile.getAudioSettings().sfxVolume);
         sfxSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             tempSettingsFile.getAudioSettings().sfxVolume = newVal.doubleValue();
+            sfxLabel.setText("SFX: " + (int) (newVal.doubleValue() * 100) + "%");
         });
-        rootList.add(sfxSlider);
+        rootList.add(new HBox(buttonSpacing, sfxLabel, sfxSlider));
 
         stage.setOnCloseRequest(e -> {
             e.consume();
