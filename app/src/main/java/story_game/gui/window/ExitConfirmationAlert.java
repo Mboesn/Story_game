@@ -11,9 +11,12 @@ public class ExitConfirmationAlert {
 
     /**
      * Opens a confirmation alert asking the user if he wishes to close a given
-     * stage
+     * stage.
      * 
-     * @param stage stage to close if OK is selected
+     * @param stage   Stage to close if OK is selected.
+     * @param title   The Title of the dialog.
+     * @param header  The Title of the dialog.
+     * @param content The string to show in the dialog content area.
      * 
      * @return True if window closed
      */
