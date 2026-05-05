@@ -1,6 +1,6 @@
 package story_game.text.pages.HouseScene.Closet;
 
-import story_game.save_mechanics.Characteristics.Weapons;
+import story_game.save_mechanics.save_file.Characteristics.Weapons;
 import story_game.text.EnumChoicePage;
 
 public class WeaponsPage extends EnumChoicePage<Weapons> {

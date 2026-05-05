@@ -1,12 +1,13 @@
-package story_game.save_mechanics;
+package story_game.save_mechanics.save_file;
 
 import com.google.gson.Gson;
 
-import story_game.save_mechanics.scene_flags.HouseSceneFlags;
+import story_game.save_mechanics.SaveHandler.Saveable;
+import story_game.save_mechanics.save_file.scene_flags.HouseSceneFlags;
 import story_game.text.Page;
 import story_game.text.pages.HouseScene.IntroPage;
 
-public class SaveFile {
+public class SaveFile implements Saveable{
     private PlayerCharacter playerCharacter;
     private HouseSceneFlags HouseSceneFlags;
     private Page currentPage;

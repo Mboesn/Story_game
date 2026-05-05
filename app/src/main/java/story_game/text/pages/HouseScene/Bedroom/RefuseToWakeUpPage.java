@@ -1,7 +1,7 @@
 package story_game.text.pages.HouseScene.Bedroom;
 
 import story_game.gui.util.ButtonCustom;
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
 

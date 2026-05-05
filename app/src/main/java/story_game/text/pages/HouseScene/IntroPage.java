@@ -1,7 +1,7 @@
 package story_game.text.pages.HouseScene;
 
 import story_game.Constants;
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.ResponsePage;
 import story_game.text.Text;
 import story_game.text.pages.HouseScene.Bedroom.WakingUpPage;

@@ -1,4 +1,4 @@
-package story_game.save_mechanics.scene_flags;
+package story_game.save_mechanics.save_file.scene_flags;
 
 public class HouseSceneFlags {
     // Bathroom
