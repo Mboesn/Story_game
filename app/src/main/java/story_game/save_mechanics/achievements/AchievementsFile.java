@@ -7,20 +7,20 @@ import com.google.gson.Gson;
 import story_game.save_mechanics.SaveHandler.Saveable;
 
 public class AchievementsFile implements Saveable {
-    private HashMap<Achievements, Boolean> achievements;
+    private HashMap<Achievement, Boolean> achievements;
 
     public AchievementsFile() {
-        achievements = new HashMap<Achievements, Boolean>();
-        for (Achievements achievement : Achievements.values()) {
+        achievements = new HashMap<Achievement, Boolean>();
+        for (Achievement achievement : Achievement.values()) {
             achievements.put(achievement, false);
         }
     }
 
-    public HashMap<Achievements, Boolean> getAchievements() {
+    public HashMap<Achievement, Boolean> getAchievements() {
         return achievements;
     }
 
-    public void setAchievements(Achievements achievement, boolean hasCompleted) {
+    public void setAchievement(Achievement achievement, boolean hasCompleted) {
         achievements.replace(achievement, hasCompleted);
     }
 
@@ -30,7 +30,7 @@ public class AchievementsFile implements Saveable {
         return gson.toJson(this);
     }
 
-    public enum Achievements {
+    public enum Achievement {
         SLEEP("Sweet dreams", "Fall asleep and never wake up."),
         FINISH_DEMO("Finish demo", "Finish demo"),
         GET_YOURSELF_TOGETHER("Get yourself together", "Get dressed, brush your teeth, and clean up.");
@@ -38,7 +38,7 @@ public class AchievementsFile implements Saveable {
         transient private String name;
         transient private String description;
 
-        Achievements(String name, String description) {
+        Achievement(String name, String description) {
             this.name = name;
             this.description = description;
         }

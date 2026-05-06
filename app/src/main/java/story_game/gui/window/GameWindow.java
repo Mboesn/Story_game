@@ -20,11 +20,11 @@ import story_game.text.Page;
 import story_game.text.Text;
 
 public class GameWindow {
-
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
     private static TextArea gameTextArea;
     private static SaveFile saveFile;
+    public static boolean unsafeClose = false;
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
 
@@ -76,9 +76,12 @@ public class GameWindow {
 
         stage.setOnCloseRequest(e -> {
             e.consume();
-            if (ExitConfirmationAlert.confirmExit(stage)) {
+            if (unsafeClose) {
                 mainMenuStage.show();
-            }
+                stage.close();
+            } else if (ExitConfirmationAlert.confirmExit(stage))
+                mainMenuStage.show();
+            unsafeClose = false;
         });
 
         HBox.setHgrow(settingsButton, Priority.ALWAYS);

@@ -1,7 +1,8 @@
 package story_game.text.pages.OutsideScene;
 
 import story_game.gui.util.ButtonCustom;
-import story_game.gui.util.ContinueButton;
+import story_game.gui.util.EndGameButton;
+import story_game.save_mechanics.achievements.AchievementsFile.Achievement;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
@@ -23,10 +24,7 @@ public class OutsidePage extends Page {
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom[] buttons = new ButtonCustom[] {
-                new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
-
-                }),
-                new ContinueButton(getTexts(saveFile))
+                new EndGameButton("Finish Demo", () -> Achievement.FINISH_DEMO)
         };
         return buttons;
     }

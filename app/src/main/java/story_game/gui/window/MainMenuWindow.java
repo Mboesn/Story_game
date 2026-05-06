@@ -25,6 +25,7 @@ public class MainMenuWindow extends Application {
     public void start(Stage mainMenuStage) throws Exception {
         // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();
+        
         AudioHandler.playMusic(Music.DEFAULT);
 
         final double sceneWidth = 1000;
