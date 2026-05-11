@@ -17,9 +17,10 @@ public class AchievementsContainer {
     public static void CheckAchievements(CompletedAchievementCheck... achievementChecks) {
         for (CompletedAchievementCheck achievementCheck : achievementChecks) {
             Achievement achievement = achievementCheck.CheckCompleted();
-            if (achievement != null)
+            if (achievement != null) {
                 getAchievements().setAchievement(achievement, true);
+                SaveHandler.saveAchievements(getAchievements());
+            }
         }
-        SaveHandler.saveAchievements(getAchievements());
     }
 }

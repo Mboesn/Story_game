@@ -25,7 +25,7 @@ public class MainMenuWindow extends Application {
     public void start(Stage mainMenuStage) throws Exception {
         // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();
-        
+
         AudioHandler.playMusic(Music.DEFAULT);
 
         final double sceneWidth = 1000;
@@ -61,6 +61,13 @@ public class MainMenuWindow extends Application {
                     save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
                     mainMenuStage.close();
                 });
+        // Opens the achievements window which lists all completed and uncompleted
+        // achievements
+        ButtonCustom achievements = ButtonCustom.createButtonCustom("Achievements",
+                e -> {
+                    AchievementsWindow achievementsWindow = new AchievementsWindow();
+                    achievementsWindow.show();
+                });
 
         // Opens the settings window.
         ButtonCustom settings = ButtonCustom.createButtonCustom("Settings",
@@ -75,7 +82,7 @@ public class MainMenuWindow extends Application {
 
         ObservableList<Node> list = root.getChildren();
 
-        list.addAll(titleText, newGame, loadGame, settings, exit);
+        list.addAll(titleText, newGame, loadGame, achievements, settings, exit);
         root.setSpacing(buttonSpacing);
         root.setAlignment(Pos.CENTER);
         root.setFillWidth(true);

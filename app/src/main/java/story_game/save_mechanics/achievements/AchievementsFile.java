@@ -31,16 +31,18 @@ public class AchievementsFile implements Saveable {
     }
 
     public enum Achievement {
-        SLEEP("Sweet dreams", "Fall asleep and never wake up."),
-        FINISH_DEMO("Finish demo", "Finish demo"),
-        GET_YOURSELF_TOGETHER("Get yourself together", "Get dressed, brush your teeth, and clean up.");
+        SLEEP("Sweet dreams", "Fall asleep and never wake up.", "sleeping zzz"),
+        FINISH_DEMO("Finish demo", "Finish demo", "gears"),
+        GET_YOURSELF_TOGETHER("Get yourself together", "Get dressed, brush your teeth, and clean up.", "suit");
 
         transient private String name;
         transient private String description;
+        transient private String imagePath;
 
-        Achievement(String name, String description) {
+        Achievement(String name, String description, String imageName) {
             this.name = name;
             this.description = description;
+            this.imagePath = "/achievement images/" + imageName + ".jpg";
         }
 
         public String getName() {
@@ -49,6 +51,10 @@ public class AchievementsFile implements Saveable {
 
         public String getDescription() {
             return description;
+        }
+
+        public String getImagePath() {
+            return imagePath;
         }
     }
 }
