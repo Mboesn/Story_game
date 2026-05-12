@@ -3,7 +3,7 @@ package story_game.text.pages.HouseScene.LivingRoom;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.achievements.AchievementsContainer;
-import story_game.save_mechanics.achievements.AchievementsFile.Achievement;
+import story_game.save_mechanics.achievements.Achievement;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.save_mechanics.save_file.Characteristics.Clothes;
 import story_game.text.Page;

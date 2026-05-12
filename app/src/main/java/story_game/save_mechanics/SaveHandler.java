@@ -188,14 +188,13 @@ public class SaveHandler {
     }
 
     /**
-     * load a achievements file from a given path and file name
+     * load a achievements file from a given path and file name.
      * 
-     * @param fileName the name of the json file
-     * @param dirPath  the path to folder in which to save the achievements
+     * @param fileName the name of the json file.
+     * @param dirPath  the path to folder in which to save the achievements.
      * 
      * @return The loaded achievements file, a new achievements file is saved and
-     *         returned
-     *         if none was found
+     *         returned if none was found.
      */
     public static AchievementsFile loadAchievements(String fileName, String dirPath) {
         AchievementsFile achievements = loadFile(fileName, dirPath, AchievementsFile.class);

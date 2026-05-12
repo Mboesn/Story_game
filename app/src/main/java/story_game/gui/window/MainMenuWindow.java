@@ -62,7 +62,7 @@ public class MainMenuWindow extends Application {
                     mainMenuStage.close();
                 });
         // Opens the achievements window which lists all completed and uncompleted
-        // achievements
+        // achievements.
         ButtonCustom achievements = ButtonCustom.createButtonCustom("Achievements",
                 e -> {
                     AchievementsWindow achievementsWindow = new AchievementsWindow();

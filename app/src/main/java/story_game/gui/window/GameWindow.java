@@ -20,11 +20,11 @@ import story_game.text.Page;
 import story_game.text.Text;
 
 public class GameWindow {
+    private static boolean unsafeClose = false;
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
     private static TextArea gameTextArea;
     private static SaveFile saveFile;
-    public static boolean unsafeClose = false;
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
 
@@ -76,6 +76,8 @@ public class GameWindow {
 
         stage.setOnCloseRequest(e -> {
             e.consume();
+            // If unsafe close is true close without confirming with the player. Used when
+            // the game ends.
             if (unsafeClose) {
                 mainMenuStage.show();
                 stage.close();
@@ -114,6 +116,17 @@ public class GameWindow {
         stage.show();
     }
 
+    /**
+     * @param unsafeClose whether or not to close the game window without confirming
+     *                    with the player.
+     */
+    public static void setUnsafeClose(boolean unsafeClose) {
+        GameWindow.unsafeClose = unsafeClose;
+    }
+
+    /**
+     * @return The currently showing page.
+     */
     public Page getCurrentPage() {
         return currentPage;
     }

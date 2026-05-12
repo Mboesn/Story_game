@@ -2,8 +2,11 @@ package story_game.save_mechanics.achievements;
 
 import story_game.gui.util.CompletedAchievementCheck;
 import story_game.save_mechanics.SaveHandler;
-import story_game.save_mechanics.achievements.AchievementsFile.Achievement;
 
+/**
+ * This class holds the global achievements file and the method to update it.
+ * Used in order not to have to load achievements every time.
+ */
 public class AchievementsContainer {
     private static AchievementsFile achievements = SaveHandler.loadAchievements();
 
@@ -14,6 +17,12 @@ public class AchievementsContainer {
         return achievements;
     }
 
+    /**
+     * Goes over a list of achievement checks and updates the achievement file
+     * accordingly.
+     * 
+     * @param achievementChecks Achievement checks to make.
+     */
     public static void CheckAchievements(CompletedAchievementCheck... achievementChecks) {
         for (CompletedAchievementCheck achievementCheck : achievementChecks) {
             Achievement achievement = achievementCheck.CheckCompleted();
