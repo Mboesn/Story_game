@@ -2,6 +2,9 @@ package story_game.text.pages.HouseScene.Closet;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
+import story_game.save_mechanics.achievements.AchievementsContainer;
+import story_game.save_mechanics.achievements.Achievement;
+import story_game.save_mechanics.save_file.Characteristics.Clothes;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.Text;
@@ -11,6 +14,11 @@ public class ClosetPage extends Page {
 
     @Override
     public Text[] getTexts(SaveFile saveFile) {
+        AchievementsContainer.CheckAchievements(() -> saveFile.getHouseSceneFlags().brushedTeeth
+                && saveFile.getPlayerCharacter().getClothing() != Clothes.PAJAMAS
+                && saveFile.getHouseSceneFlags().cleanedUpBottles
+                        ? Achievement.GET_YOURSELF_TOGETHER
+                        : null);
         Text[] texts = new Text[] {
                 new Text(
                         """

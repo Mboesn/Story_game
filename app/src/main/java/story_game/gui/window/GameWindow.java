@@ -20,7 +20,7 @@ import story_game.text.Page;
 import story_game.text.Text;
 
 public class GameWindow {
-
+    private static boolean unsafeClose = false;
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
     private static TextArea gameTextArea;
@@ -76,9 +76,14 @@ public class GameWindow {
 
         stage.setOnCloseRequest(e -> {
             e.consume();
-            if (ExitConfirmationAlert.confirmExit(stage)) {
+            // If unsafe close is true close without confirming with the player. Used when
+            // the game ends.
+            if (unsafeClose) {
                 mainMenuStage.show();
-            }
+                stage.close();
+            } else if (ExitConfirmationAlert.confirmExit(stage))
+                mainMenuStage.show();
+            unsafeClose = false;
         });
 
         HBox.setHgrow(settingsButton, Priority.ALWAYS);
@@ -111,6 +116,17 @@ public class GameWindow {
         stage.show();
     }
 
+    /**
+     * @param unsafeClose whether or not to close the game window without confirming
+     *                    with the player.
+     */
+    public static void setUnsafeClose(boolean unsafeClose) {
+        GameWindow.unsafeClose = unsafeClose;
+    }
+
+    /**
+     * @return The currently showing page.
+     */
     public Page getCurrentPage() {
         return currentPage;
     }

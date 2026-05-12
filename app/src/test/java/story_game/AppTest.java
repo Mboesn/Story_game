@@ -5,6 +5,7 @@ package story_game;
 
 import story_game.gui.window.MainMenuWindow;
 import story_game.save_mechanics.SaveHandler;
+import story_game.save_mechanics.achievements.AchievementsContainer;
 import story_game.save_mechanics.save_file.SaveFile;
 
 class AppTest {
@@ -13,6 +14,7 @@ class AppTest {
         SaveHandler.saveFile(save, "save2");
         SaveHandler.saveFile(save, "save3");
         System.out.println(SaveHandler.loadGame("save1"));
+        System.out.println(AchievementsContainer.getAchievements());
         MainMenuWindow.launch(MainMenuWindow.class, args);
     }
 }
