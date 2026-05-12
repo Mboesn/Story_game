@@ -3,11 +3,14 @@ package story_game.gui.window;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import story_game.gui.util.ButtonCustom;
@@ -19,17 +22,28 @@ public class AchievementsWindow {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
-        final double achievementWidth = 200;
-        final double achievementHeight = 200;
+        final double achievementWidth = 75;
+        final double achievementHeight = 75;
 
         Stage stage = new Stage();
         VBox root = new VBox();
-        Scene scene = new Scene(root, sceneWidth, sceneHeight);
+
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(root);
+        scrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+        scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+
+        Scene scene = new Scene(scrollPane, sceneWidth, sceneHeight);
 
         ObservableList<Node> rootList = root.getChildren();
 
         stage.setScene(scene);
         stage.setTitle("Achievements");
+        ButtonCustom back = ButtonCustom.createButtonCustom("Back",
+                e -> {
+                    stage.close();
+                });
+        rootList.add(back);
 
         VBox completedAchievementsBox = new VBox();
         VBox uncompletedAchievementsBox = new VBox();
@@ -37,10 +51,11 @@ public class AchievementsWindow {
         AchievementsFile achievements = SaveHandler.loadAchievements();
         achievements.getAchievements().forEach((key, value) -> {
             try {
+                boolean completed = !value.isBlank();
                 Image image = new Image(getClass().getResourceAsStream(key.getImagePath()));
                 ImageView imageView = new ImageView(image);
                 // if haven't completed achievement make it grayscale
-                if (!value) {
+                if (!completed) {
                     ColorAdjust grayscale = new ColorAdjust();
                     grayscale.setSaturation(-1.0); // -1.0 is fully desaturated (grayscale)
                     imageView.setEffect(grayscale);
@@ -48,17 +63,23 @@ public class AchievementsWindow {
                 // Set the desired dimensions
                 imageView.setFitWidth(achievementWidth);
                 imageView.setFitHeight(achievementHeight);
-                // Maintain the original aspect ratio (highly recommended)
-                imageView.setPreserveRatio(true);
+                imageView.setPreserveRatio(false);
                 // Smooth the scaling for better quality
                 imageView.setSmooth(true);
 
-                GridPane achievementsPane = new GridPane();
-                achievementsPane.add(imageView, 0, 0);
-                if (value) {
-                    completedAchievementsBox.getChildren().add(achievementsPane);
+                GridPane achievementPane = new GridPane();
+                achievementPane.add(imageView, 0, 0);
+                String achievementText = key.getName() + "\n";
+                if (completed) {
+                    achievementPane.add(new Text(achievementText + key.getDescription() + " Completed on: " + value), 1,
+                            0);
                 } else {
-                    uncompletedAchievementsBox.getChildren().add(achievementsPane);
+                    achievementPane.add(new Text(achievementText + "???"), 1, 0);
+                }
+                if (completed) {
+                    completedAchievementsBox.getChildren().add(achievementPane);
+                } else {
+                    uncompletedAchievementsBox.getChildren().add(achievementPane);
                 }
 
             } catch (Exception e) {
@@ -68,12 +89,6 @@ public class AchievementsWindow {
         });
         rootList.add(completedAchievementsBox);
         rootList.add(uncompletedAchievementsBox);
-
-        ButtonCustom back = ButtonCustom.createButtonCustom("Back",
-                e -> {
-                    stage.close();
-                });
-        rootList.add(back);
 
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.APPLICATION_MODAL);
