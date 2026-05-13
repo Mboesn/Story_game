@@ -13,8 +13,6 @@ public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Pag
     private transient Page targetPage;
     private transient ButtonCustom[] customButton;
 
-    // TODO: change save system to only save id so transient will not be required
-
     /**
      * This class displays to the player a given enum of choices and lets them
      * select one and then saves it in the save file

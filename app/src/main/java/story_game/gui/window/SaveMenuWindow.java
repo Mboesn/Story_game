@@ -31,8 +31,8 @@ public class SaveMenuWindow {
      *                      null
      */
     public void show(Stage mainMenuStage, SaveMenuType type, SaveFile saveFile) {
-        final double sceneWidth = 300;
-        final double sceneHeight = 500;
+        final double sceneWidth = 350;
+        final double sceneHeight = 550;
 
         final double buttonSpacing = 15;
         final double backButtonInset = 30;
@@ -42,8 +42,6 @@ public class SaveMenuWindow {
         Stage stage = new Stage();
         VBox root = new VBox();
         Scene scene = new Scene(root, sceneWidth, sceneHeight);
-
-        // TODO: add info to save
 
         SaveButton[] saveButtons = new SaveButton[maxSaveCount];
         ObservableList<Node> list = root.getChildren();
@@ -89,6 +87,7 @@ public class SaveMenuWindow {
     }
 
     private class SaveButton extends ButtonCustom {
+        private static final double minButtonLength = 300;
 
         /**
          * Creates a button that loads a save file when pressed
@@ -108,15 +107,34 @@ public class SaveMenuWindow {
         public SaveButton(String text, Stage loadSaveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
             super(text);
+            this.setMinWidth(minButtonLength);
             // removes whitespaces from the text
             String saveFileName = text.replaceAll("\\s+", "");
             SaveFile save = SaveHandler.loadGame(saveFileName);
+
+            String location = "";
+            if (save != null) {
+                location = save.getCurrentPage().getClass().toString().replace("class story_game.text.pages.", "");
+                location = location.split("\\.")[0].toLowerCase();
+                switch (location) {
+                    case "housescene":
+                        location = "House";
+                        break;
+                    case "outsidescene":
+                        location = "Outside";
+                        break;
+                    default:
+                        location = "unknown";
+                        break;
+                }
+            }
 
             // Loader logic
             if (saveFile == null) {
                 // If no save is found for a given slot disable the button
                 this.setDisable(save == null);
                 if (save != null) {
+                    this.setText(this.getText() + " - " + location + " - " + save.getSaveDate());
                     setOnMouseClicked(e -> {
                         loadSaveMenuStage.close();
                         mainMenuStage.close();
@@ -131,7 +149,7 @@ public class SaveMenuWindow {
                         saveGame(saveFileName, loadSaveMenuStage, saveFile, type, mainMenuStage);
                     });
                 } else {
-                    this.setText(this.getText() + " - override save");
+                    this.setText(this.getText() + " - " + location + " - " + save.getSaveDate());
                     // Throws an alert telling the user that save will be overridden
                     Alert saveConfirmationAlert = new Alert(AlertType.CONFIRMATION);
                     saveConfirmationAlert.setTitle("Are you sure?");
@@ -160,6 +178,7 @@ public class SaveMenuWindow {
          */
         private void saveGame(String saveFileName, Stage saveMenuStage, SaveFile saveFile,
                 SaveMenuType type, Stage mainMenuStage) {
+            saveFile.updateSaveDate();
             SaveHandler.saveFile(saveFile, saveFileName);
             if (type != SaveMenuType.SAVE_GAME) {
                 GameWindow gameWindow = new GameWindow();
