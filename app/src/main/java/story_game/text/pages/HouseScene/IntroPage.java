@@ -16,8 +16,9 @@ public class IntroPage extends ResponsePage {
     public CustomText[] getTexts(SaveFile saveFile) {
         CustomText[] texts = new CustomText[] {
                 new CustomText(
-                        "You're name is Gobby McGobface, you are a goblin from the " + Constants.KINGDOM_NAME
-                                + ". You stand at 3 and a half feet, have green skin, bald, pointy ears, With deep black eyes."),
+                        "Your name is ", Constants.MAIN_CHARACTER_NAME, ", you are a goblin from the ",
+                        Constants.KINGDOM_NAME,
+                        ". You stand at 3 and a half feet, have green skin, bald, pointy ears, With deep black eyes."),
                 new CustomText(
                         "You don't remember what happened the day before, but have some good guesses based on yourself, your headache, and extreme hunger. "
                                 + "Two of those things you can't quite do anything about, but your hunger can easily be changed. "

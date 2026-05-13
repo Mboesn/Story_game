@@ -3,8 +3,9 @@ package story_game.text.pages.HouseScene.LivingRoom;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
-import story_game.text.Page;
 import story_game.text.CustomText;
+import story_game.text.Page;
+import story_game.text.TextType;
 import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
 import story_game.text.pages.HouseScene.Kitchen.KitchenPage;
 import story_game.text.pages.OutsideScene.OutsidePage;
@@ -13,21 +14,29 @@ public class LivingRoomPage extends Page {
 
     @Override
     public CustomText[] getTexts(SaveFile saveFile) {
-        String text = "Your living room.";
-
+        CustomText bottles;
         if (!saveFile.getHouseSceneFlags().cleanedUpBottles)
-            text += " Sprawled across the floor are countless glass bottles.";
+            bottles = new CustomText("Sprawled across the floor are countless.",
+                    new CustomText("glass bottles", TextType.ITEM), ".");
+        else
+            bottles = new CustomText("");
 
-        text += " You find two doors, one leads to the kitchen and one to the very scary outside.";
-
+        CustomText checkedKitchen;
         if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
-            text += "\n\nYou should probably check out the kitchen to see what you have to eat before leaving.";
+            checkedKitchen = new CustomText("\n\nYou should probably check out the ",
+                    new CustomText("kitchen", TextType.LOCATION_OPTION),
+                    " to see what you have to eat before leaving.");
         } else {
-            text += "\n\nOnce you are all ready you should leave and go to town to find some food.";
+            checkedKitchen = new CustomText("\n\nOnce you are all ready you should leave and go to ",
+                    new CustomText("town", TextType.LOCATION_OPTION), " to find some food.");
         }
 
         CustomText[] texts = new CustomText[] {
-                new CustomText(text)
+                new CustomText("Your living room.", bottles,
+                        " You find two doors, one leads to the ",
+                        new CustomText("kitchen", TextType.LOCATION_OPTION), "and one to the very scary ",
+                        new CustomText("outside", TextType.LOCATION_OPTION), ".",
+                        checkedKitchen)
         };
         return texts;
     }

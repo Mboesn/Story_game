@@ -1,5 +1,6 @@
 package story_game.text.pages.HouseScene.Bedroom;
 
+import story_game.Constants;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.EndGameButton;
 import story_game.save_mechanics.achievements.Achievement;
@@ -12,7 +13,8 @@ public class RefuseToWakeUpPage extends Page {
     @Override
     public CustomText[] getTexts(SaveFile saveFile) {
         CustomText text[] = new CustomText[] { new CustomText(
-                "And so Gobby McGobface, went to sleep and died of starvation. \n \t \t \t \t \t \t \t \t \t FIN") };
+                "And so ", Constants.MAIN_CHARACTER_NAME,
+                " went to sleep and died of starvation. \n \t \t \t \t \t \t \t \t \t FIN") };
         return text;
     }
 

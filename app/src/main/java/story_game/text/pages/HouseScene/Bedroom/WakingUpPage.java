@@ -36,7 +36,6 @@ public class WakingUpPage extends Page {
                                                                         BioShock
                                                                         Prey
                                                                         Amnesia: The dark descent
-                                                                        Persona 5
                                                                         Outer Wilds
                                                                         """),
                                 new CustomText("You know, this bit has gotten pretty old fairly quickly. I think The Stanley Parable did it way better, just press the wake up button already....")

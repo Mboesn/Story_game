@@ -1,9 +1,11 @@
 package story_game.gui.window;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -32,9 +34,12 @@ public class GameWindow {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
-        final double choiceButtonSpacing = 15;
+        final int textAreaLineSpacing = 3;
+        final int textAreaPadding = 25;
+        final int textAreaHeight = 300;
 
-        final int textAreaSize = 10;
+        final double choiceButtonSpacing = 15;
+        final int choicesPadding = 3;
 
         Stage stage = new Stage();
         HBox topRow = new HBox();
@@ -93,15 +98,21 @@ public class GameWindow {
         rootList.add(topRow);
 
         TextFlow gameTextArea = new TextFlow();
-        // gameTextArea.setWrapText(true);
-        // gameTextArea.setEditable(false);
-        // gameTextArea.setPrefRowCount(textAreaSize);
-        rootList.add(gameTextArea);
+        gameTextArea.setLineSpacing(textAreaLineSpacing);
+        gameTextArea.setPadding(new Insets(0, textAreaPadding, 0, textAreaPadding));
+        gameTextArea.setPrefHeight(textAreaHeight);
+
+        ScrollPane textScroll = new ScrollPane(gameTextArea);
+        textScroll.setFitToWidth(true);
+        textScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        textScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        rootList.add(textScroll);
 
         GameWindow.gameTextArea = gameTextArea;
 
         rootList.add(choices);
         choices.setSpacing(choiceButtonSpacing);
+        choices.setPadding(new Insets(choicesPadding));
         choices.setAlignment(Pos.CENTER_LEFT);
         choices.setFillWidth(true);
         choices.autosize();

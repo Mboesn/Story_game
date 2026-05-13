@@ -11,10 +11,11 @@ public class KitchenPage extends Page {
 
     @Override
     public CustomText[] getTexts(SaveFile saveFile) {
+        //TODO: fix according to new code
         String text = "You enter your kitchen and find your pantry , fridge, and freezer. In the kitchen there are a bunch more "
                 + "open bottles from, what you can only assume, the night before.";
         if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
-            text += "\n\nyou should probably check for food.";
+            text += "\n\"You should probably check for food.";
         } else {
             text += "\n\nIt seems that you ate the place dry, you should probably go to town to find something to eat.";
         }

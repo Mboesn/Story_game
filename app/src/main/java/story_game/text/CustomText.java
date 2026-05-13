@@ -5,28 +5,38 @@ import javafx.scene.text.Text;
 public class CustomText {
     private String[] text;
     private TextType[] textType;
+    //TODO: switch to array and take all from custom texts not just first value
 
     /**
      * This class stores all info about a given text paragraph.
      * 
-     * @param text The text to display.
-     * @param font The font settings to apply to the text.
+     * @param customText All the paragraphs to merge together. Provide either
+     *                   CustomText objects or string which will be displayed using
+     *                   default font.
      */
-    public CustomText(CustomText... customTexts) {
-        int textCount = customTexts.length;
+    public CustomText(Object... paragraphs) {
+        int textCount = paragraphs.length;
         this.text = new String[textCount];
         this.textType = new TextType[textCount];
         for (int i = 0; i < textCount; i++) {
-            this.text[i] = customTexts[i].getFirstText();
-            this.textType[i] = customTexts[i].getFirstTextType();
+            if (paragraphs[i] instanceof String str) {
+                this.text[i] = str;
+                this.textType[i] = TextType.DEFAULT;
+            } else if (paragraphs[i] instanceof CustomText customText) {
+                this.text[i] = customText.getFirstText();
+                this.textType[i] = customText.getFirstTextType();
+            } else {
+                throw new IllegalArgumentException(
+                        "CustomText only accepts String or CustomText");
+            }
         }
     }
 
     /**
      * This class stores all info about a given text paragraph.
      * 
-     * @param text The text to display.
-     * @param font The font settings to apply to the text.
+     * @param text     The text to display.
+     * @param textType The font settings to apply to the text.
      */
     public CustomText(String text, TextType textType) {
         this.text = new String[] { text };
@@ -39,7 +49,7 @@ public class CustomText {
      * @param text The text to display.
      */
     public CustomText(String text) {
-        this(text, TextType.DEFAULT_FONT);
+        this(text, TextType.DEFAULT);
     }
 
     /**

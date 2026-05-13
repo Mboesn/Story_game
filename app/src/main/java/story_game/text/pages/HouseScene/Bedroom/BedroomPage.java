@@ -4,6 +4,7 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
+import story_game.text.TextType;
 import story_game.text.CustomText;
 import story_game.text.pages.HouseScene.Bathroom.BathroomPage;
 import story_game.text.pages.HouseScene.Closet.ClosetPage;
@@ -17,8 +18,13 @@ public class BedroomPage extends Page {
                 new CustomText(
                         "You're in your bedroom. The draw to catch a few more minutes of sleep is strong but you know you must resist the urge. "
                                 + "You don't keep much in your bedroom, you like your spaces free and clean. All you have is a twin sized bed which is quite big for you "
-                                + "and a night stand with a lantern, book and empty glass bottle on top. From this room you have three doors, "
-                                + "the closet, bathroom and living room.")
+                                + "and a night stand with a lantern, ",
+                        new CustomText("book", TextType.ITEM),
+                        " and empty glass bottle on top. From this room you have three doors, "
+                                + "the ",
+                        new CustomText("closet", TextType.LOCATION_OPTION), ", ",
+                        new CustomText("bathroom", TextType.LOCATION_OPTION), " and ",
+                        new CustomText("living room", TextType.LOCATION_OPTION), ".")
         };
         return texts;
     }
