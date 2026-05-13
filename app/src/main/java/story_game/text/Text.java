@@ -1,5 +1,8 @@
 package story_game.text;
 
+import javafx.scene.text.Font;
+import story_game.Constants;
+
 public class Text {
     private String text;
     private Font font;
@@ -21,7 +24,7 @@ public class Text {
      * @param text The text to display.
      */
     public Text(String text) {
-        this(text, new Font());
+        this(text, Constants.DEFAULT_FONT);
     }
 
     /**
@@ -32,7 +35,7 @@ public class Text {
      */
     @Deprecated
     public Text() {
-        this("Missing text", new Font());
+        this("Missing text", Constants.DEFAULT_FONT);
     }
 
     /**

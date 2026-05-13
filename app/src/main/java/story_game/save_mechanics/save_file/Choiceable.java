@@ -1,6 +1,6 @@
 package story_game.save_mechanics.save_file;
 
-import story_game.text.Font;
+import javafx.scene.text.Font;
 
 /**
  * This interface defines an enum that will be displayed by the game as a list

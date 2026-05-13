@@ -8,7 +8,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -97,8 +96,6 @@ public class GameWindow {
         gameTextArea.setWrapText(true);
         gameTextArea.setEditable(false);
         gameTextArea.setPrefRowCount(textAreaSize);
-        // TODO: make font code separate
-        gameTextArea.setFont(Font.font("System", 25));
         rootList.add(gameTextArea);
 
         GameWindow.gameTextArea = gameTextArea;
@@ -160,6 +157,7 @@ public class GameWindow {
     public static void updateText(Text text) {
         try {
             GameWindow.gameTextArea.setText(text.getText());
+            GameWindow.gameTextArea.setFont(text.getFont());
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }
