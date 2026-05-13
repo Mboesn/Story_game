@@ -3,7 +3,7 @@ package story_game.text.pages.HouseScene.Bedroom;
 import story_game.Constants;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.ResponsePage;
-import story_game.text.Text;
+import story_game.text.CustomText;
 
 public class WakeUpPage extends ResponsePage {
 
@@ -12,9 +12,9 @@ public class WakeUpPage extends ResponsePage {
     }
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
-        Text[] texts = new Text[] {
-                new Text(
+    public CustomText[] getTexts(SaveFile saveFile) {
+        CustomText[] texts = new CustomText[] {
+                new CustomText(
                         "You open your eyes on a new day in the comfort of your bedroom. The fresh summer sun baths your skin from the big round window beside your bed. "
                                 + "You live in a quaint modest cottage on the outskirts of " + Constants.TOWN_NAME
                                 + ". You enjoy the privacy and quietness that this location provides. Your cabin has all the basic necessities needed for a living quarters: a bedroom, "

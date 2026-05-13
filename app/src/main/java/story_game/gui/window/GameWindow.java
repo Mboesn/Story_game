@@ -4,10 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -16,13 +16,13 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 
 public class GameWindow {
     private static boolean unsafeClose = false;
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
-    private static TextArea gameTextArea;
+    private static TextFlow gameTextArea;
     private static SaveFile saveFile;
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
@@ -92,10 +92,10 @@ public class GameWindow {
 
         rootList.add(topRow);
 
-        TextArea gameTextArea = new TextArea();
-        gameTextArea.setWrapText(true);
-        gameTextArea.setEditable(false);
-        gameTextArea.setPrefRowCount(textAreaSize);
+        TextFlow gameTextArea = new TextFlow();
+        // gameTextArea.setWrapText(true);
+        // gameTextArea.setEditable(false);
+        // gameTextArea.setPrefRowCount(textAreaSize);
         rootList.add(gameTextArea);
 
         GameWindow.gameTextArea = gameTextArea;
@@ -154,10 +154,10 @@ public class GameWindow {
      * 
      * @param text text to update to.
      */
-    public static void updateText(Text text) {
+    public static void updateText(CustomText text) {
         try {
-            GameWindow.gameTextArea.setText(text.getText());
-            GameWindow.gameTextArea.setFont(text.getFont());
+            GameWindow.gameTextArea.getChildren().clear();
+            GameWindow.gameTextArea.getChildren().addAll(text.getTextNodes());
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }

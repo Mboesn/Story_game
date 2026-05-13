@@ -18,7 +18,7 @@ public abstract class Page {
      * 
      * @return Array of texts to display.
      */
-    public abstract Text[] getTexts(SaveFile saveFile);
+    public abstract CustomText[] getTexts(SaveFile saveFile);
 
     /**
      * Array of all the buttons to display when loading the page.

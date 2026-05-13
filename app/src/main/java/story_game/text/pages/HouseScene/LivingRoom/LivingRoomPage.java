@@ -4,7 +4,7 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
 import story_game.text.pages.HouseScene.Kitchen.KitchenPage;
 import story_game.text.pages.OutsideScene.OutsidePage;
@@ -12,7 +12,7 @@ import story_game.text.pages.OutsideScene.OutsidePage;
 public class LivingRoomPage extends Page {
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
+    public CustomText[] getTexts(SaveFile saveFile) {
         String text = "Your living room.";
 
         if (!saveFile.getHouseSceneFlags().cleanedUpBottles)
@@ -26,8 +26,8 @@ public class LivingRoomPage extends Page {
             text += "\n\nOnce you are all ready you should leave and go to town to find some food.";
         }
 
-        Text[] texts = new Text[] {
-                new Text(text)
+        CustomText[] texts = new CustomText[] {
+                new CustomText(text)
         };
         return texts;
     }

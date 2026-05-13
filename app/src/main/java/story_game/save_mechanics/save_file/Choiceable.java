@@ -1,7 +1,5 @@
 package story_game.save_mechanics.save_file;
 
-import javafx.scene.text.Font;
-
 /**
  * This interface defines an enum that will be displayed by the game as a list
  * allowing the player to choice which value they want from the automatically
@@ -18,11 +16,6 @@ public interface Choiceable {
      * @return The text used to describe the given choice to the player
      */
     public String getText();
-
-    /**
-     * @return The font to display the page in
-     */
-    public Font getFont();
 
     /**
      * @param saveFile current temporary save file used by the GameWindow class.

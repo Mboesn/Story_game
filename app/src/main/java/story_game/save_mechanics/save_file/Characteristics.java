@@ -1,8 +1,5 @@
 package story_game.save_mechanics.save_file;
 
-import javafx.scene.text.Font;
-import story_game.Constants;
-
 /** List of data that can define the players character */
 public class Characteristics {
 
@@ -31,11 +28,6 @@ public class Characteristics {
         @Override
         public String getText() {
             return text;
-        }
-
-        @Override
-        public Font getFont() {
-            return Constants.DEFAULT_FONT;
         }
 
         @Override
@@ -75,11 +67,6 @@ public class Characteristics {
         @Override
         public String getText() {
             return text;
-        }
-
-        @Override
-        public Font getFont() {
-            return Constants.DEFAULT_FONT;
         }
 
         @Override

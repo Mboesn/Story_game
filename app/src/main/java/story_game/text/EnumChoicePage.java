@@ -82,7 +82,7 @@ public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Pag
     }
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
+    public CustomText[] getTexts(SaveFile saveFile) {
         String textString = "";
         // If there is text to display before the choices add it on top.
         if (!chooseText.equals(""))
@@ -94,8 +94,8 @@ public abstract class EnumChoicePage<T extends Enum<T> & Choiceable> extends Pag
                 textString += currentChoiceText + "     ";
             textString += choices[i].getName() + ": " + choices[i].getText() + "\n\n";
         }
-        Text[] texts = new Text[] {
-                new Text(textString, choices[0].getFont())
+        CustomText[] texts = new CustomText[] {
+                new CustomText(textString)
         };
         return texts;
     }

@@ -4,13 +4,13 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 import story_game.text.pages.HouseScene.LivingRoom.LivingRoomPage;
 
 public class KitchenPage extends Page {
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
+    public CustomText[] getTexts(SaveFile saveFile) {
         String text = "You enter your kitchen and find your pantry , fridge, and freezer. In the kitchen there are a bunch more "
                 + "open bottles from, what you can only assume, the night before.";
         if (!saveFile.getHouseSceneFlags().checkedKitchenForFood) {
@@ -18,8 +18,8 @@ public class KitchenPage extends Page {
         } else {
             text += "\n\nIt seems that you ate the place dry, you should probably go to town to find something to eat.";
         }
-        Text[] texts = new Text[] {
-                new Text(text)
+        CustomText[] texts = new CustomText[] {
+                new CustomText(text)
         };
         return texts;
     }

@@ -7,14 +7,14 @@ import story_game.save_mechanics.achievements.Achievement;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.save_mechanics.save_file.Characteristics.Clothes;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 
 public class BottlesPage extends Page {
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
-        Text[] texts = new Text[] {
-                new Text("You look closer and they are all empty. You should probably clean this up.")
+    public CustomText[] getTexts(SaveFile saveFile) {
+        CustomText[] texts = new CustomText[] {
+                new CustomText("You look closer and they are all empty. You should probably clean this up.")
         };
         return texts;
     }

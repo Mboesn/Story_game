@@ -4,7 +4,7 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 import story_game.text.pages.HouseScene.Bathroom.BathroomPage;
 import story_game.text.pages.HouseScene.Closet.ClosetPage;
 import story_game.text.pages.HouseScene.LivingRoom.LivingRoomPage;
@@ -12,9 +12,9 @@ import story_game.text.pages.HouseScene.LivingRoom.LivingRoomPage;
 public class BedroomPage extends Page {
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
-        Text[] texts = new Text[] {
-                new Text(
+    public CustomText[] getTexts(SaveFile saveFile) {
+        CustomText[] texts = new CustomText[] {
+                new CustomText(
                         "You're in your bedroom. The draw to catch a few more minutes of sleep is strong but you know you must resist the urge. "
                                 + "You don't keep much in your bedroom, you like your spaces free and clean. All you have is a twin sized bed which is quite big for you "
                                 + "and a night stand with a lantern, book and empty glass bottle on top. From this room you have three doors, "
