@@ -21,7 +21,7 @@ public class ClosetPage extends Page {
                                                 ? Achievement.GET_YOURSELF_TOGETHER
                                                 : null);
                 CustomText[] texts = new CustomText[] {
-                                new CustomText("You enter your closet, it isn't very big to an average human but as you aren't an average human, but rather a small goblin that finds it quite spacious for your needs."
+                                new CustomText("You enter your closet, it isn't very big to an average human but as you aren't an average human, but rather a small goblin that finds it quite spacious for your needs. "
                                                 + "You look about you and find most of your belongings: ",
                                                 new CustomText("clothes", TextType.ITEM), " and ",
                                                 new CustomText("weapons", TextType.ITEM), ".")

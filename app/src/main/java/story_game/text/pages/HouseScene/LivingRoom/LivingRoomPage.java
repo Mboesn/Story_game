@@ -16,7 +16,7 @@ public class LivingRoomPage extends Page {
     public CustomText[] getTexts(SaveFile saveFile) {
         CustomText bottles;
         if (!saveFile.getHouseSceneFlags().cleanedUpBottles)
-            bottles = new CustomText("Sprawled across the floor are countless.",
+            bottles = new CustomText(" Sprawled across the floor are countless ",
                     new CustomText("glass bottles", TextType.ITEM), ".");
         else
             bottles = new CustomText("");
@@ -34,7 +34,7 @@ public class LivingRoomPage extends Page {
         CustomText[] texts = new CustomText[] {
                 new CustomText("Your living room.", bottles,
                         " You find two doors, one leads to the ",
-                        new CustomText("kitchen", TextType.LOCATION_OPTION), "and one to the very scary ",
+                        new CustomText("kitchen", TextType.LOCATION_OPTION), " and one to the very scary ",
                         new CustomText("outside", TextType.LOCATION_OPTION), ".",
                         checkedKitchen)
         };

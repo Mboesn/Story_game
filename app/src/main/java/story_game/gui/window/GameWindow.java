@@ -25,6 +25,7 @@ public class GameWindow {
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
     private static TextFlow gameTextArea;
+    private static ScrollPane gameTextScroll;
     private static SaveFile saveFile;
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
@@ -106,9 +107,13 @@ public class GameWindow {
         textScroll.setFitToWidth(true);
         textScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         textScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        // Make sure text doesn't clip
+        textScroll.setPadding(Insets.EMPTY);
+
         rootList.add(textScroll);
 
         GameWindow.gameTextArea = gameTextArea;
+        GameWindow.gameTextScroll = textScroll;
 
         rootList.add(choices);
         choices.setSpacing(choiceButtonSpacing);
@@ -169,6 +174,8 @@ public class GameWindow {
         try {
             GameWindow.gameTextArea.getChildren().clear();
             GameWindow.gameTextArea.getChildren().addAll(text.getTextNodes());
+            GameWindow.gameTextArea.layout();
+            GameWindow.gameTextScroll.layout();
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }
