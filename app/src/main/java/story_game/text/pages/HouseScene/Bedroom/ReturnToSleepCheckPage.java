@@ -1,4 +1,4 @@
-package story_game.text.pages.
+package story_game.text.pages.HouseScene.Bedroom;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.ContinueButton;
@@ -6,14 +6,12 @@ import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.CustomText;
 import story_game.text.Page;
 
-public class  extends Page {
+public class ReturnToSleepCheckPage extends Page {
 
     @Override
     public CustomText[] getTexts(SaveFile saveFile) {
         CustomText[] texts = new CustomText[] {
-                new CustomText(""),
-                new CustomText(""),
-                new CustomText("")
+                new CustomText("Are you sure you want to go back to sleep?")
         };
         return texts;
     }
@@ -21,10 +19,8 @@ public class  extends Page {
     @Override
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom[] buttons = new ButtonCustom[] {
-                new ContinueButton(getTexts(saveFile)).setOnClickFunction(() -> {
-
-                }),
-                new ContinueButton(getTexts(saveFile))
+                new ContinueButton(new BedroomPage(), "Stay awake"),
+                new ContinueButton(new RefuseToWakeUpPage(), "Go back to sleep")
         };
         return buttons;
     }

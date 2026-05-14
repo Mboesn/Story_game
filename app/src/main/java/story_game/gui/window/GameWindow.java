@@ -115,12 +115,20 @@ public class GameWindow {
         GameWindow.gameTextArea = gameTextArea;
         GameWindow.gameTextScroll = textScroll;
 
-        rootList.add(choices);
         choices.setSpacing(choiceButtonSpacing);
         choices.setPadding(new Insets(choicesPadding));
         choices.setAlignment(Pos.CENTER_LEFT);
         choices.setFillWidth(true);
         choices.autosize();
+
+        ScrollPane choicesScroll = new ScrollPane(choices);
+        choicesScroll.setFitToWidth(true);
+        choicesScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        choicesScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        // Make sure text doesn't clip
+        choicesScroll.setPadding(Insets.EMPTY);
+
+        rootList.add(choicesScroll);
 
         setCurrentPage(saveFile.getCurrentPage());
 
