@@ -63,8 +63,6 @@ public class GameWindow {
 
         ButtonCustom settingsButton = ButtonCustom.createButtonCustom("Settings",
                 e -> {
-                    SettingsWindow settingsWindow = new SettingsWindow();
-                    settingsWindow.show();
                 });
         topRowList.add(settingsButton);
 

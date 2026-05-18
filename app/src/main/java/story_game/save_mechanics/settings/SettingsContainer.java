@@ -24,7 +24,7 @@ public class SettingsContainer {
      */
     public static void updateSettings(SettingsFile newSettings) {
         settings = new SettingsFile(newSettings);
-        AudioHandler.setMusicVolume(settings.getAudioSettings().musicVolume);
+        AudioHandler.setMusicVolume(settings.getAudioSettings().getMusicVolume());
         SaveHandler.saveSettings(newSettings);
     }
 

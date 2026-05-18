@@ -1,26 +1,22 @@
 package story_game.gui.window;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import story_game.Constants;
-import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.settings.SettingsContainer;
-import story_game.sound_system.Music;
 import story_game.sound_system.AudioHandler;
+import story_game.sound_system.Music;
 
-/**
- * The scene for the main menu of the game.
- * this should be launched when the game is started.
- */
 public class MainMenuWindow extends Application {
+    private Stage mainMenuStage;
+
     @Override
     public void start(Stage mainMenuStage) throws Exception {
         // Updates all the game settings based on loaded settings
@@ -28,66 +24,75 @@ public class MainMenuWindow extends Application {
 
         AudioHandler.playMusic(Music.DEFAULT);
 
-        final double sceneWidth = 1000;
-        final double sceneHeight = 600;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(FXMLPaths.MAIN_MENU.getPath()));
+            AnchorPane anchorPane = loader.<AnchorPane>load();
+            Scene scene = new Scene(anchorPane);
 
-        final double buttonSpacing = 15;
+            mainMenuStage.setOnCloseRequest(e -> {
+                e.consume();
+                ExitConfirmationAlert.confirmExit(mainMenuStage);
+            });
 
-        VBox root = new VBox();
-        Scene mainMenuScene = new Scene(root, sceneWidth, sceneHeight);
-        mainMenuStage.setTitle(Constants.GAME_NAME);
-        mainMenuStage.setOnCloseRequest(e -> {
-            e.consume();
-            ExitConfirmationAlert.confirmExit(mainMenuStage);
-        });
+            mainMenuStage.setScene(scene);
+            this.mainMenuStage = mainMenuStage;
+            mainMenuStage.show();
 
-        // Game's title card
-        Text titleText = new Text();
-        titleText.setFont(new Font(45));
-        titleText.setText(Constants.GAME_NAME);
+        } catch (Exception e) {
+            System.out.println("Unable to load main menu \nError: " + e);
+        }
+    }
 
-        // Sends to game window using a fresh save file
-        ButtonCustom newGame = ButtonCustom.createButtonCustom("New game",
-                e -> {
-                    SaveMenuWindow save = new SaveMenuWindow();
-                    save.show(mainMenuStage, SaveMenuType.NEW_GAME);
-                    mainMenuStage.close();
-                });
+    /** Sends to game window using a fresh save file */
+    @FXML
+    public void newGame(ActionEvent event) {
+        // SaveMenuWindow save = new SaveMenuWindow();
+        // Node source = (Node) event.getSource();
+        // Scene scene = source.getScene();
+        // save.show((Stage) scene.getWindow(), SaveMenuType.NEW_GAME);
+        // mainMenuStage.close();
+    }
 
-        // Opens the save file window allowing you to choose what save file to load
-        ButtonCustom loadGame = ButtonCustom.createButtonCustom("Load game",
-                e -> {
-                    SaveMenuWindow save = new SaveMenuWindow();
-                    save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
-                    mainMenuStage.close();
-                });
-        // Opens the achievements window which lists all completed and uncompleted
-        // achievements.
-        ButtonCustom achievements = ButtonCustom.createButtonCustom("Achievements",
-                e -> {
-                    AchievementsWindow achievementsWindow = new AchievementsWindow();
-                    achievementsWindow.show();
-                });
+    /** Opens the save file window allowing you to choose what save file to load */
+    @FXML
+    public void loadGame() {
+        if (mainMenuStage != null) {
+            SaveMenuWindow save = new SaveMenuWindow();
+            save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
+            mainMenuStage.close();
+        }
+    }
 
-        // Opens the settings window.
-        ButtonCustom settings = ButtonCustom.createButtonCustom("Settings",
-                e -> {
-                    SettingsWindow settingsWin = new SettingsWindow();
-                    settingsWin.show();
-                });
+    /**
+     * Opens the achievements window which lists all completed and uncompleted
+     * achievements.
+     */
+    @FXML
+    public void achievements() {
+        AchievementsWindow achievementsWindow = new AchievementsWindow();
+        achievementsWindow.show();
+    }
 
-        // Closes the game
-        ButtonCustom exit = ButtonCustom.createButtonCustom("Exit",
-                e -> ExitConfirmationAlert.confirmExit(mainMenuStage));
+    /** Opens the settings window. */
+    @FXML
+    public void options(ActionEvent event) {
+        try {
+            Node source = (Node) event.getSource();
+            AnchorPane mainMenuPane = (AnchorPane) source.getScene().getRoot();
+            Pane settingsPane = SettingsWindow.getSettingsPane(source.getScene());
+            if (settingsPane != null)
+                mainMenuPane.getChildren().add(settingsPane);
+        } catch (Exception e) {
+            System.out.println("Failed to open settings\nError: " + e);
+        }
+    }
 
-        ObservableList<Node> list = root.getChildren();
-
-        list.addAll(titleText, newGame, loadGame, achievements, settings, exit);
-        root.setSpacing(buttonSpacing);
-        root.setAlignment(Pos.CENTER);
-        root.setFillWidth(true);
-
-        mainMenuStage.setScene(mainMenuScene);
-        mainMenuStage.show();
+    /** Closes the game */
+    @FXML
+    public void exit(ActionEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        ExitConfirmationAlert.confirmExit(stage);
     }
 }

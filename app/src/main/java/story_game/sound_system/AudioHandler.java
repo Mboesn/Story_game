@@ -23,7 +23,7 @@ public class AudioHandler {
         try {
             Media media = new Media(new File(music.getPath()).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setVolume(SettingsContainer.getSettings().getAudioSettings().musicVolume);
+            mediaPlayer.setVolume(SettingsContainer.getSettings().getAudioSettings().getMusicVolume());
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             mediaPlayer.play();
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class AudioHandler {
     public static void playSFX(SFX sfx) {
         try {
             AudioClip clip = new AudioClip(new File(sfx.getPath()).toURI().toString());
-            clip.setVolume(SettingsContainer.getSettings().getAudioSettings().sfxVolume);
+            clip.setVolume(SettingsContainer.getSettings().getAudioSettings().getSFXVolume());
             clip.play();
         } catch (Exception e) {
             System.out.println("Failed to play music: " + sfx.getPath() + "\nerror: " + e);
