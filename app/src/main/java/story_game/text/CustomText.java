@@ -52,6 +52,9 @@ public class CustomText {
         this("Missing text");
     }
 
+    /**
+     * @return All the text nodes to display in this paragraph.
+     */
     public ArrayList<Text> getTextNodes() {
         return texts;
     }

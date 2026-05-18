@@ -182,6 +182,7 @@ public class GameWindow {
         try {
             GameWindow.gameTextArea.getChildren().clear();
             GameWindow.gameTextArea.getChildren().addAll(text.getTextNodes());
+            // Makes sure text doesn't clip into scrollwheel
             GameWindow.gameTextArea.layout();
             GameWindow.gameTextScroll.layout();
         } catch (Exception e) {

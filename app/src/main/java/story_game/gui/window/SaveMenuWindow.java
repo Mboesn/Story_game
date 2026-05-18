@@ -112,6 +112,7 @@ public class SaveMenuWindow {
             String saveFileName = text.replaceAll("\\s+", "");
             SaveFile save = SaveHandler.loadGame(saveFileName);
 
+            // Add current game location to the save file
             String location = "";
             if (save != null) {
                 location = save.getCurrentPage().getClass().toString().replace("class story_game.text.pages.", "");
