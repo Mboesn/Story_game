@@ -48,7 +48,7 @@ public class AchievementsFile implements Saveable {
                 return;
         }
         LocalDateTime rawTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
         String time = rawTime.format(formatter);
         achievements.replace(achievement, time);
     }

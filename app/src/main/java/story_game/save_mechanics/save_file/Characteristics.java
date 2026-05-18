@@ -1,7 +1,5 @@
 package story_game.save_mechanics.save_file;
 
-import story_game.text.Font;
-
 /** List of data that can define the players character */
 public class Characteristics {
 
@@ -16,7 +14,6 @@ public class Characteristics {
 
         private String name;
         private String text;
-        private static final Font FONT = new Font();
 
         Clothes(String name, String text) {
             this.name = name;
@@ -31,11 +28,6 @@ public class Characteristics {
         @Override
         public String getText() {
             return text;
-        }
-
-        @Override
-        public Font getFont() {
-            return FONT;
         }
 
         @Override
@@ -61,7 +53,6 @@ public class Characteristics {
 
         private String name;
         private String text;
-        private static final Font FONT = new Font();
 
         Weapons(String name, String text) {
             this.name = name;
@@ -76,11 +67,6 @@ public class Characteristics {
         @Override
         public String getText() {
             return text;
-        }
-
-        @Override
-        public Font getFont() {
-            return FONT;
         }
 
         @Override

@@ -1,8 +1,8 @@
 package story_game.text.pages.
 
-import story_game.save_mechanics.SaveFile;
+import story_game.save_mechanics.save_file.SaveFile;
+import story_game.text.CustomText;
 import story_game.text.ResponsePage;
-import story_game.text.Text;
 
 public class  extends ResponsePage {
 
@@ -11,10 +11,10 @@ public class  extends ResponsePage {
     }
 
     @Override
-    public Text[] getTexts(SaveFile saveFile) {
-        Text[] texts = new Text[] {
-                new Text(""),
-                new Text("")
+    public CustomText[] getTexts(SaveFile saveFile) {
+        CustomText[] texts = new CustomText[] {
+                new CustomText(""),
+                new CustomText("")
         };
         return texts;
     }

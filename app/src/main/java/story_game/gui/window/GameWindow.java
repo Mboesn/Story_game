@@ -1,14 +1,15 @@
 package story_game.gui.window;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -17,13 +18,14 @@ import story_game.gui.util.ButtonCustom;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 
 public class GameWindow {
     private static boolean unsafeClose = false;
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
-    private static TextArea gameTextArea;
+    private static TextFlow gameTextArea;
+    private static ScrollPane gameTextScroll;
     private static SaveFile saveFile;
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
@@ -33,9 +35,12 @@ public class GameWindow {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
 
-        final double choiceButtonSpacing = 15;
+        final int textAreaLineSpacing = 3;
+        final int textAreaPadding = 25;
+        final int textAreaHeight = 300;
 
-        final int textAreaSize = 10;
+        final double choiceButtonSpacing = 15;
+        final int choicesPadding = 3;
 
         Stage stage = new Stage();
         HBox topRow = new HBox();
@@ -93,21 +98,37 @@ public class GameWindow {
 
         rootList.add(topRow);
 
-        TextArea gameTextArea = new TextArea();
-        gameTextArea.setWrapText(true);
-        gameTextArea.setEditable(false);
-        gameTextArea.setPrefRowCount(textAreaSize);
-        // TODO: make font code separate
-        gameTextArea.setFont(Font.font("System", 25));
-        rootList.add(gameTextArea);
+        TextFlow gameTextArea = new TextFlow();
+        gameTextArea.setLineSpacing(textAreaLineSpacing);
+        gameTextArea.setPadding(new Insets(0, textAreaPadding, 0, textAreaPadding));
+        gameTextArea.setPrefHeight(textAreaHeight);
+
+        ScrollPane textScroll = new ScrollPane(gameTextArea);
+        textScroll.setFitToWidth(true);
+        textScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        textScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        // Make sure text doesn't clip
+        textScroll.setPadding(Insets.EMPTY);
+
+        rootList.add(textScroll);
 
         GameWindow.gameTextArea = gameTextArea;
+        GameWindow.gameTextScroll = textScroll;
 
-        rootList.add(choices);
         choices.setSpacing(choiceButtonSpacing);
+        choices.setPadding(new Insets(choicesPadding));
         choices.setAlignment(Pos.CENTER_LEFT);
         choices.setFillWidth(true);
         choices.autosize();
+
+        ScrollPane choicesScroll = new ScrollPane(choices);
+        choicesScroll.setFitToWidth(true);
+        choicesScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        choicesScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        // Make sure text doesn't clip
+        choicesScroll.setPadding(Insets.EMPTY);
+
+        rootList.add(choicesScroll);
 
         setCurrentPage(saveFile.getCurrentPage());
 
@@ -157,9 +178,13 @@ public class GameWindow {
      * 
      * @param text text to update to.
      */
-    public static void updateText(Text text) {
+    public static void updateText(CustomText text) {
         try {
-            GameWindow.gameTextArea.setText(text.getText());
+            GameWindow.gameTextArea.getChildren().clear();
+            GameWindow.gameTextArea.getChildren().addAll(text.getTextNodes());
+            // Makes sure text doesn't clip into scrollwheel
+            GameWindow.gameTextArea.layout();
+            GameWindow.gameTextScroll.layout();
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }

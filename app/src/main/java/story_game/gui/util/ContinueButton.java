@@ -2,7 +2,7 @@ package story_game.gui.util;
 
 import story_game.gui.window.GameWindow;
 import story_game.text.Page;
-import story_game.text.Text;
+import story_game.text.CustomText;
 
 public class ContinueButton extends ButtonCustom {
     private int nextText = 1;
@@ -19,7 +19,7 @@ public class ContinueButton extends ButtonCustom {
      * @param buttonText A text string for its label.
      */
     @SuppressWarnings("deprecation")
-    public ContinueButton(Text[] text, Page targetPage, String buttonText) {
+    public ContinueButton(CustomText[] text, Page targetPage, String buttonText) {
         super(buttonText);
         setOnMouseClicked(e -> {
             if (text == null || nextText == text.length) {
@@ -50,7 +50,7 @@ public class ContinueButton extends ButtonCustom {
      *             insure the button will do something when finished.
      */
     @Deprecated
-    public ContinueButton(Text[] text, String buttonText) {
+    public ContinueButton(CustomText[] text, String buttonText) {
         this(text, null, buttonText);
     }
 
@@ -66,7 +66,7 @@ public class ContinueButton extends ButtonCustom {
      *                   immediately switch pages.
      * @param targetPage Page to switch to after completing all text elements.
      */
-    public ContinueButton(Text[] text, Page targetPage) {
+    public ContinueButton(CustomText[] text, Page targetPage) {
         this(text, targetPage, "Continue");
     }
 
@@ -84,7 +84,7 @@ public class ContinueButton extends ButtonCustom {
      *             insure the button will do something when finished.
      */
     @Deprecated
-    public ContinueButton(Text[] text) {
+    public ContinueButton(CustomText[] text) {
         this(text, null, "Continue");
     }
 
