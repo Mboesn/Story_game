@@ -52,7 +52,7 @@ public class GameWindow {
         stage.setTitle(Constants.GAME_NAME);
         stage.setOnCloseRequest(e -> {
             e.consume();
-            ExitConfirmationAlert.confirmExit(stage);
+            // ExitConfirmationAlert.confirmExit(stage);
         });
 
         ObservableList<Node> rootList = root.getChildren();
@@ -84,8 +84,9 @@ public class GameWindow {
             if (unsafeClose) {
                 mainMenuStage.show();
                 stage.close();
-            } else if (ExitConfirmationAlert.confirmExit(stage))
-                mainMenuStage.show();
+            } 
+            // else if (ExitConfirmationAlert.confirmExit(stage))
+                // mainMenuStage.show();
             unsafeClose = false;
         });
 

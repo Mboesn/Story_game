@@ -2,7 +2,7 @@ package story_game.gui.window;
 
 public enum FXMLPaths {
     MAIN_MENU("MainMenu"),
-    EXIT("Exit"),
+    EXIT("ExitConfirmAlert"),
     SETTINGS("Settings");
 
     private String path;

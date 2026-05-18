@@ -1,11 +1,9 @@
 package story_game.gui.window;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.save_mechanics.settings.SettingsFile;
@@ -23,22 +21,6 @@ public class SettingsWindow {
     private Slider sfxSlider;
     @FXML
     private Pane settingsPane;
-
-    public static Pane getSettingsPane(Scene scene) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SettingsWindow.class.getResource(FXMLPaths.SETTINGS.getPath()));
-            Pane anchorPane = loader.<Pane>load();
-            AnchorPane.setTopAnchor(anchorPane, 0.0);
-            AnchorPane.setBottomAnchor(anchorPane, 0.0);
-            AnchorPane.setLeftAnchor(anchorPane, 0.0);
-            AnchorPane.setRightAnchor(anchorPane, 0.0);
-            return anchorPane;
-        } catch (Exception e) {
-            System.out.println("Failed to open settings\nError: " + e);
-            return null;
-        }
-    }
 
     @FXML
     public void initialize() {
@@ -64,7 +46,7 @@ public class SettingsWindow {
     public void save() {
         try {
             SettingsContainer.updateSettings(tempSettingsFile);
-            ((Pane) settingsPane.getParent()).getChildren().remove(settingsPane);
+            guiUtil.closePopup(settingsPane);
         } catch (Exception e) {
             System.out.println("Couldn't save settings.\nError: " + e);
         }
@@ -72,20 +54,17 @@ public class SettingsWindow {
 
     /** Sets settings to default. */
     @FXML
-    public void reset() {
+    public void reset(ActionEvent event) {
         try {
-            if (ExitConfirmationAlert.confirmExit()) {
-                SettingsContainer.updateSettings(new SettingsFile());
-                ((Pane) settingsPane.getParent()).getChildren().remove(settingsPane);
-            }
+            new ExitConfirmationAlert(event, settingsPane, () -> SettingsContainer.updateSettings(new SettingsFile()));
         } catch (Exception e) {
             System.out.println("Couldn't save settings.\nError: " + e);
         }
     }
 
-    /** Closes the game */
+    /** Closes settings menu without saving */
     @FXML
-    public void exit() {
-        ExitConfirmationAlert.confirmExit(settingsPane);
+    public void exit(ActionEvent event) {
+        new ExitConfirmationAlert(event, settingsPane);
     }
 }

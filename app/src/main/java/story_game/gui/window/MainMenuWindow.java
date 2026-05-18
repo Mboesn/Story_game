@@ -4,10 +4,9 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.settings.SettingsContainer;
@@ -15,7 +14,6 @@ import story_game.sound_system.AudioHandler;
 import story_game.sound_system.Music;
 
 public class MainMenuWindow extends Application {
-    private Stage mainMenuStage;
 
     @Override
     public void start(Stage mainMenuStage) throws Exception {
@@ -32,11 +30,10 @@ public class MainMenuWindow extends Application {
 
             mainMenuStage.setOnCloseRequest(e -> {
                 e.consume();
-                ExitConfirmationAlert.confirmExit(mainMenuStage);
+                new ExitConfirmationAlert(e, mainMenuStage);
             });
 
             mainMenuStage.setScene(scene);
-            this.mainMenuStage = mainMenuStage;
             mainMenuStage.show();
 
         } catch (Exception e) {
@@ -57,11 +54,11 @@ public class MainMenuWindow extends Application {
     /** Opens the save file window allowing you to choose what save file to load */
     @FXML
     public void loadGame() {
-        if (mainMenuStage != null) {
-            SaveMenuWindow save = new SaveMenuWindow();
-            save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
-            mainMenuStage.close();
-        }
+        // if (mainMenuStage != null) {
+        // SaveMenuWindow save = new SaveMenuWindow();
+        // save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
+        // mainMenuStage.close();
+        // }
     }
 
     /**
@@ -77,22 +74,13 @@ public class MainMenuWindow extends Application {
     /** Opens the settings window. */
     @FXML
     public void options(ActionEvent event) {
-        try {
-            Node source = (Node) event.getSource();
-            AnchorPane mainMenuPane = (AnchorPane) source.getScene().getRoot();
-            Pane settingsPane = SettingsWindow.getSettingsPane(source.getScene());
-            if (settingsPane != null)
-                mainMenuPane.getChildren().add(settingsPane);
-        } catch (Exception e) {
-            System.out.println("Failed to open settings\nError: " + e);
-        }
+        guiUtil.loadPopup(FXMLPaths.SETTINGS, event);
     }
 
     /** Closes the game */
     @FXML
     public void exit(ActionEvent event) {
-        Node source = (Node) event.getSource();
-        Stage stage = (Stage) source.getScene().getWindow();
-        ExitConfirmationAlert.confirmExit(stage);
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        new ExitConfirmationAlert(event, stage);
     }
 }
