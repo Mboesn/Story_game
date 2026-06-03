@@ -66,9 +66,10 @@ public class MainMenuWindow extends Application {
      * achievements.
      */
     @FXML
-    public void achievements() {
-        AchievementsWindow achievementsWindow = new AchievementsWindow();
-        achievementsWindow.show();
+    public void achievements(ActionEvent event) {
+        // AchievementsWindow achievementsWindow = new AchievementsWindow();
+        // achievementsWindow.show();
+        guiUtil.loadPopup(FXMLPaths.ACHIEVEMENTS_WINDOW, event);
     }
 
     /** Opens the settings window. */

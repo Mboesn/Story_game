@@ -1,0 +1,11 @@
+.imageFrame {
+  -fx-background-color: gold;
+}
+.background {
+  -fx-background-color: aquamarine;
+  -fx-border-color: #333333;
+  -fx-border-style: solid;
+  -fx-border-width: 3px;
+  -fx-background-radius: 10px;
+  -fx-border-radius: 10px;
+}

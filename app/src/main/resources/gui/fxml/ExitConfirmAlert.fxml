@@ -9,8 +9,8 @@
 
 <StackPane fx:id="exitPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.window.ExitConfirmationWindow">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="Background" stylesheets="@../css/transparentBackground.css" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="236.0" prefWidth="669.0" styleClass="backgound" stylesheets="@../css/exitConfirmationWindow.css">
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@../css/transparentBackground.css" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="236.0" prefWidth="669.0" styleClass="background" stylesheets="@../css/exitConfirmationWindow.css">
          <children>
             <Text layoutX="52.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Are you sure you want to exit?" textAlignment="CENTER" wrappingWidth="196.73046875">
                <font>

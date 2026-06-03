@@ -1,6 +1,9 @@
 package story_game.gui.window;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +12,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -18,6 +22,40 @@ import story_game.save_mechanics.achievements.AchievementsContainer;
 import story_game.save_mechanics.achievements.AchievementsFile;
 
 public class AchievementsWindow {
+    @FXML
+    public VBox completedAchievementsBox;
+    @FXML
+    public VBox uncompletedAchievementsBox;
+    @FXML
+    public Pane achievementsPane;
+
+    @FXML
+    public void initialize() {
+        AchievementsFile achievements = AchievementsContainer.getAchievements();
+
+        achievements.getAchievements().forEach((achievement, completionDate) -> {
+            try {
+                Pane achievementNodePane;
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(SettingsWindow.class.getResource(FXMLPaths.ACHIEVEMENT_NODE.getPath()));
+                achievementNodePane = loader.<Pane>load();
+
+                AchievementNode controller = loader.getController();
+
+                controller.setAchievementNode(achievement, completionDate);
+
+                if (!completionDate.isBlank()) {
+                    completedAchievementsBox.getChildren().add(achievementNodePane);
+                } else {
+                    uncompletedAchievementsBox.getChildren().add(achievementNodePane);
+                }
+
+            } catch (Exception e) {
+                System.out.println("Failed to load achievement: " + achievement.getName() + "\nerror: " + e);
+            }
+        });
+    }
+
     public void show() {
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
@@ -93,5 +131,10 @@ public class AchievementsWindow {
         // blocks all other windows till settings has been finished
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
+    }
+
+    @FXML
+    public void back(ActionEvent event) {
+        new ExitConfirmationAlert(event, achievementsPane);
     }
 }

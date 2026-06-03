@@ -3,7 +3,9 @@ package story_game.gui.window;
 public enum FXMLPaths {
     MAIN_MENU("MainMenu"),
     EXIT("ExitConfirmAlert"),
-    SETTINGS("Settings");
+    SETTINGS("Settings"),
+    ACHIEVEMENTS_WINDOW("Achievements"),
+    ACHIEVEMENT_NODE("AchievementNode");
 
     private String path;
 
