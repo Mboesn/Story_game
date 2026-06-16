@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="exitPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.window.ExitConfirmationWindow">
+<StackPane fx:id="exitPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.window.ExitConfirmationWindow">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@../css/transparentBackground.css" />
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="236.0" prefWidth="669.0" styleClass="background" stylesheets="@../css/exitConfirmationWindow.css">

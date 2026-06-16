@@ -7,3 +7,6 @@
   -cursor: pointer; /* Hand icon on hover */
   -font-size: 16px; /* Text size */
 }
+.background {
+  -fx-background-color: #add8e6;
+}

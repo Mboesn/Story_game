@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.settings.SettingsContainer;
@@ -23,9 +24,10 @@ public class MainMenuWindow extends Application {
         AudioHandler.playMusic(Music.DEFAULT);
 
         try {
+            mainMenuStage.setMaximized(true);
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(FXMLPaths.MAIN_MENU.getPath()));
-            AnchorPane anchorPane = loader.<AnchorPane>load();
+            StackPane anchorPane = loader.<StackPane>load();
             Scene scene = new Scene(anchorPane);
 
             mainMenuStage.setOnCloseRequest(e -> {
