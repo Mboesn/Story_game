@@ -59,6 +59,6 @@ public class AchievementsWindow {
 
     @FXML
     public void back(ActionEvent event) {
-        new ExitConfirmationAlert(event, achievementsPane);
+        guiUtil.closePopup(achievementsPane);
     }
 }

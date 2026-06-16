@@ -51,16 +51,18 @@ public class MainMenuWindow extends Application {
         // Scene scene = source.getScene();
         // save.show((Stage) scene.getWindow(), SaveMenuType.NEW_GAME);
         // mainMenuStage.close();
+        SaveMenu.newGame(event);
     }
 
     /** Opens the save file window allowing you to choose what save file to load */
     @FXML
-    public void loadGame() {
+    public void loadGame(ActionEvent event) {
         // if (mainMenuStage != null) {
         // SaveMenuWindow save = new SaveMenuWindow();
         // save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
         // mainMenuStage.close();
         // }
+        SaveMenu.loadGame(event);
     }
 
     /**
@@ -69,8 +71,6 @@ public class MainMenuWindow extends Application {
      */
     @FXML
     public void achievements(ActionEvent event) {
-        // AchievementsWindow achievementsWindow = new AchievementsWindow();
-        // achievementsWindow.show();
         guiUtil.loadPopup(FXMLPaths.ACHIEVEMENTS_WINDOW, event);
     }
 

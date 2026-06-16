@@ -3,13 +3,18 @@ package story_game.gui.window;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +27,22 @@ import story_game.save_mechanics.save_file.SaveFile;
  * current one
  */
 public class SaveMenuWindow {
+    public static SaveMenuType saveMenuType = SaveMenuType.LOAD_GAME;
+    public static SaveFile saveFile = new SaveFile();
+    @FXML
+    public StackPane saveMenuPane;
+    @FXML
+    public GridPane saveButtons;
+
+    private int saveCountStart = 0;
+
+    private SaveType saveType = SaveType.REGULAR_SAVE;
+
+    @FXML
+    public void initialize() {
+        updateGrid("0");
+    }
+
     /**
      * Opens a save menu
      * 
@@ -195,5 +216,116 @@ public class SaveMenuWindow {
         NEW_GAME,
         LOAD_GAME,
         SAVE_GAME;
+    }
+
+    /** The type of save to load/save to */
+    public enum SaveType {
+        REGULAR_SAVE("Save"),
+        AUTO_SAVE("Auto Save"),
+        QUICK_SAVE("Quick Save");
+
+        private String saveName;
+
+        private SaveType(String saveName) {
+            this.saveName = saveName;
+        }
+
+        public String getSaveName() {
+            return saveName;
+        }
+    }
+
+    private void updateGrid(String gridButtonId) {
+        switch (gridButtonId) {
+            case "A":
+                saveCountStart = 0;
+                saveType = SaveType.AUTO_SAVE;
+                break;
+            case "Q":
+                saveCountStart = 0;
+                saveType = SaveType.QUICK_SAVE;
+                break;
+            default:
+                saveCountStart = Integer.parseInt(gridButtonId) * saveButtons.getChildren().size();
+                saveType = SaveType.REGULAR_SAVE;
+                break;
+        }
+
+        String saveName = saveType.getSaveName();
+        for (Node saveBtn : saveButtons.getChildren()) {
+            if (saveBtn instanceof Button btn) {
+                String saveButtonId = btn.getId().replaceAll("save", "");
+                int saveNumber = saveCountStart + Integer.parseInt(saveButtonId);
+                SaveFile save = SaveHandler.loadGame(saveName + saveNumber);
+                // Add current game location to the save file\
+                if (save != null) {
+                    String location = save.getCurrentPage().getClass().toString()
+                            .replace("class story_game.text.pages.", "");
+                    location = location.split("\\.")[0].toLowerCase();
+                    switch (location) {
+                        case "housescene":
+                            location = "House";
+                            break;
+                        case "outsidescene":
+                            location = "Outside";
+                            break;
+                        default:
+                            location = "unknown";
+                            break;
+                    }
+                    btn.setText(saveName + " " + saveNumber + "\n" + location + "\n" + save.getSaveDate());
+                    saveBtn.setDisable(false);
+                } else {
+                    btn.setText(saveName + " " + saveNumber + "\n" + "Empty save");
+                    if (saveMenuType == SaveMenuType.LOAD_GAME) {
+                        saveBtn.setDisable(true);
+                    }
+                }
+            }
+        }
+    }
+
+    @FXML
+    public void updateGrid(ActionEvent event) {
+        Button gridBtn = (Button) event.getSource();
+        String gridButtonId = gridBtn.getId().replaceAll("grid", "");
+        updateGrid(gridButtonId);
+    }
+
+    @FXML
+    public void saveOrLoad(ActionEvent event) {
+        Button saveBtn = (Button) event.getSource();
+        String saveButtonId = saveBtn.getId().replaceAll("save", "");
+        int saveNumber = saveCountStart + Integer.parseInt(saveButtonId);
+        String saveName = saveType.getSaveName() + saveNumber;
+        SaveFile buttonSaveFile = SaveHandler.loadGame(saveName);
+
+        if (saveMenuType == SaveMenuType.LOAD_GAME) {
+            System.out.println("load " + buttonSaveFile);
+        } else {
+            if (buttonSaveFile != null) {
+                SaveOverrideConfirmationWindow.overrideSaveFunction = () -> saveGame(saveFile, saveName);
+                guiUtil.loadPopup(FXMLPaths.SAVE_OVERRIDE_CONFIRMATION, event);
+            } else {
+                saveGame(saveFile, saveName);
+            }
+            System.out.println("save " + saveName);
+        }
+    }
+
+    private void saveGame(SaveFile saveFile, String saveName) {
+        saveFile.updateSaveDate();
+        SaveHandler.saveFile(saveFile, saveName);
+        if (saveMenuType == SaveMenuType.NEW_GAME) {
+            // GameWindow gameWindow = new GameWindow();
+            // gameWindow.show(saveFile, mainMenuStage);
+            // mainMenuStage.close();
+        }
+        back();
+    }
+
+    @FXML
+    public void back() {
+        guiUtil.closePopup(saveMenuPane);
     }
 }

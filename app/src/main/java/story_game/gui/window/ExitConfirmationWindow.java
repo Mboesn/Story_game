@@ -21,11 +21,9 @@ public class ExitConfirmationWindow {
     @FXML
     public void exit() {
         onExit.onClick();
-        onExit = () -> {
-        };
+        onExit = () -> {};
         exitFunction.onClick();
-        exitFunction = () -> {
-        };
+        exitFunction = () -> {};
         cancel();
     }
 }

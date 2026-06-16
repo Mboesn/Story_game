@@ -5,7 +5,9 @@ public enum FXMLPaths {
     EXIT("ExitConfirmAlert"),
     SETTINGS("Settings"),
     ACHIEVEMENTS_WINDOW("Achievements"),
-    ACHIEVEMENT_NODE("AchievementNode");
+    ACHIEVEMENT_NODE("AchievementNode"),
+    SAVE_MENU("SaveMenu"),
+    SAVE_OVERRIDE_CONFIRMATION("SaveOverrideConfirmation");
 
     private String path;
 
