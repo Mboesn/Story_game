@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.controllers.save_menu;
 
 import java.util.Optional;
 
@@ -18,7 +18,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import story_game.gui.controllers.game.GameWindowCtrl;
 import story_game.gui.util.ButtonCustom;
+import story_game.gui.util.FXMLPaths;
+import story_game.gui.util.PopupHandler;
 import story_game.save_mechanics.SaveHandler;
 import story_game.save_mechanics.save_file.SaveFile;
 
@@ -26,7 +29,7 @@ import story_game.save_mechanics.save_file.SaveFile;
  * This window lists all available saves, allowing to load a new one or save the
  * current one
  */
-public class SaveMenuWindow {
+public class SaveMenuCtrl {
     public static SaveMenuType saveMenuType = SaveMenuType.LOAD_GAME;
     public static SaveFile saveFile = new SaveFile();
     @FXML
@@ -160,7 +163,7 @@ public class SaveMenuWindow {
                     setOnMouseClicked(e -> {
                         loadSaveMenuStage.close();
                         mainMenuStage.close();
-                        GameWindow gameWindow = new GameWindow();
+                        GameWindowCtrl gameWindow = new GameWindowCtrl();
                         gameWindow.show(save, mainMenuStage);
                     });
                 }
@@ -203,7 +206,7 @@ public class SaveMenuWindow {
             saveFile.updateSaveDate();
             SaveHandler.saveFile(saveFile, saveFileName);
             if (type != SaveMenuType.SAVE_GAME) {
-                GameWindow gameWindow = new GameWindow();
+                GameWindowCtrl gameWindow = new GameWindowCtrl();
                 gameWindow.show(saveFile, mainMenuStage);
                 mainMenuStage.close();
             }
@@ -304,8 +307,8 @@ public class SaveMenuWindow {
             System.out.println("load " + buttonSaveFile);
         } else {
             if (buttonSaveFile != null) {
-                SaveOverrideConfirmationWindow.overrideSaveFunction = () -> saveGame(saveFile, saveName);
-                guiUtil.loadPopup(FXMLPaths.SAVE_OVERRIDE_CONFIRMATION, event);
+                SaveOverrideConfirmationCtrl.overrideSaveFunction = () -> saveGame(saveFile, saveName);
+                PopupHandler.loadPopup(FXMLPaths.SAVE_OVERRIDE_CONFIRMATION, event);
             } else {
                 saveGame(saveFile, saveName);
             }
@@ -326,6 +329,6 @@ public class SaveMenuWindow {
 
     @FXML
     public void back() {
-        guiUtil.closePopup(saveMenuPane);
+        PopupHandler.closePopup(saveMenuPane);
     }
 }

@@ -1,10 +1,11 @@
-package story_game.gui.window;
+package story_game.gui.controllers.save_menu;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import story_game.gui.util.OnClickFunction;
+import story_game.gui.util.PopupHandler;
 
-public class SaveOverrideConfirmationWindow {
+public class SaveOverrideConfirmationCtrl {
     public static OnClickFunction overrideSaveFunction = () -> {
     };
 
@@ -13,7 +14,7 @@ public class SaveOverrideConfirmationWindow {
 
     @FXML
     public void cancel() {
-        guiUtil.closePopup(saveOverrideConfirmationPane);
+        PopupHandler.closePopup(saveOverrideConfirmationPane);
     }
 
     @FXML

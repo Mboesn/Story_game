@@ -1,15 +1,17 @@
-package story_game.gui.window;
+package story_game.gui.controllers.settings;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
+import story_game.gui.controllers.exit_confirmation.ExitConfirmationFunctions;
+import story_game.gui.util.PopupHandler;
 import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.save_mechanics.settings.SettingsFile;
 import story_game.sound_system.AudioHandler;
 
-public class SettingsWindow {
+public class SettingsCtrl {
     SettingsFile tempSettingsFile;
     @FXML
     private Label musicLbl;
@@ -46,7 +48,7 @@ public class SettingsWindow {
     public void save() {
         try {
             SettingsContainer.updateSettings(tempSettingsFile);
-            guiUtil.closePopup(settingsPane);
+            PopupHandler.closePopup(settingsPane);
         } catch (Exception e) {
             System.out.println("Couldn't save settings.\nError: " + e);
         }
@@ -56,7 +58,7 @@ public class SettingsWindow {
     @FXML
     public void reset(ActionEvent event) {
         try {
-            new ExitConfirmationAlert(event, settingsPane, () -> SettingsContainer.updateSettings(new SettingsFile()));
+            new ExitConfirmationFunctions(event, settingsPane, () -> SettingsContainer.updateSettings(new SettingsFile()));
         } catch (Exception e) {
             System.out.println("Couldn't save settings.\nError: " + e);
         }
@@ -65,6 +67,6 @@ public class SettingsWindow {
     /** Closes settings menu without saving */
     @FXML
     public void exit(ActionEvent event) {
-        new ExitConfirmationAlert(event, settingsPane);
+        new ExitConfirmationFunctions(event, settingsPane);
     }
 }

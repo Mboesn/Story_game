@@ -1,23 +1,25 @@
-package story_game.gui.window;
+package story_game.gui.controllers.exit_confirmation;
 
 import javafx.event.Event;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import story_game.gui.util.FXMLPaths;
 import story_game.gui.util.OnClickFunction;
+import story_game.gui.util.PopupHandler;
 
-public class ExitConfirmationAlert {
+public class ExitConfirmationFunctions {
 
     /**
      * Opens a confirmation alert asking the user if he wishes to close a given
      * stage.
      */
-    private ExitConfirmationAlert(Event event, OnClickFunction... onExit) {
-        ExitConfirmationWindow.onExit = () -> {
+    private ExitConfirmationFunctions(Event event, OnClickFunction... onExit) {
+        ExitConfirmationCtrl.onExit = () -> {
             for (OnClickFunction onClickFunction : onExit) {
                 onClickFunction.onClick();
             }
         };
-        guiUtil.loadPopup(FXMLPaths.EXIT, event);
+        PopupHandler.loadPopup(FXMLPaths.EXIT, event);
     }
 
     /**
@@ -28,8 +30,8 @@ public class ExitConfirmationAlert {
      * 
      * @return True if window closed
      */
-    public ExitConfirmationAlert(Event event, Stage stage, OnClickFunction... onExit) {
-        ExitConfirmationWindow.exitFunction = () -> stage.close();
+    public ExitConfirmationFunctions(Event event, Stage stage, OnClickFunction... onExit) {
+        ExitConfirmationCtrl.exitFunction = () -> stage.close();
         temp(event, onExit);
         // this(event, onExit);
         // TODO: upgrade to java 26
@@ -43,18 +45,18 @@ public class ExitConfirmationAlert {
      * 
      * @return True if window closed
      */
-    public ExitConfirmationAlert(Event event, Pane pane, OnClickFunction... onExit) {
-        ExitConfirmationWindow.exitFunction = () -> guiUtil.closePopup(pane);
+    public ExitConfirmationFunctions(Event event, Pane pane, OnClickFunction... onExit) {
+        ExitConfirmationCtrl.exitFunction = () -> PopupHandler.closePopup(pane);
         temp(event, onExit);
         // this(event, onExit);
     }
 
     private void temp(Event event, OnClickFunction... onExit) {
-        ExitConfirmationWindow.onExit = () -> {
+        ExitConfirmationCtrl.onExit = () -> {
             for (OnClickFunction onClickFunction : onExit) {
                 onClickFunction.onClick();
             }
         };
-        guiUtil.loadPopup(FXMLPaths.EXIT, event);
+        PopupHandler.loadPopup(FXMLPaths.EXIT, event);
     }
 }

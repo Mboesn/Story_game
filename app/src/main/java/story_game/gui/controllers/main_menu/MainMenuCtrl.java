@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.controllers.main_menu;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -9,12 +9,16 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import story_game.gui.window.SaveMenuWindow.SaveMenuType;
+import story_game.gui.controllers.exit_confirmation.ExitConfirmationFunctions;
+import story_game.gui.controllers.save_menu.SaveMenuFunctions;
+import story_game.gui.controllers.save_menu.SaveMenuCtrl.SaveMenuType;
+import story_game.gui.util.FXMLPaths;
+import story_game.gui.util.PopupHandler;
 import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.sound_system.AudioHandler;
 import story_game.sound_system.Music;
 
-public class MainMenuWindow extends Application {
+public class MainMenuCtrl extends Application {
 
     @Override
     public void start(Stage mainMenuStage) throws Exception {
@@ -32,7 +36,7 @@ public class MainMenuWindow extends Application {
 
             mainMenuStage.setOnCloseRequest(e -> {
                 e.consume();
-                new ExitConfirmationAlert(e, mainMenuStage);
+                new ExitConfirmationFunctions(e, mainMenuStage);
             });
 
             mainMenuStage.setScene(scene);
@@ -51,7 +55,7 @@ public class MainMenuWindow extends Application {
         // Scene scene = source.getScene();
         // save.show((Stage) scene.getWindow(), SaveMenuType.NEW_GAME);
         // mainMenuStage.close();
-        SaveMenu.newGame(event);
+        SaveMenuFunctions.newGame(event);
     }
 
     /** Opens the save file window allowing you to choose what save file to load */
@@ -62,7 +66,7 @@ public class MainMenuWindow extends Application {
         // save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
         // mainMenuStage.close();
         // }
-        SaveMenu.loadGame(event);
+        SaveMenuFunctions.loadGame(event);
     }
 
     /**
@@ -71,19 +75,19 @@ public class MainMenuWindow extends Application {
      */
     @FXML
     public void achievements(ActionEvent event) {
-        guiUtil.loadPopup(FXMLPaths.ACHIEVEMENTS_WINDOW, event);
+        PopupHandler.loadPopup(FXMLPaths.ACHIEVEMENTS_WINDOW, event);
     }
 
     /** Opens the settings window. */
     @FXML
     public void options(ActionEvent event) {
-        guiUtil.loadPopup(FXMLPaths.SETTINGS, event);
+        PopupHandler.loadPopup(FXMLPaths.SETTINGS, event);
     }
 
     /** Closes the game */
     @FXML
     public void exit(ActionEvent event) {
         Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        new ExitConfirmationAlert(event, stage);
+        new ExitConfirmationFunctions(event, stage);
     }
 }

@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.util;
 
 public enum FXMLPaths {
     MAIN_MENU("MainMenu"),

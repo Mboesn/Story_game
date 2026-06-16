@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.controllers.game;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,13 +14,14 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import story_game.Constants;
+import story_game.gui.controllers.save_menu.SaveMenuCtrl;
+import story_game.gui.controllers.save_menu.SaveMenuCtrl.SaveMenuType;
 import story_game.gui.util.ButtonCustom;
-import story_game.gui.window.SaveMenuWindow.SaveMenuType;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.CustomText;
 
-public class GameWindow {
+public class GameWindowCtrl {
     private static boolean unsafeClose = false;
     private static Page currentPage;
     private static ObservableList<Node> choicesList;
@@ -30,7 +31,7 @@ public class GameWindow {
 
     public void show(SaveFile saveFile, Stage mainMenuStage) {
 
-        GameWindow.saveFile = saveFile;
+        GameWindowCtrl.saveFile = saveFile;
 
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
@@ -59,7 +60,7 @@ public class GameWindow {
         ObservableList<Node> topRowList = topRow.getChildren();
         ObservableList<Node> choicesList = choices.getChildren();
 
-        GameWindow.choicesList = choicesList;
+        GameWindowCtrl.choicesList = choicesList;
 
         ButtonCustom settingsButton = ButtonCustom.createButtonCustom("Settings",
                 e -> {
@@ -68,7 +69,7 @@ public class GameWindow {
 
         ButtonCustom saveGameButton = ButtonCustom.createButtonCustom("Save game",
                 e -> {
-                    SaveMenuWindow saveMenuWindow = new SaveMenuWindow();
+                    SaveMenuCtrl saveMenuWindow = new SaveMenuCtrl();
                     saveMenuWindow.show(mainMenuStage, SaveMenuType.SAVE_GAME, saveFile);
                 });
         topRowList.add(saveGameButton);
@@ -111,8 +112,8 @@ public class GameWindow {
 
         rootList.add(textScroll);
 
-        GameWindow.gameTextArea = gameTextArea;
-        GameWindow.gameTextScroll = textScroll;
+        GameWindowCtrl.gameTextArea = gameTextArea;
+        GameWindowCtrl.gameTextScroll = textScroll;
 
         choices.setSpacing(choiceButtonSpacing);
         choices.setPadding(new Insets(choicesPadding));
@@ -141,7 +142,7 @@ public class GameWindow {
      *                    with the player.
      */
     public static void setUnsafeClose(boolean unsafeClose) {
-        GameWindow.unsafeClose = unsafeClose;
+        GameWindowCtrl.unsafeClose = unsafeClose;
     }
 
     /**
@@ -164,7 +165,7 @@ public class GameWindow {
             // update buttons
             addButtons(currentPage.getButtons(saveFile));
             // update variables accordingly
-            GameWindow.currentPage = currentPage;
+            GameWindowCtrl.currentPage = currentPage;
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
             System.out.println("Failed to set current page, error: \n" + e);
@@ -179,11 +180,11 @@ public class GameWindow {
      */
     public static void updateText(CustomText text) {
         try {
-            GameWindow.gameTextArea.getChildren().clear();
-            GameWindow.gameTextArea.getChildren().addAll(text.getTextNodes());
+            GameWindowCtrl.gameTextArea.getChildren().clear();
+            GameWindowCtrl.gameTextArea.getChildren().addAll(text.getTextNodes());
             // Makes sure text doesn't clip into scrollwheel
-            GameWindow.gameTextArea.layout();
-            GameWindow.gameTextScroll.layout();
+            GameWindowCtrl.gameTextArea.layout();
+            GameWindowCtrl.gameTextScroll.layout();
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }

@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.controllers.achievement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,10 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import story_game.gui.controllers.settings.SettingsCtrl;
+import story_game.gui.util.FXMLPaths;
+import story_game.gui.util.PopupHandler;
 import story_game.save_mechanics.achievements.AchievementsContainer;
 import story_game.save_mechanics.achievements.AchievementsFile;
 
-public class AchievementsWindow {
+public class AchievementsCtrl {
     @FXML
     public VBox completedAchievementsBox;
     @FXML
@@ -31,10 +34,10 @@ public class AchievementsWindow {
             try {
                 Pane achievementNodePane;
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(SettingsWindow.class.getResource(FXMLPaths.ACHIEVEMENT_NODE.getPath()));
+                loader.setLocation(SettingsCtrl.class.getResource(FXMLPaths.ACHIEVEMENT_NODE.getPath()));
                 achievementNodePane = loader.<Pane>load();
 
-                AchievementNode controller = loader.getController();
+                AchievementNodeCtrl controller = loader.getController();
 
                 controller.setAchievementNode(achievement, completionDate);
 
@@ -59,6 +62,6 @@ public class AchievementsWindow {
 
     @FXML
     public void back(ActionEvent event) {
-        guiUtil.closePopup(achievementsPane);
+        PopupHandler.closePopup(achievementsPane);
     }
 }

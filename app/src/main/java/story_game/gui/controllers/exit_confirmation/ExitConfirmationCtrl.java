@@ -1,10 +1,11 @@
-package story_game.gui.window;
+package story_game.gui.controllers.exit_confirmation;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import story_game.gui.util.OnClickFunction;
+import story_game.gui.util.PopupHandler;
 
-public class ExitConfirmationWindow {
+public class ExitConfirmationCtrl {
     public static OnClickFunction onExit = () -> {
     };
     public static OnClickFunction exitFunction = () -> {
@@ -15,7 +16,7 @@ public class ExitConfirmationWindow {
 
     @FXML
     public void cancel() {
-        guiUtil.closePopup(exitPane);
+        PopupHandler.closePopup(exitPane);
     }
 
     @FXML

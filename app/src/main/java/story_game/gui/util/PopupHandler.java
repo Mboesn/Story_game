@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.util;
 
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -6,13 +6,14 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import story_game.gui.controllers.settings.SettingsCtrl;
 
-public class guiUtil {
+public class PopupHandler {
     public static void loadPopup(FXMLPaths popup, Event event) {
         try {
             // loads pop up
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(SettingsWindow.class.getResource(popup.getPath()));
+            loader.setLocation(SettingsCtrl.class.getResource(popup.getPath()));
             Pane popupPane = loader.<Pane>load();
             // centers pop up
             AnchorPane.setTopAnchor(popupPane, 0.0);

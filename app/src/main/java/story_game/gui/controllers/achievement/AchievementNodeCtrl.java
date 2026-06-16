@@ -1,4 +1,4 @@
-package story_game.gui.window;
+package story_game.gui.controllers.achievement;
 
 import javafx.fxml.FXML;
 import javafx.scene.effect.ColorAdjust;
@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import story_game.save_mechanics.achievements.Achievement;
 
-public class AchievementNode {
+public class AchievementNodeCtrl {
     @FXML
     public ImageView achievementImage;
     @FXML
