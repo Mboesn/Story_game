@@ -1,4 +1,4 @@
-package story_game.gui.controllers.achievement;
+package story_game.gui.controllers.achievements;
 
 import javafx.fxml.FXML;
 import javafx.scene.effect.ColorAdjust;
