@@ -6,9 +6,9 @@ import story_game.gui.util.OnClickFunction;
 import story_game.gui.util.PopupHandler;
 
 public class ExitConfirmationCtrl {
-    public static OnClickFunction onExit = () -> {
+    protected static OnClickFunction onExit = () -> {
     };
-    public static OnClickFunction exitFunction = () -> {
+    protected static OnClickFunction exitFunction = () -> {
     };
 
     @FXML
@@ -16,15 +16,21 @@ public class ExitConfirmationCtrl {
 
     @FXML
     public void cancel() {
+        onExit = () -> {
+        };
+        exitFunction = () -> {
+        };
         PopupHandler.closePopup(exitPane);
     }
 
     @FXML
     public void exit() {
         onExit.onClick();
-        onExit = () -> {};
+        onExit = () -> {
+        };
         exitFunction.onClick();
-        exitFunction = () -> {};
+        exitFunction = () -> {
+        };
         cancel();
     }
 }

@@ -3,7 +3,7 @@ package story_game.gui.util;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import story_game.gui.controllers.game.GameWindowCtrl;
+import story_game.gui.controllers.game.GameCtrl;
 import story_game.save_mechanics.achievements.AchievementsContainer;
 
 public class EndGameButton extends ButtonCustom {
@@ -24,7 +24,7 @@ public class EndGameButton extends ButtonCustom {
                 onClickFunction.onClick();
             }
             AchievementsContainer.CheckAchievements(achievementChecks);
-            GameWindowCtrl.setUnsafeClose(true);
+            GameCtrl.setUnsafeClose(true);
             // Get current stage and close it.
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));

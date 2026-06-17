@@ -1,7 +1,7 @@
 package story_game.gui.util;
 
 import story_game.text.Page;
-import story_game.gui.controllers.game.GameWindowCtrl;
+import story_game.gui.controllers.game.GameCtrl;
 import story_game.text.CustomText;
 
 public class ContinueButton extends ButtonCustom {
@@ -27,10 +27,10 @@ public class ContinueButton extends ButtonCustom {
                     onClickFunction.onClick();
                 }
                 if (targetPage != null) {
-                    GameWindowCtrl.setCurrentPage(targetPage);
+                    GameCtrl.setCurrentPage(targetPage);
                 }
             } else {
-                GameWindowCtrl.updateText(text[nextText]);
+                GameCtrl.updateText(text[nextText]);
                 nextText++;
             }
         });

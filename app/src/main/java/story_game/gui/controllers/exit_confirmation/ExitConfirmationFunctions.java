@@ -13,7 +13,9 @@ public class ExitConfirmationFunctions {
      * Opens a confirmation alert asking the user if he wishes to close a given
      * stage.
      */
-    private ExitConfirmationFunctions(Event event, OnClickFunction... onExit) {
+    public ExitConfirmationFunctions(Event event, OnClickFunction... onExit) {
+        ExitConfirmationCtrl.exitFunction = () -> {
+        };
         ExitConfirmationCtrl.onExit = () -> {
             for (OnClickFunction onClickFunction : onExit) {
                 onClickFunction.onClick();

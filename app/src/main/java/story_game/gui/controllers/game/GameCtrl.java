@@ -1,9 +1,14 @@
 package story_game.gui.controllers.game;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -14,24 +19,56 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import story_game.Constants;
+import story_game.gui.controllers.exit_confirmation.ExitConfirmationFunctions;
+import story_game.gui.controllers.main_menu.MainMenuCtrl;
 import story_game.gui.controllers.save_menu.SaveMenuCtrl;
 import story_game.gui.controllers.save_menu.SaveMenuCtrl.SaveMenuType;
 import story_game.gui.util.ButtonCustom;
+import story_game.gui.util.FXMLPaths;
+import story_game.gui.util.OnClickFunction;
+import story_game.gui.util.StageHandler;
 import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.CustomText;
 
-public class GameWindowCtrl {
+public class GameCtrl {
+    @FXML
+    public TextFlow textFlow;
+    @FXML
+    public ScrollPane textScroll;
+    @FXML
+    public VBox choicesVBox;
+
+    private static GameCtrl gameController;
+
     private static boolean unsafeClose = false;
     private static Page currentPage;
-    private static ObservableList<Node> choicesList;
+    // private static ObservableList<Node> choicesList;
     private static TextFlow gameTextArea;
     private static ScrollPane gameTextScroll;
     private static SaveFile saveFile;
 
+    @FXML
+    public void initialize() {
+        gameController = this;
+    }
+
+    public static void setupGameScene(SaveFile saveFile) {
+        StageHandler.stage.setTitle(Constants.GAME_NAME);
+        StageHandler.stage.setOnCloseRequest(event -> {
+            event.consume();
+            switchStage(event);
+            // else if (ExitConfirmationAlert.confirmExit(stage))
+            // mainMenuStage.show();
+            unsafeClose = false;
+        });
+        GameCtrl.saveFile = saveFile;
+        setCurrentPage(saveFile.getCurrentPage());
+    }
+
     public void show(SaveFile saveFile, Stage mainMenuStage) {
 
-        GameWindowCtrl.saveFile = saveFile;
+        GameCtrl.saveFile = saveFile;
 
         final double sceneWidth = 1000;
         final double sceneHeight = 600;
@@ -60,7 +97,7 @@ public class GameWindowCtrl {
         ObservableList<Node> topRowList = topRow.getChildren();
         ObservableList<Node> choicesList = choices.getChildren();
 
-        GameWindowCtrl.choicesList = choicesList;
+        // GameCtrl.choicesList = choicesList;
 
         ButtonCustom settingsButton = ButtonCustom.createButtonCustom("Settings",
                 e -> {
@@ -85,9 +122,9 @@ public class GameWindowCtrl {
             if (unsafeClose) {
                 mainMenuStage.show();
                 stage.close();
-            } 
+            }
             // else if (ExitConfirmationAlert.confirmExit(stage))
-                // mainMenuStage.show();
+            // mainMenuStage.show();
             unsafeClose = false;
         });
 
@@ -112,8 +149,8 @@ public class GameWindowCtrl {
 
         rootList.add(textScroll);
 
-        GameWindowCtrl.gameTextArea = gameTextArea;
-        GameWindowCtrl.gameTextScroll = textScroll;
+        GameCtrl.gameTextArea = gameTextArea;
+        GameCtrl.gameTextScroll = textScroll;
 
         choices.setSpacing(choiceButtonSpacing);
         choices.setPadding(new Insets(choicesPadding));
@@ -142,7 +179,7 @@ public class GameWindowCtrl {
      *                    with the player.
      */
     public static void setUnsafeClose(boolean unsafeClose) {
-        GameWindowCtrl.unsafeClose = unsafeClose;
+        GameCtrl.unsafeClose = unsafeClose;
     }
 
     /**
@@ -165,7 +202,7 @@ public class GameWindowCtrl {
             // update buttons
             addButtons(currentPage.getButtons(saveFile));
             // update variables accordingly
-            GameWindowCtrl.currentPage = currentPage;
+            GameCtrl.currentPage = currentPage;
             saveFile.setCurrentPage(currentPage);
         } catch (Exception e) {
             System.out.println("Failed to set current page, error: \n" + e);
@@ -180,11 +217,11 @@ public class GameWindowCtrl {
      */
     public static void updateText(CustomText text) {
         try {
-            GameWindowCtrl.gameTextArea.getChildren().clear();
-            GameWindowCtrl.gameTextArea.getChildren().addAll(text.getTextNodes());
+            gameController.textFlow.getChildren().clear();
+            gameController.textFlow.getChildren().addAll(text.getTextNodes());
             // Makes sure text doesn't clip into scrollwheel
-            GameWindowCtrl.gameTextArea.layout();
-            GameWindowCtrl.gameTextScroll.layout();
+            gameController.textFlow.layout();
+            gameController.textScroll.layout();
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }
@@ -196,15 +233,53 @@ public class GameWindowCtrl {
      * @param buttons new buttons to add to the game screen
      */
     private static void addButtons(ButtonCustom[] buttons) {
-        choicesList.clear();
+        gameController.choicesVBox.getChildren().clear();
         if (buttons != null)
             for (ButtonCustom btn : buttons) {
                 try {
                     if (!btn.isInvisible())
-                        choicesList.add(btn);
+                        gameController.choicesVBox.getChildren().add(btn);
                 } catch (Exception e) {
                     System.out.println("Failed to add button, error: \n" + e);
                 }
             }
+    }
+
+    @FXML
+    public void returnToMainMenu(ActionEvent event) {
+        switchStage(event);
+    }
+
+    private static void switchStage(Event event) {
+        try {
+            Parent root = FXMLLoader.load(GameCtrl.class.getResource(FXMLPaths.MAIN_MENU.getPath()));
+            OnClickFunction close = () -> {
+                MainMenuCtrl.setupMainMenuStage();
+                StageHandler.stage.getScene().setRoot(root);
+            };
+            if (unsafeClose)
+                close.onClick();
+            else
+                new ExitConfirmationFunctions(event, close);
+
+        } catch (Exception e) {
+            System.out.println("Failed to launch game window.\nError: " + e);
+        }
+    }
+
+    @FXML
+    private void save(ActionEvent event) {
+    }
+
+    @FXML
+    private void quickSave(ActionEvent event) {
+    }
+
+    @FXML
+    private void load(ActionEvent event) {
+    }
+
+    @FXML
+    private void settings(ActionEvent event) {
     }
 }

@@ -6,14 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import story_game.gui.controllers.exit_confirmation.ExitConfirmationFunctions;
 import story_game.gui.controllers.save_menu.SaveMenuFunctions;
-import story_game.gui.controllers.save_menu.SaveMenuCtrl.SaveMenuType;
 import story_game.gui.util.FXMLPaths;
 import story_game.gui.util.PopupHandler;
+import story_game.gui.util.StageHandler;
 import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.sound_system.AudioHandler;
 import story_game.sound_system.Music;
@@ -21,30 +20,35 @@ import story_game.sound_system.Music;
 public class MainMenuCtrl extends Application {
 
     @Override
-    public void start(Stage mainMenuStage) throws Exception {
+    public void start(Stage stage) throws Exception {
+        StageHandler.stage = stage;
+
         // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();
 
         AudioHandler.playMusic(Music.DEFAULT);
 
         try {
-            mainMenuStage.setMaximized(true);
+            setupMainMenuStage();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource(FXMLPaths.MAIN_MENU.getPath()));
             StackPane anchorPane = loader.<StackPane>load();
             Scene scene = new Scene(anchorPane);
 
-            mainMenuStage.setOnCloseRequest(e -> {
-                e.consume();
-                new ExitConfirmationFunctions(e, mainMenuStage);
-            });
-
-            mainMenuStage.setScene(scene);
-            mainMenuStage.show();
+            stage.setScene(scene);
+            stage.show();
 
         } catch (Exception e) {
             System.out.println("Unable to load main menu \nError: " + e);
         }
+    }
+
+    public static void setupMainMenuStage() {
+        StageHandler.stage.setMaximized(true);
+        StageHandler.stage.setOnCloseRequest(e -> {
+            e.consume();
+            new ExitConfirmationFunctions(e, StageHandler.stage);
+        });
     }
 
     /** Sends to game window using a fresh save file */

@@ -5,9 +5,11 @@ import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,10 +20,11 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import story_game.gui.controllers.game.GameWindowCtrl;
+import story_game.gui.controllers.game.GameCtrl;
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.FXMLPaths;
 import story_game.gui.util.PopupHandler;
+import story_game.gui.util.StageHandler;
 import story_game.save_mechanics.SaveHandler;
 import story_game.save_mechanics.save_file.SaveFile;
 
@@ -163,7 +166,7 @@ public class SaveMenuCtrl {
                     setOnMouseClicked(e -> {
                         loadSaveMenuStage.close();
                         mainMenuStage.close();
-                        GameWindowCtrl gameWindow = new GameWindowCtrl();
+                        GameCtrl gameWindow = new GameCtrl();
                         gameWindow.show(save, mainMenuStage);
                     });
                 }
@@ -206,7 +209,7 @@ public class SaveMenuCtrl {
             saveFile.updateSaveDate();
             SaveHandler.saveFile(saveFile, saveFileName);
             if (type != SaveMenuType.SAVE_GAME) {
-                GameWindowCtrl gameWindow = new GameWindowCtrl();
+                GameCtrl gameWindow = new GameCtrl();
                 gameWindow.show(saveFile, mainMenuStage);
                 mainMenuStage.close();
             }
@@ -304,27 +307,39 @@ public class SaveMenuCtrl {
         SaveFile buttonSaveFile = SaveHandler.loadGame(saveName);
 
         if (saveMenuType == SaveMenuType.LOAD_GAME) {
-            System.out.println("load " + buttonSaveFile);
+            launchGame(event, buttonSaveFile);
         } else {
+            if(saveMenuType == SaveMenuType.NEW_GAME)
+                saveFile = new SaveFile();
             if (buttonSaveFile != null) {
-                SaveOverrideConfirmationCtrl.overrideSaveFunction = () -> saveGame(saveFile, saveName);
+                SaveOverrideConfirmationCtrl.overrideSaveFunction = () -> saveGame(saveFile, saveName, event);
                 PopupHandler.loadPopup(FXMLPaths.SAVE_OVERRIDE_CONFIRMATION, event);
             } else {
-                saveGame(saveFile, saveName);
+                saveGame(saveFile, saveName, event);
             }
-            System.out.println("save " + saveName);
         }
     }
 
-    private void saveGame(SaveFile saveFile, String saveName) {
+    private void saveGame(SaveFile saveFile, String saveName, ActionEvent event) {
         saveFile.updateSaveDate();
         SaveHandler.saveFile(saveFile, saveName);
         if (saveMenuType == SaveMenuType.NEW_GAME) {
-            // GameWindow gameWindow = new GameWindow();
-            // gameWindow.show(saveFile, mainMenuStage);
-            // mainMenuStage.close();
+            launchGame(event, saveFile);
         }
         back();
+    }
+
+    private void launchGame(ActionEvent event, SaveFile saveFile) {
+        try {
+            Scene currentScene = StageHandler.stage.getScene();
+            Parent root = FXMLLoader.load(getClass().getResource(FXMLPaths.GAME.getPath()));
+            GameCtrl.setupGameScene(saveFile);
+            currentScene.setRoot(root);
+            // Scene gameScene = new Scene(root);
+            // stage.setScene(gameScene);
+        } catch (Exception e) {
+            System.out.println("Failed to launch game window.\nError: " + e);
+        }
     }
 
     @FXML

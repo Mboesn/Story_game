@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.game.GameCtrl">
+   <children>
+      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="1.0">
+        <menus>
+          <Menu mnemonicParsing="false" onAction="#save" text="Save" />
+          <Menu mnemonicParsing="false" onAction="#quickSave" text="Quick save" />
+          <Menu mnemonicParsing="false" onAction="#load" text="Load" />
+            <Menu mnemonicParsing="false" onAction="#settings" text="Settings" />
+            <Menu mnemonicParsing="false" onAction="#returnToMainMenu" text="Return to main menu" />
+        </menus>
+      </MenuBar>
+      <ScrollPane fx:id="textScroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="50.0" layoutY="42.0" prefHeight="300.0" prefWidth="900.0">
+         <content>
+            <TextFlow fx:id="textFlow" lineSpacing="3.0" prefHeight="363.0" prefWidth="850.0">
+               <padding>
+                  <Insets left="25.0" right="25.0" />
+               </padding>
+            </TextFlow>
+         </content>
+      </ScrollPane>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="50.0" layoutY="358.0" prefHeight="200.0" prefWidth="900.0">
+         <content>
+            <VBox fx:id="choicesVBox" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+               <padding>
+                  <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
