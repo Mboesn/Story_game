@@ -31,6 +31,8 @@ public class GameCtrl {
     @FXML
     public VBox choicesVBox;
     @FXML
+    public VBox a;
+    @FXML
     public ScrollPane choicesScroll;
 
     private static GameCtrl gameController;
@@ -44,7 +46,12 @@ public class GameCtrl {
         gameController = this;
         Region parentLayout = (Region) StageHandler.stage.getScene().getRoot();
         parentLayout.setSnapToPixel(true);
-        //TODO: fix scroll wheel not visible when required. 
+        textFlow.setPrefWidth(textScroll.getWidth());
+        textFlow.setFocusTraversable(false);
+        textScroll.setFocusTraversable(false);
+        choicesScroll.setFocusTraversable(false);
+        choicesVBox.setFocusTraversable(false);
+        a.setFocusTraversable(false);
     }
 
     public static void setupGameScene(SaveFile saveFile) {
@@ -101,11 +108,9 @@ public class GameCtrl {
      */
     public static void updateText(CustomText text) {
         try {
-            gameController.textFlow.getChildren().clear();
-            gameController.textFlow.getChildren().addAll(text.getTextNodes());
-            // Makes sure text doesn't clip into scrollwheel
-            gameController.textFlow.layout();
-            gameController.textScroll.layout();
+            gameController.textFlow.getChildren().setAll(text.getTextNodes());
+            gameController.textFlow.requestLayout();
+            gameController.textScroll.requestLayout();
         } catch (Exception e) {
             System.out.println("Failed to update text, error: \n" + e);
         }

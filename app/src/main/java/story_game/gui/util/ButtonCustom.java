@@ -21,6 +21,8 @@ public class ButtonCustom extends Button {
     public ButtonCustom(String text) {
         super(text);
         setMinWidth(Constants.DEFAULT_BUTTON_MIN_WIDTH);
+        setDefaultButton(false);
+        setFocusTraversable(false);
     }
 
     /**
