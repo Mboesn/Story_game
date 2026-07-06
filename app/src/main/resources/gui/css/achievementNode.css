@@ -1,7 +1,7 @@
-.imageFrame {
+.image-frame {
   -fx-background-color: gold;
 }
-.background {
+.node-background {
   -fx-background-color: aquamarine;
   -fx-border-color: #333333;
   -fx-border-style: solid;

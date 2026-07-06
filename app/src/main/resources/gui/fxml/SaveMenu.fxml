@@ -11,8 +11,8 @@
 
 <StackPane fx:id="saveMenuPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.save_menu.SaveMenuCtrl">
    <children>
-      <Pane prefHeight="1000.0" prefWidth="1000.0" styleClass="background" stylesheets="@../css/transparentBackground.css" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="686.0" prefWidth="723.0" styleClass="background" stylesheets="@../css/saveMenu.css">
+      <Pane prefHeight="1000.0" prefWidth="1000.0" styleClass="transparent-background" stylesheets="@../css/transparentBackground.css" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="686.0" prefWidth="723.0" styleClass="save-menu-background" stylesheets="@../css/saveMenu.css">
          <children>
             <GridPane fx:id="saveButtons" alignment="CENTER" layoutX="80.0" layoutY="209.0" prefHeight="348.0" prefWidth="546.0">
               <columnConstraints>

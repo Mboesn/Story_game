@@ -10,8 +10,10 @@ import story_game.gui.util.PopupHandler;
 public class ExitConfirmationFunctions {
 
     /**
-     * Opens a confirmation alert asking the user if he wishes to close a given
-     * stage.
+     * Opens a ExitConfirmation window and closes a given pane.
+     * 
+     * @param event  event that called ExitConfirmationFunctions.
+     * @param onExit extra functions to call when exiting.
      */
     public ExitConfirmationFunctions(Event event, OnClickFunction... onExit) {
         ExitConfirmationCtrl.exitFunction = () -> {
@@ -25,12 +27,11 @@ public class ExitConfirmationFunctions {
     }
 
     /**
-     * Opens a confirmation alert asking the user if he wishes to close a given
-     * stage
+     * Opens a ExitConfirmation window and closes a given stage.
      * 
-     * @param stage stage to close if OK is selected
-     * 
-     * @return True if window closed
+     * @param event  event that called ExitConfirmationFunctions.
+     * @param stage  stage to close.
+     * @param onExit extra functions to call when exiting.
      */
     public ExitConfirmationFunctions(Event event, Stage stage, OnClickFunction... onExit) {
         ExitConfirmationCtrl.exitFunction = () -> stage.close();
@@ -40,12 +41,11 @@ public class ExitConfirmationFunctions {
     }
 
     /**
-     * Opens a confirmation alert asking the user if he wishes to close a given
-     * stage
+     * Opens a ExitConfirmation window and closes a given pane.
      * 
-     * @param stage stage to close if OK is selected
-     * 
-     * @return True if window closed
+     * @param event  event that called ExitConfirmationFunctions.
+     * @param pane   pane to close.
+     * @param onExit extra functions to call when exiting.
      */
     public ExitConfirmationFunctions(Event event, Pane pane, OnClickFunction... onExit) {
         ExitConfirmationCtrl.exitFunction = () -> PopupHandler.closePopup(pane);
@@ -53,6 +53,13 @@ public class ExitConfirmationFunctions {
         // this(event, onExit);
     }
 
+    /**
+     * Temporary method holding the closing method till the code ins upgraded to
+     * java 26 and we can call the first constructor after calling code;
+     * 
+     * @param event  event that called ExitConfirmationFunctions.
+     * @param onExit extra functions to call when exiting.
+     */
     private void temp(Event event, OnClickFunction... onExit) {
         ExitConfirmationCtrl.onExit = () -> {
             for (OnClickFunction onClickFunction : onExit) {

@@ -15,7 +15,7 @@
          <center>
             <VBox fx:id="a" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
                <children>
-                  <ScrollPane fx:id="textScroll" fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" vbarPolicy="AS_NEEDED">
+                  <ScrollPane fx:id="textScroll" fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" styleClass="game-scroll-pane" stylesheets="@../css/game.css" vbarPolicy="AS_NEEDED">
                      <content>
                         <TextFlow fx:id="textFlow" lineSpacing="3.0">
                            <padding>
@@ -27,7 +27,7 @@
                         <Insets />
                      </VBox.margin>
                   </ScrollPane>
-                  <ScrollPane fx:id="choicesScroll" fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="900.0">
+                  <ScrollPane fx:id="choicesScroll" fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" styleClass="game-scroll-pane" stylesheets="@../css/game.css">
                      <content>
                         <VBox fx:id="choicesVBox" alignment="CENTER_LEFT" spacing="15.0">
                            <padding>

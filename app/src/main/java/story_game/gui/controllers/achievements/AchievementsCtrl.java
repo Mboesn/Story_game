@@ -12,6 +12,10 @@ import story_game.gui.util.PopupHandler;
 import story_game.save_mechanics.achievements.AchievementsContainer;
 import story_game.save_mechanics.achievements.AchievementsFile;
 
+/**
+ * Controls the page hosting all the achievements. Top list includes completed
+ * achievements bottom includes uncompleted achievements.
+ */
 public class AchievementsCtrl {
     @FXML
     public VBox completedAchievementsBox;
@@ -30,13 +34,15 @@ public class AchievementsCtrl {
     public void initialize() {
         AchievementsFile achievements = AchievementsContainer.getAchievements();
 
+        // For every achievement listed in the achievement save file add a node with
+        // it's information and status.
         achievements.getAchievements().forEach((achievement, completionDate) -> {
             try {
+                // Load a new node and set it's values equal to the current achievement
                 Pane achievementNodePane;
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(SettingsCtrl.class.getResource(FXMLPaths.ACHIEVEMENT_NODE.getPath()));
                 achievementNodePane = loader.<Pane>load();
-
                 AchievementNodeCtrl controller = loader.getController();
 
                 controller.setAchievementNode(achievement, completionDate);
@@ -51,6 +57,7 @@ public class AchievementsCtrl {
                 System.out.println("Failed to load achievement: " + achievement.getName() + "\nerror: " + e);
             }
         });
+        // If one of the lists is empty remove the list and title.
         if (completedAchievementsBox.getChildren().isEmpty()) {
             achievementsVBox.getChildren().remove(completedAchievementsBox);
             achievementsVBox.getChildren().remove(completedText);
@@ -61,6 +68,9 @@ public class AchievementsCtrl {
     }
 
     @FXML
+    /**
+     * Closes the window.
+     */
     public void back(ActionEvent event) {
         PopupHandler.closePopup(achievementsPane);
     }

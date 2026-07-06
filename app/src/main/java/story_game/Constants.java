@@ -13,4 +13,5 @@ public final class Constants {
     public static final CustomText TOWN_NAME = new CustomText("Town of Grimeguard", TextType.LOCATION);
     public static final CustomText MAIN_CHARACTER_NAME = new CustomText("Gobby McGobface", TextType.NAME);
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy");
+    public static final String GLOBAL_CSS_PATH = "/gui/css/global.css";
 }

@@ -8,6 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import story_game.save_mechanics.achievements.Achievement;
 
+/**
+ * A single bar which includes all information about a given achievement. Is
+ * displayed in AchievementCtrl.
+ */
 public class AchievementNodeCtrl {
     @FXML
     public ImageView achievementImage;
@@ -18,8 +22,16 @@ public class AchievementNodeCtrl {
     @FXML
     public AnchorPane node;
 
+    /**
+     * Sets the values of the node in accordance with a given achievement.
+     * 
+     * @param achievement    The achievement to load the information of.
+     * @param completionDate The date the achievement was completed. Leave blank if
+     *                       not completed.
+     */
     public void setAchievementNode(Achievement achievement, String completionDate) {
         try {
+            // Check if the achievement has been completed.
             boolean completed = !completionDate.isBlank();
 
             Image image = new Image(getClass().getResourceAsStream(achievement.getImagePath()));

@@ -6,9 +6,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="node" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="750.0" styleClass="background" stylesheets="@../css/achievementNode.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.achievements.AchievementNodeCtrl">
+<AnchorPane fx:id="node" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="750.0" styleClass="node-background" stylesheets="@../css/achievementNode.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.achievements.AchievementNodeCtrl">
    <children>
-      <Pane prefHeight="105.0" prefWidth="105.0" styleClass="imageFrame" stylesheets="@../css/achievementNode.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="105.0" prefWidth="105.0" styleClass="image-frame" stylesheets="@../css/achievementNode.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="achievementImage" fitHeight="75.0" fitWidth="75.0" layoutX="15.0" layoutY="12.0" pickOnBounds="true" />
          </children>
@@ -18,7 +18,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="discText" layoutX="120.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievment description" wrappingWidth="700.0">
+      <Text fx:id="discText" layoutX="120.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement description" wrappingWidth="700.0">
          <font>
             <Font size="15.0" />
          </font>

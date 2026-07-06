@@ -23,6 +23,10 @@ import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.Page;
 import story_game.text.CustomText;
 
+/**
+ * The screen of the game divided into a text box and list of buttons for
+ * choices.
+ */
 public class GameCtrl {
     @FXML
     public TextFlow textFlow;
@@ -35,6 +39,8 @@ public class GameCtrl {
     @FXML
     public ScrollPane choicesScroll;
 
+    // an instance of this class used to edit variables every time the game screen
+    // is opened
     private static GameCtrl gameController;
 
     private static boolean unsafeClose = false;

@@ -22,7 +22,7 @@ public class IntroPage extends ResponsePage {
                 new CustomText(
                         "You don't remember what happened the day before, but have some good guesses based on yourself, your headache, and extreme hunger. "
                                 + "Two of those things you can't quite do anything about, but your hunger can easily be changed. "
-                                + "As long as you can wake up and get your self out of bed and go the kitchen the hunger can be satiated.")
+                                + "As long as you can wake up and get yourself out of bed and go the kitchen the hunger can be satiated.")
         };
         return texts;
     }

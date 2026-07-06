@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import story_game.Constants;
 import story_game.gui.controllers.exit_confirmation.ExitConfirmationFunctions;
 import story_game.gui.controllers.save_menu.SaveMenuFunctions;
 import story_game.gui.util.FXMLPaths;
@@ -34,6 +35,9 @@ public class MainMenuCtrl extends Application {
             loader.setLocation(getClass().getResource(FXMLPaths.MAIN_MENU.getPath()));
             StackPane anchorPane = loader.<StackPane>load();
             Scene scene = new Scene(anchorPane);
+
+            // Load and add the global stylesheet
+            scene.getStylesheets().add(getClass().getResource(Constants.GLOBAL_CSS_PATH).toExternalForm());
 
             stage.setScene(scene);
             stage.show();

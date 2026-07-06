@@ -14,8 +14,8 @@
 
 <StackPane fx:id="settingsPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.settings.SettingsCtrl">
    <children>
-      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@../css/transparentBackground.css" />
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="327.0" styleClass="background" stylesheets="@../css/settings.css">
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="transparent-background" stylesheets="@../css/transparentBackground.css" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="327.0" styleClass="settings-background" stylesheets="@../css/settings.css">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" underline="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                <font>
