@@ -20,20 +20,27 @@ import story_game.save_mechanics.save_file.SaveFile;
 
 /**
  * This window lists all available saves, allowing to load a new one or save the
- * current one
+ * current one. Do not load this controller from here, use SaveMenuFunctions
+ * instead.
  */
 public class SaveMenuCtrl {
+    // The type of menu to load, set before loading.
     protected static SaveMenuType saveMenuType = SaveMenuType.LOAD_GAME;
+    // The save file to save if saving.
     private static SaveFile saveFile = new SaveFile();
     @FXML
     public StackPane saveMenuPane;
     @FXML
     public GridPane saveButtons;
 
+    // The save file to start from when listing files in grid. Change based on grid
+    // selections.
     private int saveCountStart = 0;
 
+    // When saving or loading set what type of save to save/load.
     private SaveType saveType = SaveType.REGULAR_SAVE;
 
+    // How many buttons are in the grid.
     private static int gridPaneSaveCount;
 
     @FXML
@@ -66,6 +73,11 @@ public class SaveMenuCtrl {
         }
     }
 
+    /**
+     * Change the save files on the grid.
+     * 
+     * @param gridButtonId The Id of the button that updated the grid.
+     */
     private void updateGrid(String gridButtonId) {
         switch (gridButtonId) {
             case "A":
@@ -88,34 +100,46 @@ public class SaveMenuCtrl {
                 String saveButtonId = btn.getId().replaceAll("save", "");
                 int saveNumber = saveCountStart + Integer.parseInt(saveButtonId);
                 SaveFile save = SaveHandler.loadGame(saveName + saveNumber);
-                // Add current game location to the save file\
+                // Add current game location to the save file
                 if (save != null) {
                     String location = save.getCurrentPage().getClass().toString()
                             .replace("class story_game.text.pages.", "");
                     location = location.split("\\.")[0].toLowerCase();
-                    switch (location) {
-                        case "housescene":
-                            location = "House";
-                            break;
-                        case "outsidescene":
-                            location = "Outside";
-                            break;
-                        default:
-                            location = "unknown";
-                            break;
-                    }
+                    location = getLocationName(location);
+
                     btn.setText(saveName + " " + saveNumber + "\n" + location + "\n" + save.getSaveDate());
                     saveBtn.setDisable(false);
                 } else {
                     btn.setText(saveName + " " + saveNumber + "\n" + "Empty save");
-                    if (saveMenuType == SaveMenuType.LOAD_GAME) {
-                        saveBtn.setDisable(true);
-                    }
+                    // Set disable if save file empty and loading a game.
+                    saveBtn.setDisable(saveMenuType == SaveMenuType.LOAD_GAME);
                 }
             }
         }
     }
 
+    /**
+     * @param packageName The name of the package of the current page.
+     * @return The location name to display to the user.
+     */
+    private String getLocationName(String packageName) {
+        switch (packageName) {
+            case "housescene":
+                packageName = "House";
+                break;
+            case "outsidescene":
+                packageName = "Outside";
+                break;
+            default:
+                packageName = "unknown";
+                break;
+        }
+        return packageName;
+    }
+
+    /**
+     * Updates the save grid based on the Id of the button that called this method.
+     */
     @FXML
     public void updateGrid(ActionEvent event) {
         Button gridBtn = (Button) event.getSource();
@@ -123,6 +147,10 @@ public class SaveMenuCtrl {
         updateGrid(gridButtonId);
     }
 
+    /**
+     * Saves or loads the save file (based on the SaveMenuType value). Launches the
+     * game menu after saving/loading.
+     */
     @FXML
     public void saveOrLoad(ActionEvent event) {
         Button saveBtn = (Button) event.getSource();
@@ -136,6 +164,7 @@ public class SaveMenuCtrl {
         } else {
             if (saveMenuType == SaveMenuType.NEW_GAME)
                 saveFile = new SaveFile();
+            // If overriding an existing save asks the user if they are sure.
             if (buttonSaveFile != null) {
                 SaveOverrideConfirmationCtrl.overrideSaveFunction = () -> saveGame(saveFile, saveName, event);
                 PopupHandler.loadPopup(FXMLPaths.SAVE_OVERRIDE_CONFIRMATION, event);
@@ -145,9 +174,17 @@ public class SaveMenuCtrl {
         }
     }
 
+    /**
+     * Saves the game on the newest quick-save/auto-save.
+     * 
+     * @param saveFile The save file to save.
+     * @param saveType The save type.
+     */
     protected static void quickSave(SaveFile saveFile, SaveType saveType) {
         if (saveType == SaveType.REGULAR_SAVE)
             return;
+        // Goes through all the quick-saves/auto-saves and sets this value to the oldest
+        // one or an empty one.
         String oldestQuickSave = saveType.getSaveName() + 1;
         SaveFile tempSave = SaveHandler.loadGame(oldestQuickSave);
         if (tempSave != null) {
@@ -170,7 +207,11 @@ public class SaveMenuCtrl {
         SaveHandler.saveFile(saveFile, oldestQuickSave);
     }
 
+    /**
+     * Loads the newest quick-save.
+     */
     protected static void quickLoad() {
+        // Goes through all quick-saves and finds the newest one.
         String newestQuickSave = "";
         LocalDateTime newestSaveTime = LocalDateTime.now();
         for (int i = 1; i <= gridPaneSaveCount; i++) {
@@ -194,6 +235,13 @@ public class SaveMenuCtrl {
             GameCtrl.setupGameScene(tempSave);
     }
 
+    /**
+     * Saves the game and launches the game window.
+     * 
+     * @param saveFile The save file to save.
+     * @param saveName The name to give to the save file.
+     * @param event    The event that called this action.
+     */
     private void saveGame(SaveFile saveFile, String saveName, ActionEvent event) {
         saveFile.updateSaveDate();
         SaveHandler.saveFile(saveFile, saveName);
@@ -201,6 +249,12 @@ public class SaveMenuCtrl {
         back();
     }
 
+    /**
+     * Launches the game window.
+     * 
+     * @param event    The event that called this action.
+     * @param saveFile The save file to use for the game.
+     */
     private void launchGame(ActionEvent event, SaveFile saveFile) {
         try {
             Scene currentScene = StageHandler.stage.getScene();
@@ -212,6 +266,9 @@ public class SaveMenuCtrl {
         }
     }
 
+    /**
+     * Closes the save menu.
+     */
     @FXML
     public void back() {
         PopupHandler.closePopup(saveMenuPane);

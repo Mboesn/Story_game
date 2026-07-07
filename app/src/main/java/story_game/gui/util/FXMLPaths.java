@@ -13,15 +13,17 @@ public enum FXMLPaths {
     private String path;
 
     /**
-     * List of all the sounds effects available to be played. All sounds effects is
-     * royalty free.
+     * All the lists of path to the FXML files. Used to launch fxml files.
      * 
-     * @param name The name of the sound effect file.
+     * @param name The name of the FXML file.
      */
     FXMLPaths(String name) {
         this.path = "/gui/fxml/" + name + ".fxml";
     }
 
+    /**
+     * @return Path to the FXML file.
+     */
     public String getPath() {
         return path;
     }

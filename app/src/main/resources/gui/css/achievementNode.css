@@ -1,7 +1,7 @@
 .image-frame {
   -fx-background-color: gold;
 }
-.node-background {
+.achievement-node-background {
   -fx-background-color: aquamarine;
   -fx-border-color: #333333;
   -fx-border-style: solid;

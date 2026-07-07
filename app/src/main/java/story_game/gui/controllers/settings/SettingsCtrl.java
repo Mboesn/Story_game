@@ -11,6 +11,9 @@ import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.save_mechanics.settings.SettingsFile;
 import story_game.sound_system.AudioHandler;
 
+/**
+ * The settings window.
+ */
 public class SettingsCtrl {
     SettingsFile tempSettingsFile;
     @FXML
@@ -26,9 +29,12 @@ public class SettingsCtrl {
 
     @FXML
     public void initialize() {
+        // Loads the current settings and saves a copy
         tempSettingsFile = new SettingsFile(SettingsContainer.getSettings());
+        // Sets the values of the settings to represent the current settings.
         musicLbl.setText("Music: " + (int) (tempSettingsFile.getAudioSettings().getMusicVolume() * 100) + "%");
         musicSlider.setValue(tempSettingsFile.getAudioSettings().getMusicVolume());
+        // When the slider is moved updates the music.
         musicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
             tempSettingsFile.getAudioSettings().setMusicVolume(newVal.doubleValue());
             AudioHandler.setMusicVolume(newVal.doubleValue());
@@ -58,7 +64,8 @@ public class SettingsCtrl {
     @FXML
     public void reset(ActionEvent event) {
         try {
-            new ExitConfirmationFunctions(event, settingsPane, () -> SettingsContainer.updateSettings(new SettingsFile()));
+            new ExitConfirmationFunctions(event, settingsPane,
+                    () -> SettingsContainer.updateSettings(new SettingsFile()));
         } catch (Exception e) {
             System.out.println("Couldn't save settings.\nError: " + e);
         }

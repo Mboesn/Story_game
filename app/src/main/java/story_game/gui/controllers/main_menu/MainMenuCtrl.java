@@ -18,11 +18,16 @@ import story_game.save_mechanics.settings.SettingsContainer;
 import story_game.sound_system.AudioHandler;
 import story_game.sound_system.Music;
 
+/**
+ * The opening screen and menu of the game. Launch this in main.
+ */
 public class MainMenuCtrl extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
         StageHandler.stage = stage;
+
+        stage.setTitle(Constants.GAME_NAME);
 
         // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();
@@ -41,12 +46,15 @@ public class MainMenuCtrl extends Application {
 
             stage.setScene(scene);
             stage.show();
-
         } catch (Exception e) {
             System.out.println("Unable to load main menu \nError: " + e);
         }
     }
 
+    /**
+     * Sets the stage to match the main-menu settings. Call before launching the
+     * stage or switching to this scene.
+     */
     public static void setupMainMenuStage() {
         StageHandler.stage.setMaximized(true);
         StageHandler.stage.setOnCloseRequest(e -> {
@@ -58,22 +66,12 @@ public class MainMenuCtrl extends Application {
     /** Sends to game window using a fresh save file */
     @FXML
     public void newGame(ActionEvent event) {
-        // SaveMenuWindow save = new SaveMenuWindow();
-        // Node source = (Node) event.getSource();
-        // Scene scene = source.getScene();
-        // save.show((Stage) scene.getWindow(), SaveMenuType.NEW_GAME);
-        // mainMenuStage.close();
         SaveMenuFunctions.newGame(event);
     }
 
     /** Opens the save file window allowing you to choose what save file to load */
     @FXML
     public void loadGame(ActionEvent event) {
-        // if (mainMenuStage != null) {
-        // SaveMenuWindow save = new SaveMenuWindow();
-        // save.show(mainMenuStage, SaveMenuType.LOAD_GAME);
-        // mainMenuStage.close();
-        // }
         SaveMenuFunctions.loadGame(event);
     }
 

@@ -8,7 +8,16 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import story_game.gui.controllers.settings.SettingsCtrl;
 
+/**
+ * Contains the methods for loading and closing pane popups.
+ */
 public class PopupHandler {
+    /**
+     * Loads a popup pane on top of the current scene
+     * 
+     * @param popup The popup to load.
+     * @param event The event which called this action.
+     */
     public static void loadPopup(FXMLPaths popup, Event event) {
         try {
             // loads pop up
@@ -30,7 +39,7 @@ public class PopupHandler {
                 originalPane = (Pane) ((Node) source).getScene().getRoot();
             }
 
-            // adds popup to main
+            // adds popup to the root pane.
             if (originalPane != null)
                 originalPane.getChildren().add(popupPane);
 
@@ -40,6 +49,11 @@ public class PopupHandler {
         }
     }
 
+    /**
+     * Closes a popup pane.
+     * 
+     * @param popupPane Pane to close.
+     */
     public static void closePopup(Pane popupPane) {
         ((Pane) popupPane.getParent()).getChildren().remove(popupPane);
     }

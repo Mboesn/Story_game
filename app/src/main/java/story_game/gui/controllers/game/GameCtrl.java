@@ -34,10 +34,6 @@ public class GameCtrl {
     public ScrollPane textScroll;
     @FXML
     public VBox choicesVBox;
-    @FXML
-    public VBox a;
-    @FXML
-    public ScrollPane choicesScroll;
 
     // an instance of this class used to edit variables every time the game screen
     // is opened
@@ -53,13 +49,13 @@ public class GameCtrl {
         Region parentLayout = (Region) StageHandler.stage.getScene().getRoot();
         parentLayout.setSnapToPixel(true);
         textFlow.setPrefWidth(textScroll.getWidth());
-        textFlow.setFocusTraversable(false);
-        textScroll.setFocusTraversable(false);
-        choicesScroll.setFocusTraversable(false);
-        choicesVBox.setFocusTraversable(false);
-        a.setFocusTraversable(false);
     }
 
+    /**
+     * Sets up the current game scene. Call before loading this scene.
+     * 
+     * @param saveFile The save file to use.
+     */
     public static void setupGameScene(SaveFile saveFile) {
         StageHandler.stage.setTitle(Constants.GAME_NAME);
         StageHandler.stage.setOnCloseRequest(event -> {
@@ -140,11 +136,17 @@ public class GameCtrl {
             }
     }
 
+    /**
+     * Switches the scene to the main menu.
+     */
     @FXML
     public void returnToMainMenu(ActionEvent event) {
         switchStage(event);
     }
 
+    /**
+     * Switches the scene to the main menu.
+     */
     private static void switchStage(Event event) {
         try {
             Parent root = FXMLLoader.load(GameCtrl.class.getResource(FXMLPaths.MAIN_MENU.getPath()));
@@ -162,26 +164,43 @@ public class GameCtrl {
         }
     }
 
+    /**
+     * Loads the save menu.
+     */
     @FXML
     private void save(ActionEvent event) {
         SaveMenuFunctions.saveGame(event, saveFile);
     }
 
+    /**
+     * Saves the current save file to the oldest quick-save file.
+     */
     @FXML
     private void quickSave(ActionEvent event) {
         SaveMenuFunctions.quickSave(saveFile, SaveType.QUICK_SAVE);
     }
 
+    /**
+     * Opens the load menu after asking the player if they are sure they wish to
+     * exit.
+     */
     @FXML
     private void load(ActionEvent event) {
         new ExitConfirmationFunctions(event, () -> SaveMenuFunctions.loadGame(event));
     }
 
+    /**
+     * Loads the newest quick-save after asking the player if they are sure they
+     * wish to exit.
+     */
     @FXML
     private void quickLoad(ActionEvent event) {
         new ExitConfirmationFunctions(event, SaveMenuFunctions::quickLoad);
     }
 
+    /**
+     * Opens the settings menu.
+     */
     @FXML
     private void settings(ActionEvent event) {
         PopupHandler.loadPopup(FXMLPaths.SETTINGS, event);
