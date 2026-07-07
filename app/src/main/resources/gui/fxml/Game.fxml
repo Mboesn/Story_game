@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<StackPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="story_game.gui.controllers.game.GameCtrl">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="1100.0">
+         <center>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fx:id="textScroll" fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="900.0" styleClass="game-scroll-pane" stylesheets="@../css/game.css" vbarPolicy="AS_NEEDED">
+                     <content>
+                        <TextFlow fx:id="textFlow" lineSpacing="3.0">
+                           <padding>
+                              <Insets left="25.0" right="25.0" />
+                           </padding>
+                        </TextFlow>
+                     </content>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ScrollPane>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="900.0" styleClass="game-scroll-pane" stylesheets="@../css/game.css">
+                     <content>
+                        <VBox fx:id="choicesVBox" alignment="CENTER_LEFT" spacing="15.0">
+                           <padding>
+                              <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                           </padding>
+                        </VBox>
+                     </content>
+                  </ScrollPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </center>
+         <bottom>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <buttons>
+                  <Button mnemonicParsing="false" onAction="#save" text="Save" />
+                  <Button mnemonicParsing="false" onAction="#quickSave" text="Quick save" />
+                  <Button mnemonicParsing="false" onAction="#load" text="Load" />
+                  <Button mnemonicParsing="false" onAction="#quickLoad" text="Quick load" />
+                  <Button mnemonicParsing="false" onAction="#settings" text="Settings" />
+                  <Button mnemonicParsing="false" onAction="#returnToMainMenu" text="Return to main menu" />
+               </buttons>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
+         </bottom>
+      </BorderPane>
+   </children>
+</StackPane>

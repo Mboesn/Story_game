@@ -1,0 +1,9 @@
+.save-override-background {
+  -fx-background-color: #add8e6;
+
+  -fx-pref-width: 300;
+  -fx-pref-height: 200;
+
+  -fx-background-radius: 12;
+  -fx-padding: 20;
+}

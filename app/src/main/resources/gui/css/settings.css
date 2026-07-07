@@ -1,0 +1,9 @@
+.settings-background {
+  -fx-background-color: #add8e6;
+
+  -fx-pref-width: 275;
+  -fx-pref-height: 350;
+
+  -fx-background-radius: 12;
+  -fx-padding: 20;
+}
