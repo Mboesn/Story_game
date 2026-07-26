@@ -1,4 +1,4 @@
-package story_game.text.pages.OutsideScene;
+package story_game.text.pages.TownScene;
 
 import story_game.gui.util.ButtonCustom;
 import story_game.gui.util.EndGameButton;

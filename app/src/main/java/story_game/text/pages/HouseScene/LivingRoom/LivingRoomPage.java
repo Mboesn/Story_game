@@ -7,8 +7,8 @@ import story_game.text.CustomText;
 import story_game.text.Page;
 import story_game.text.TextType;
 import story_game.text.pages.HouseScene.Bedroom.BedroomPage;
+import story_game.text.pages.HouseScene.FrontYard.ExitHousePage;
 import story_game.text.pages.HouseScene.Kitchen.KitchenPage;
-import story_game.text.pages.OutsideScene.OutsidePage;
 
 public class LivingRoomPage extends Page {
 
@@ -50,8 +50,8 @@ public class LivingRoomPage extends Page {
                 new ContinueButton(new KitchenPage(), "Enter kitchen"),
                 new ContinueButton(new BedroomPage(), "Return to bedroom"),
                 // if you haven't checked the kitchen do not let the player leave
-                new ContinueButton(new OutsidePage(),
-                        "Exit your house and go on your adventure!!! no turning back")
+                new ContinueButton(new ExitHousePage(),
+                        "Exit your house and go on your adventure!!!")
                         .defineDisable(!saveFile.getHouseSceneFlags().checkedKitchenForFood)
         };
         return buttons;
