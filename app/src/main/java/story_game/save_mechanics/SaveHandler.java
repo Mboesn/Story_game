@@ -23,7 +23,7 @@ import story_game.text.Page;
 
 public class SaveHandler {
     // This path leads to the game folder in the local appdata
-    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.GAME_NAME;
+    private static final String defaultSavePath = System.getenv("LOCALAPPDATA") + "/" + Constants.Names.GAME_NAME;
     // This path leads to the pages package
     private static final String pagesPackage = "story_game.text.pages";
     // The default name of the settings file

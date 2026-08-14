@@ -13,7 +13,7 @@ public class RefuseToWakeUpPage extends Page {
     @Override
     public CustomText[] getTexts(SaveFile saveFile) {
         CustomText text[] = new CustomText[] { new CustomText(
-                "And so ", Constants.MAIN_CHARACTER_NAME,
+                "And so ", Constants.Names.MAIN_CHARACTER_NAME,
                 " went to sleep and died of starvation. \n \t \t \t \t \t \t \t \t \t FIN") };
         return text;
     }

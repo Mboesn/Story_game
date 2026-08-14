@@ -27,7 +27,7 @@ public class MainMenuCtrl extends Application {
     public void start(Stage stage) throws Exception {
         StageHandler.stage = stage;
 
-        stage.setTitle(Constants.GAME_NAME);
+        stage.setTitle(Constants.Names.GAME_NAME);
 
         // Updates all the game settings based on loaded settings
         SettingsContainer.updateSettings();

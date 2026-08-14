@@ -7,6 +7,7 @@ import story_game.save_mechanics.save_file.SaveFile;
 import story_game.text.CustomText;
 import story_game.text.Page;
 import story_game.text.pages.HouseScene.LivingRoom.LivingRoomPage;
+import story_game.text.pages.TownScene.EnterTownPage;
 
 public class FrontYardPage extends Page {
 
@@ -25,7 +26,7 @@ public class FrontYardPage extends Page {
                                 "The second choice, which is a splendid option according to your famished gut, which is to go into town, find the closest pub and "
                                 +
                                 "not leave till you've had your fill of all the meats, fruits and vegetables the great ",
-                        Constants.KINGDOM_NAME, " has to offer.\n" +
+                        Constants.Names.KINGDOM_NAME, " has to offer.\n" +
                                 "The third choice, which is quite an odd one by all accounts of your internal organs, is to just starts wondering around without rhyme or reason.")
         };
         return texts;
@@ -35,7 +36,7 @@ public class FrontYardPage extends Page {
     public ButtonCustom[] getButtons(SaveFile saveFile) {
         ButtonCustom[] buttons = new ButtonCustom[] {
                 new ContinueButton(new LivingRoomPage(), "Return home"),
-                new ContinueButton("Head to town"),
+                new ContinueButton(new EnterTownPage(),"Head to town"),
                 new ContinueButton("I am but a leaf in the winds of fate")
         };
         return buttons;

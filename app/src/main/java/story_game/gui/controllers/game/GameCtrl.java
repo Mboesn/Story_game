@@ -57,7 +57,7 @@ public class GameCtrl {
      * @param saveFile The save file to use.
      */
     public static void setupGameScene(SaveFile saveFile) {
-        StageHandler.stage.setTitle(Constants.GAME_NAME);
+        StageHandler.stage.setTitle(Constants.Names.GAME_NAME);
         StageHandler.stage.setOnCloseRequest(event -> {
             event.consume();
             switchStage(event);
